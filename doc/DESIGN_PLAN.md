@@ -1,85 +1,69 @@
 # OOLALA Design Plan
-## NAMES
+## Name: Norah Tan (xt22), Dane Erickson (dte12), Evelyn Cupil-Garcia (ec220)
 
 
 ### Team Roles and Responsibilities
-
-
+- Will be figured out on Meeting 9/23 @ 9pm EDT
 
 ### High Level Design
+- Model folder
+  - Creature Superclass --> turtles etc.
+  - Game Superclass
+    - Turtle: commands/creatures
+    - Fractal: commands
+    - Darwin: commands/creatures
+- View folder
+  - ScreenDisplay --> text box to run code and screen for drawing
+  - CreatureView
+    - TurtleView
+    - FractalView
+    - DarwinView
+    
+### Logo Programming IDE Card Classes
 
+#### Creature Class
+This class's purpose is to represent the Creature Superclass:
 
-
-### CRC Card Classes
-
-This class's purpose or value is to represent a customer's order:
-![Order Class CRC Card](order_crc_card.png "Order Class")
-
-
-This class's purpose or value is to represent a customer's order:
-
-|Order| |
+|Creature| |
 |---|---|
-|boolean isInStock(OrderLine)         |OrderLine|
-|double getTotalPrice(OrderLine)      |Customer|
-|boolean isValidPayment (Customer)    | |
-|void deliverTo (OrderLine, Customer) | |
+|getXPosition         ||
+|getYPosition      ||
+| getXOrientation ||
+| getYOrientation ||
+| setOrientation(int angle) ||
+| boolean isPenActive ||
+| reset ||
+| boolean isCreatureVisible ||
+| boolean isStamped ||
+| move(int distance) ||
+| boolean isCreatureActive ||
 
+#### Game Class
+This class's purpose is to represent the Game Superclass:
 
-This class's purpose or value is to represent a customer's order:
-```java
-public class Order {
-     // returns whether or not the given items are available to order
-     public boolean isInStock (OrderLine items)
-     // sums the price of all the given items
-     public double getTotalPrice (OrderLine items)
-     // returns whether or not the customer's payment is valid
-     public boolean isValidPayment (Customer customer)
-     // dispatches the items to be ordered to the customer's selected address
-     public void deliverTo (OrderLine items, Customer customer)
- }
- ```
- 
+|Game| |
+|---|---|
+|step()         | Creature |
+|initializeCreature()      | Creature |
+|interpretCommand(String command) | Creature |
 
-### Use Cases 
+#### ScreenDisplay Class
+This class's purpose is to represent the ScreenDisplay Superclass:
 
- * The user types 'fd 50' in the command window, sees the turtle move in the display window leaving a trail, and has the command added to the environment's history.
-```java
- OrderLine items = new OrderLine();
- if (order.isInStock(items)) {
-     total = order.getTotalPrice(items);
- }
-```
+|ScreenDisplay| |
+|---|---|
+| makeButton()        | |
+| makeCommandBox()   | |
+| makeScene() | |
+| makeGraphicsWindow() | |
+| handleKeyInput() | |
+| actionReset() | |
 
- * The user loads a file of commands, sees the turtle move in the display window leaving a trail, and has the command added to the environment's history.
-```java
- OrderLine items = new OrderLine();
- if (order.isInStock(items)) {
-     total = order.getTotalPrice(items);
- }
-```
+#### CreatureView Class
+This class's purpose is to represent the CreatureView Superclass:
 
- * The user types '50 fd' in the command window and sees an error message that the command was not formatted correctly.
-```java
- OrderLine items = new OrderLine();
- if (order.isInStock(items)) {
-     total = order.getTotalPrice(items);
- }
-```
-
- * The user clicks in the display window to set a new Home location.
-```java
- OrderLine items = new OrderLine();
- if (order.isInStock(items)) {
-     total = order.getTotalPrice(items);
- }
-```
-
- * The user changes the color of the environment's background.
-```java
- OrderLine items = new OrderLine();
- if (order.isInStock(items)) {
-     total = order.getTotalPrice(items);
- }
-```
-
+|CreatureView| |
+|---|---|
+| drawCreature(int x, int y)        | Creature |
+| drawLine(Creature creature)   |  Creature |
+| updateCreature(Creature creature) | Creature |
