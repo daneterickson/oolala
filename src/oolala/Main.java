@@ -1,21 +1,23 @@
 package oolala;
 
+import View.ScreenDisplay;
+import javafx.application.Application;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.stage.Stage;
 
-/**
- * Feel free to completely change this code or delete it entirely. 
- */
-public class Main {
-    /**
-     * A method to test (and a joke :).
-     */
-    public double getVersion () {
-        return 0.001;
-    }
+public class Main extends Application {
+    public static final String TITLE = "OOLALA";
+    public static final Paint BACKGROUND = Color.THISTLE;
 
     /**
-     * Start of the program.
+     * Organize display of game in a scene and start the game.
      */
-    public static void main (String[] args) {
-        System.out.println("Hello world");
+    @Override
+    public void start (Stage stage) {
+        ScreenDisplay view = new ScreenDisplay();
+        stage.setScene(view.setupDisplay(BACKGROUND));
+        stage.setTitle(TITLE);
+        stage.show();
     }
 }
