@@ -2,7 +2,8 @@ package Creatures;
 
 public class Creature {
 
-    private int myPosX, myPosY, myDirectX, myDirectY;
+    private int myPosX, myPosY;
+    private double myDirectX, myDirectY;
     private boolean isPenActive, isCreatureVisible, isCreatureActive;
 
     public Creature () {
@@ -10,10 +11,11 @@ public class Creature {
     }
 
     public void reset () {
+        // initialize position to (0, 0) and direction to (0, 1)
         myPosX = 0;
         myPosY = 0;
         myDirectX = 0;
-        myDirectY = 0;
+        myDirectY = 1;
     }
 
     public void move (int distance) {
@@ -23,6 +25,14 @@ public class Creature {
 
     public void changeOrientation (int angle) {
         // positive angle means clockwise
+        // https://en.wikipedia.org/wiki/Rotation_matrix
+        // rotationMatrix = [cos(x), -sin(x); sin(x), cos(x)];
+        // oldDirect = [directX, directY];
+        // newDirect = rotationMatrix * oldDirect;
+        double newDirectX = myDirectX * Math.cos(angle) - myDirectY * Math.sin(angle);
+        double newDirectY = myDirectX * Math.sin(angle) + myDirectY * Math.cos(angle);
+        myDirectX = newDirectX;
+        myDirectY = newDirectY;
     }
 
 }
