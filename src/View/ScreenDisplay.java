@@ -12,7 +12,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Paint;
-
+// Goals: create white screen and textbox
 public class ScreenDisplay {
 
     public ScreenDisplay () {}
@@ -22,7 +22,7 @@ public class ScreenDisplay {
         VBox root = new VBox();
         root.setSpacing(20);
         root.setPadding(new Insets(10, 10, 10, 10));
-        root.getChildren().addAll(makeGameModesPanel(), makeCommandBox());
+        root.getChildren().addAll(makeGameModesPanel());
 
         Scene scene = new Scene(root, background);
         scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
