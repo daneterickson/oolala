@@ -8,7 +8,17 @@ public class Creature {
 
     public Creature () {
         reset();
+        isPenActive = true;
+//        isCreatureActive = false;
+        isCreatureVisible = true;
     }
+
+    public boolean getStatusIsPenActive () { return isPenActive; }
+    public boolean getStatusIsCreatureVisible () { return isCreatureVisible; }
+    public void setPenActivity (boolean status) { isPenActive = status; }
+    public void setCreatureVisibility (boolean status) { isCreatureVisible = status; }
+    public int getPoX () { return myPosX; }
+    public int getPosY () { return myPosY; }
 
     public void reset () {
         // initialize position to (0, 0) and direction to (0, 1)
@@ -17,6 +27,8 @@ public class Creature {
         myDirectX = 0;
         myDirectY = 1;
     }
+
+
 
     public void move (int distance) {
         myPosX += distance * myDirectX;
