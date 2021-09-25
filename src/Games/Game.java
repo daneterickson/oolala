@@ -15,6 +15,7 @@ public class Game {
 
     public void step (String command) {
         String[] commands = command.split(" ");
+        myCurrent.setStatusStamp(false);
         switch (commands[0]) {
             case "fd" -> myCurrent.move(Integer.valueOf(commands[1]));
             case "bk" -> myCurrent.move(-Integer.valueOf(commands[1]));
@@ -25,7 +26,7 @@ public class Game {
             case "st" -> myCurrent.setCreatureVisibility(true);
             case "ht" -> myCurrent.setCreatureVisibility(false);
             case "home" -> myCurrent.reset();
-//            case "stamp" -> //stamp
+            case "stamp" -> myCurrent.setStatusStamp(true);
 //            case "tell" ->
         }
     }
