@@ -22,7 +22,7 @@ public class Creature {
         myShape.setFill(COLOR_TURTLE);
         isPenActive = true;
 //        isCreatureActive = false;
-//        isStamp = false;
+        isStamp = false;
         isCreatureVisible = true;
     }
 
@@ -33,6 +33,8 @@ public class Creature {
         myShape.setVisible(status);
         isCreatureVisible = status;
     }
+    public boolean getStatusStamp () { return isStamp; }
+    public void setStatusStamp (boolean status) { isStamp = status; }
 
     public void reset () {
         myShape.setX(0);
