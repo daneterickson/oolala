@@ -35,6 +35,7 @@ public class Creature {
     }
     public boolean getStatusStamp () { return isStamp; }
     public void setStatusStamp (boolean status) { isStamp = status; }
+    public Rectangle getShape () { return myShape; }
 
     public void reset () {
         myShape.setX(0);
@@ -43,11 +44,13 @@ public class Creature {
     }
 
     public void move (int distance) {
-        myShape.setTranslateX(distance * Math.cos(myShape.getRotate()));
-        myShape.setTranslateY(distance * Math.sin(myShape.getRotate()));
+        myShape.setX(myShape.getX() + distance * Math.cos(Math.toRadians(myShape.getRotate())));
+        myShape.setY(myShape.getY() + distance * Math.sin(Math.toRadians(myShape.getRotate())));
     }
 
     public void changeOrientation (int angle) {
+        // initial getRotate() = 0 -> positive x-axis
+        // positive angle means clockwise
         myShape.setRotate(angle + myShape.getRotate());
     }
 
