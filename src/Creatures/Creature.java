@@ -1,57 +1,38 @@
 package Creatures;
 
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.Shape;
-
 public class Creature {
 
-    private final int WIDTH = 2;
-    private final int HEIGHT = 1;
-    private final Color COLOR_TURTLE = Color.GREEN;
-
-    private boolean isPenActive, isCreatureVisible, isCreatureActive, isStamp;
-
-    // can call myShape.getX(), getY(), getRotate(), myShape.isVisible()
-    private Rectangle myShape;
-
+    private int myPosX, myPosY;
+    private double myDirectX, myDirectY;
+    private boolean isPenActive, isCreatureVisible, isCreatureActive;
 
     public Creature () {
-        myShape = new Rectangle(0,0, WIDTH, HEIGHT);
-        myShape.setFill(COLOR_TURTLE);
-        isPenActive = true;
-//        isCreatureActive = false;
-        isStamp = false;
-        isCreatureVisible = true;
+        reset();
     }
-
-    public boolean getPenActivity () { return isPenActive; }
-    public boolean getCreatureVisibility () { return isCreatureVisible; }
-    public void setPenActivity (boolean status) { isPenActive = status; }
-    public void setCreatureVisibility (boolean status) {
-        myShape.setVisible(status);
-        isCreatureVisible = status;
-    }
-    public boolean getStatusStamp () { return isStamp; }
-    public void setStatusStamp (boolean status) { isStamp = status; }
-    public Rectangle getShape () { return myShape; }
 
     public void reset () {
-        myShape.setX(0);
-        myShape.setY(0);
-        myShape.setRotate(0);
+        // initialize position to (0, 0) and direction to (0, 1)
+        myPosX = 0;
+        myPosY = 0;
+        myDirectX = 0;
+        myDirectY = 1;
     }
 
     public void move (int distance) {
-        myShape.setX(myShape.getX() + distance * Math.cos(Math.toRadians(myShape.getRotate())));
-        myShape.setY(myShape.getY() + distance * Math.sin(Math.toRadians(myShape.getRotate())));
+        myPosX += distance * myDirectX;
+        myPosY += distance * myDirectY;
     }
 
     public void changeOrientation (int angle) {
-        // initial getRotate() = 0 -> positive x-axis
         // positive angle means clockwise
-        myShape.setRotate(angle + myShape.getRotate());
+        // https://en.wikipedia.org/wiki/Rotation_matrix
+        // rotationMatrix = [cos(x), -sin(x); sin(x), cos(x)];
+        // oldDirect = [directX, directY];
+        // newDirect = rotationMatrix * oldDirect;
+        double newDirectX = myDirectX * Math.cos(angle) - myDirectY * Math.sin(angle);
+        double newDirectY = myDirectX * Math.sin(angle) + myDirectY * Math.cos(angle);
+        myDirectX = newDirectX;
+        myDirectY = newDirectY;
     }
 
 }

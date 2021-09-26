@@ -3,10 +3,7 @@
 
 
 ### Team Roles and Responsibilities
-09/23/21
-- Evelyn Cupil-Garcia: ScreenDisplay (Frontend)
-- Norah Tan: Creature Model/Game Superclass (Backend)
-- Dane Erickson: Creature View (Frontend)
+- Will be figured out on Meeting 9/23 @ 9pm EDT
 
 ### High Level Design
 - Model folder
