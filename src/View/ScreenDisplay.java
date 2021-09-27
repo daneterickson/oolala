@@ -23,6 +23,7 @@ public class ScreenDisplay {
     private final int MY_WIDTH = 200;
     private final int MY_HEIGHT = 45;
     private final int MY_SPACING = 10;
+    private TextArea myCommandBox;
 
     public ScreenDisplay () {
 
@@ -57,17 +58,23 @@ public class ScreenDisplay {
     private Node makeCommandBox() {
         BorderPane panel = new BorderPane();
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        TextArea commandBox = displayComponents.makeCommandBox(value -> setCanvas(new TurtleGame()));
-        panel.setLeft(commandBox);
+        myCommandBox = displayComponents.makeCommandBox(value -> setCanvas(new TurtleGame()));
+        panel.setLeft(myCommandBox);
         panel.setRight(makeCommandBoxButtons());
 
         return panel;
     }
 
+    // Trying to figure out the connection from ScreenDisplay to model
+    public String getCommandBoxInput() {
+        System.out.println(myCommandBox.getText());
+        return myCommandBox.getText();
+    }
+
     private Node makeCommandBoxButtons() {
         VBox panel = new VBox();
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        Button runCommand = displayComponents.makeButton("Run", value -> setCanvas(new TurtleGame()));
+        Button runCommand = displayComponents.makeButton("Run", value -> getCommandBoxInput());
         Button clear = displayComponents.makeButton("Clear", value -> setCanvas(new TurtleGame()));
         runCommand.setPrefWidth(MY_WIDTH);
         runCommand.setPrefHeight(MY_HEIGHT);

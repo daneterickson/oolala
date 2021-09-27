@@ -1,5 +1,6 @@
 package oolala;
 
+import View.GameView;
 import View.ScreenDisplay;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
@@ -15,8 +16,8 @@ public class Main extends Application {
      */
     @Override
     public void start (Stage stage) {
-        ScreenDisplay view = new ScreenDisplay();
-        stage.setScene(view.setupDisplay(BACKGROUND));
+        GameView view = new GameView();
+        stage.setScene(view.setupGame(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
     }
