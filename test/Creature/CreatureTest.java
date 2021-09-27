@@ -22,24 +22,24 @@ public class CreatureTest {
     void moveTwice() {
         myCreature.move(3);
         myCreature.move(-2);
-        assertEquals(1, myCreature.getShape().getX());
-        assertEquals(0, myCreature.getShape().getY());
+        assertEquals(1, myCreature.getNewX());
+        assertEquals(0, myCreature.getNewY());
     }
 
     @Test
     void rotateTwice() {
         myCreature.changeOrientation(30);
-        assertEquals(30, myCreature.getShape().getRotate());
+        assertEquals(30, myCreature.getAngle());
         myCreature.changeOrientation(-20);
-        assertEquals(10, myCreature.getShape().getRotate());
+        assertEquals(10, myCreature.getAngle());
     }
 
     @Test
     void rotateThenMove() {
         myCreature.changeOrientation(30);
         myCreature.move(20);
-        assertTrue(Math.abs(myCreature.getShape().getX() - 10*Math.sqrt(3)) < THRESHOLD);
-        assertTrue(Math.abs(myCreature.getShape().getY() - 10) < THRESHOLD);
+        assertTrue(Math.abs(myCreature.getNewX() - 10*Math.sqrt(3)) < THRESHOLD);
+        assertTrue(Math.abs(myCreature.getNewY() - 10) < THRESHOLD);
     }
 
 
