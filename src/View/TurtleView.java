@@ -13,7 +13,8 @@ import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 
 public class TurtleView extends GameView {
-
+// add the turtles to a pane (instance variable) and then add the pane to the scene in Screen Display
+// pane has getter method and will automatically update when I add more turtles
   public static final String TURTLE_IMAGE = "turtle.png";
   public static final double TURTLE_WIDTH = 10;
   public static final double TURTLE_HEIGHT = 20;
