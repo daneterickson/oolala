@@ -24,16 +24,18 @@ public class TurtleView extends GameView {
   private Rectangle myTurtleShape;
   private ImageView myTurtleImage;
 
-  public TurtleView(Creature creature) {
-    drawCreature(0, 0, TURTLE_WIDTH, TURTLE_HEIGHT);
+  public TurtleView(Creature creature, double x, double y) { // x and y based on canvas/scene size
+    drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT);
     myModel = creature;
   }
 
   protected void drawCreature(double x, double y, double width,
       double height) { // final will just be double size for turtle
     myTurtleImage = new ImageView(new Image(TURTLE_IMAGE));
-    myTurtleImage.setFitHeight(TURTLE_HEIGHT);
-    myTurtleImage.setFitWidth(TURTLE_WIDTH);
+    myTurtleImage.setFitHeight(width);
+    myTurtleImage.setFitWidth(height);
+    myTurtleImage.setX(x);
+    myTurtleImage.setY(y);
     myTurtleImage.setVisible(true);
   }
 
