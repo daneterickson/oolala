@@ -1,37 +1,51 @@
 package View;
 
 import Creatures.Creature;
-import java.util.ArrayList;
-import java.util.List;
-import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
-import javafx.scene.shape.Rectangle;
 
+/**
+ * TurtleView class creates the visual turtle and lines that go on the canvas in the IDE
+ *
+ * @author Dane Erickson
+ */
 public class TurtleView extends GameView {
 
   public static final String TURTLE_IMAGE = "turtle.png";
   public static final double TURTLE_WIDTH = 10;
   public static final double TURTLE_HEIGHT = 20;
-//  public static final Paint SHOW_TURTLE = Color.GREEN;
-//  public static final Paint HIDE_TURTLE = Color.TRANSPARENT;
 
   private Creature myModel;
   private ImageView myTurtleImage;
   private Pane myTurtlePane;
 
+  /**
+   * Constructor to create a TurtleView, which is the turtle and lines that go on the canvas in the
+   * ScreenDisplay class
+   *
+   * @param creature is the Creature object that is used as the model for this view class
+   * @param x        is the starting x position of the turtle
+   * @param y        is the starting y position of the turtle
+   */
   public TurtleView(Creature creature, double x, double y) { // x and y based on canvas/scene size
     drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT);
     myModel = creature;
     myTurtlePane = new Pane();
   }
 
-  protected void drawCreature(double x, double y, double width,
+  /**
+   * Getter method to get the Pane with the turtle and lines to be added to the scene in
+   * ScreenDisplay
+   *
+   * @return myTurtlePane
+   */
+  public Pane getMyTurtlePane() {
+    return myTurtlePane;
+  }
+
+  private void drawCreature(double x, double y, double width,
       double height) { // final will just be double size for turtle
     myTurtleImage = new ImageView(new Image(TURTLE_IMAGE));
     myTurtleImage.setFitHeight(width);
@@ -42,13 +56,15 @@ public class TurtleView extends GameView {
     myTurtlePane.getChildren().add(myTurtleImage);
   }
 
-  protected void drawLine() {
+  private void drawLine() {
     Line path = new Line(myModel.getOldX(), myModel.getOldY(), myModel.getNewX(),
         myModel.getNewY());
-    if (myModel.getPenActivity()) myTurtlePane.getChildren().add(path);
+    if (myModel.getPenActivity()) {
+      myTurtlePane.getChildren().add(path);
+    }
   }
 
-  protected void updateCreature() {
+  private void updateCreature() {
     myTurtleImage.setX(myModel.getNewX() + TURTLE_WIDTH / 2);
     myTurtleImage.setY(myModel.getNewY() + TURTLE_HEIGHT / 2);
     myTurtleImage.setRotate(myModel.getAngle());
