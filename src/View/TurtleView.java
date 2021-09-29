@@ -14,8 +14,8 @@ import javafx.scene.shape.Line;
 public class TurtleView extends GameView {
 
   public static final String TURTLE_IMAGE = "turtle.png";
-  public static final double TURTLE_WIDTH = 100;
-  public static final double TURTLE_HEIGHT = 200;
+  public static final double TURTLE_WIDTH = 60;
+  public static final double TURTLE_HEIGHT = 80;
 
   private Creature myModel;
   private ImageView myTurtleImage;
@@ -30,9 +30,9 @@ public class TurtleView extends GameView {
    * @param y        is the starting y position of the turtle
    */
   public TurtleView(Creature creature, double x, double y) { // x and y based on canvas/scene size
-    drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT);
     myModel = creature;
     myTurtlePane = new Pane();
+    drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT);
   }
 
   /**
@@ -48,8 +48,8 @@ public class TurtleView extends GameView {
   private void drawCreature(double x, double y, double width,
       double height) { // final will just be double size for turtle
     myTurtleImage = new ImageView(new Image(TURTLE_IMAGE));
-    myTurtleImage.setFitHeight(width);
-    myTurtleImage.setFitWidth(height);
+    myTurtleImage.setFitHeight(height);
+    myTurtleImage.setFitWidth(width);
     myTurtleImage.setX(x);
     myTurtleImage.setY(y);
     myTurtleImage.setVisible(true);

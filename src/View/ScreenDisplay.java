@@ -5,6 +5,7 @@ import Games.FractalGame;
 import Games.Game;
 import Games.TurtleGame;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -12,10 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -23,11 +21,13 @@ public class ScreenDisplay {
     private final int MY_WIDTH = 200;
     private final int MY_HEIGHT = 45;
     private final int MY_SPACING = 10;
+    private TextArea myCommandBox;
+    private TurtleView myGame;
 
-    public ScreenDisplay () {
+    public ScreenDisplay (TurtleView game) {
+        myGame = game;
 
     }
-
 
     public Scene setupDisplay (Paint background) {
         VBox root = new VBox();
@@ -57,17 +57,24 @@ public class ScreenDisplay {
     private Node makeCommandBox() {
         BorderPane panel = new BorderPane();
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        TextArea commandBox = displayComponents.makeCommandBox(value -> setCanvas(new TurtleGame()));
-        panel.setLeft(commandBox);
+        myCommandBox = displayComponents.makeCommandBox(value -> setCanvas(new TurtleGame()));
+        panel.setLeft(myCommandBox);
         panel.setRight(makeCommandBoxButtons());
 
         return panel;
     }
 
+    // Trying to figure out the connection from ScreenDisplay to model
+    public String getCommandBoxInput() {
+        System.out.println(myCommandBox.getText());
+        return myCommandBox.getText();
+    }
+
     private Node makeCommandBoxButtons() {
         VBox panel = new VBox();
+        Game game = new Game();
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        Button runCommand = displayComponents.makeButton("Run", value -> setCanvas(new TurtleGame()));
+        Button runCommand = displayComponents.makeButton("Run", value -> game.step(getCommandBoxInput()));
         Button clear = displayComponents.makeButton("Clear", value -> setCanvas(new TurtleGame()));
         runCommand.setPrefWidth(MY_WIDTH);
         runCommand.setPrefHeight(MY_HEIGHT);
@@ -80,12 +87,18 @@ public class ScreenDisplay {
 
     private Node makeCanvas() {
         BorderPane panel = new BorderPane();
-        ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        Rectangle canvas = displayComponents.makeCanvas();
-        panel.setLeft(canvas);
+        panel.setLeft(makeCanvasPanel());
         // panel.setRight(makeDarwinPanel());
         // panel.setRight(makeFractalPanel());
         return panel;
+    }
+
+    private Node makeCanvasPanel() {
+        StackPane pane = new StackPane();
+        ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
+        Rectangle canvas = displayComponents.makeCanvas();
+        pane.getChildren().addAll(canvas, myGame.getMyTurtlePane());
+        return pane;
     }
 
     private Node makeDarwinPanel() {

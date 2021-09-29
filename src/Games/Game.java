@@ -14,8 +14,10 @@ public class Game {
     }
 
     public void step (String command) {
+        System.out.println("We entered step");
         String[] commands = command.split(" ");
         myCurrent.setStatusStamp(false);
+        System.out.println(commands[0]);
         switch (commands[0]) {
             case "fd" -> myCurrent.move(Integer.valueOf(commands[1]));
             case "bk" -> myCurrent.move(-Integer.valueOf(commands[1]));
@@ -30,4 +32,6 @@ public class Game {
 //            case "tell" ->
         }
     }
+
+    // will possibly need a helper method to parse the string
 }
