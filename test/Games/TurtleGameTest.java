@@ -17,16 +17,16 @@ public class GameTest {
     @Test
     void stepCommandParsing () {
         myGame.step("fd 50");
-        assertEquals(50, myGame.getListCreatures().get(1).getNewX());
+        assertEquals(50, myGame.getCreaturesMap().get(1).getNewX());
         myGame.step("pd");
-        assertTrue(myGame.getListCreatures().get(1).getPenActivity());
+        assertTrue(myGame.getCreaturesMap().get(1).getPenActivity());
     }
 
     @Test
     void tellCreateOneNewCreature () {
         myGame.step("tell 2");
         assertEquals(2, myGame.getActiveIndices().get(0));
-        assertEquals(2, myGame.getListCreatures().size());
+        assertEquals(2, myGame.getCreaturesMap().size());
     }
 
     @Test
@@ -35,7 +35,7 @@ public class GameTest {
         assertEquals(3, myGame.getActiveIndices().get(0));
         assertEquals(2, myGame.getActiveIndices().get(1));
         assertEquals(2, myGame.getActiveIndices().size());
-        assertEquals(3, myGame.getListCreatures().size());
+        assertEquals(3, myGame.getCreaturesMap().size());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class GameTest {
         assertEquals(2, myGame.getActiveIndices().get(1));
         assertEquals(3, myGame.getActiveIndices().get(2));
         assertEquals(3, myGame.getActiveIndices().size());
-        assertEquals(3, myGame.getListCreatures().size());
+        assertEquals(3, myGame.getCreaturesMap().size());
     }
 
 

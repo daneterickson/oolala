@@ -11,12 +11,15 @@ public class Creature {
         isPenActive = true;
         isStamp = false;
         isCreatureVisible = true;
+        setInitialPosition(0,0,0);
+    }
 
-        myOldPosX = 0;
-        myOldPoxY = 0;
-        myNewPosX = 0;
-        myNewPosY = 0;
-        myAngle = 0;
+    public void setInitialPosition (double x, double y, int angle) {
+        myOldPosX = x;
+        myNewPosX = x;
+        myOldPoxY = y;
+        myNewPosY = y;
+        myAngle = angle;
     }
 
     public boolean getPenActivity () { return isPenActive; }
