@@ -6,12 +6,12 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class GameTest {
-    private Game myGame;
+public class TurtleGameTest {
+    private TurtleGame myGame;
 
     @BeforeEach
     public void setUp () {
-        myGame = new Game();
+        myGame = new TurtleGame(0, 0);
     }
 
     @Test
