@@ -25,12 +25,12 @@ public class TurtleView extends GameView {
    * Constructor to create a TurtleView, which is the turtle and lines that go on the canvas in the
    * ScreenDisplay class
    *
-   * @param creature is the Creature object that is used as the model for this view class
+   * @param creatureModel is the Creature object that is used as the model for this view class
    * @param x        is the starting x position of the turtle
    * @param y        is the starting y position of the turtle
    */
-  public TurtleView(Creature creature, double x, double y) { // x and y based on canvas/scene size
-    myModel = creature;
+  public TurtleView(Creature creatureModel, double x, double y) { // x and y based on canvas/scene size
+    myModel = creatureModel;
     myTurtlePane = new Pane();
     drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT);
   }
@@ -45,7 +45,8 @@ public class TurtleView extends GameView {
     return myTurtlePane;
   }
 
-  private void drawCreature(double x, double y, double width,
+  @Override
+  protected void drawCreature(double x, double y, double width,
       double height) { // final will just be double size for turtle
     myTurtleImage = new ImageView(new Image(TURTLE_IMAGE));
     myTurtleImage.setFitHeight(height);
@@ -57,7 +58,19 @@ public class TurtleView extends GameView {
     myTurtlePane.getChildren().add(myTurtleImage);
   }
 
-  private void drawLine() {
+  /**
+   * Getter method to get the myTurtleImage, which is the actual turtle on the screen
+   * @return myTurtleImage
+   */
+  public ImageView getMyTurtleImage() {
+    return myTurtleImage;
+  }
+
+  /**
+   * Draws the line that follows the turtle using the old and new position from the model
+   */
+  @Override
+  public void drawLine() {
     Line path = new Line(myModel.getOldX(), myModel.getOldY(), myModel.getNewX(),
         myModel.getNewY());
     path.setId("line");
@@ -66,9 +79,13 @@ public class TurtleView extends GameView {
     }
   }
 
-  private void updateCreature() {
-    myTurtleImage.setX(myModel.getNewX() + TURTLE_WIDTH / 2);
-    myTurtleImage.setY(myModel.getNewY() + TURTLE_HEIGHT / 2);
+  /**
+   * Updates the position, orientation, and visibility of the turtle on the screen
+   */
+  @Override
+  public void updateCreature() {
+    myTurtleImage.setX(myModel.getNewX() - TURTLE_WIDTH / 2);
+    myTurtleImage.setY(myModel.getNewY() - TURTLE_HEIGHT / 2);
     myTurtleImage.setRotate(myModel.getAngle());
     myTurtleImage.setVisible(myModel.getCreatureVisibility());
   }
