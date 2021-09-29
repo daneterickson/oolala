@@ -73,8 +73,9 @@ public class ScreenDisplay {
 
     private Node makeCommandBoxButtons() {
         VBox panel = new VBox();
+        Game game = new Game();
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        Button runCommand = displayComponents.makeButton("Run", value -> getCommandBoxInput());
+        Button runCommand = displayComponents.makeButton("Run", value -> game.step(getCommandBoxInput()));
         Button clear = displayComponents.makeButton("Clear", value -> setCanvas(new TurtleGame()));
         runCommand.setPrefWidth(MY_WIDTH);
         runCommand.setPrefHeight(MY_HEIGHT);
