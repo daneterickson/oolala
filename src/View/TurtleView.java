@@ -14,8 +14,8 @@ import javafx.scene.shape.Line;
 public class TurtleView extends GameView {
 
   public static final String TURTLE_IMAGE = "turtle.png";
-  public static final double TURTLE_WIDTH = 10;
-  public static final double TURTLE_HEIGHT = 20;
+  public static final double TURTLE_WIDTH = 100;
+  public static final double TURTLE_HEIGHT = 200;
 
   private Creature myModel;
   private ImageView myTurtleImage;
@@ -53,12 +53,14 @@ public class TurtleView extends GameView {
     myTurtleImage.setX(x);
     myTurtleImage.setY(y);
     myTurtleImage.setVisible(true);
+    myTurtleImage.setId("turtle-image");
     myTurtlePane.getChildren().add(myTurtleImage);
   }
 
   private void drawLine() {
     Line path = new Line(myModel.getOldX(), myModel.getOldY(), myModel.getNewX(),
         myModel.getNewY());
+    path.setId("line");
     if (myModel.getPenActivity()) {
       myTurtlePane.getChildren().add(path);
     }
