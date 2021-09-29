@@ -21,6 +21,7 @@ public class TurtleGame extends Game {
 
     public List<Integer> getActiveIndices () { return myActiveIndices; }
 
+    @Override
     public void step (String command) {
         String[] commands = command.split(" ");
 
