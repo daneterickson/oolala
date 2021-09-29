@@ -7,11 +7,11 @@ public class Creature {
     private int myAngle;
 
 
-    public Creature () {
+    public Creature (int x, int y) {
         isPenActive = true;
         isStamp = false;
         isCreatureVisible = true;
-        setInitialPosition(0,0,0);
+        setInitialPosition(x, y,0);
     }
 
     public void setInitialPosition (double x, double y, int angle) {
@@ -49,8 +49,8 @@ public class Creature {
 
     public void move (int distance) {
         updateOldPos();
-        myNewPosX = myOldPosX + distance * Math.cos(Math.toRadians(myAngle));
-        myNewPosY = myOldPoxY + distance * Math.sin(Math.toRadians(myAngle));
+        myNewPosX = myOldPosX + distance * Math.sin(Math.toRadians(myAngle));
+        myNewPosY = myOldPoxY - distance * Math.cos(Math.toRadians(myAngle));
     }
 
     public void changeOrientation (int angle) {
