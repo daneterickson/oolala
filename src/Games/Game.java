@@ -6,24 +6,24 @@ import java.util.*;
 
 public class Game {
 
-    private Map<Integer, Creature> myListCreatures;
+    private Map<Integer, Creature> myCreaturesMap;
     private int myMaxIndex; // always equal to myListCreatures.size()
     private List<Integer> myActiveIndices;
 
     public Game () {
-        myListCreatures = new HashMap<>();
-        myListCreatures.put(1, new Creature());
+        myCreaturesMap = new HashMap<>();
+        myCreaturesMap.put(1, new Creature());
         myMaxIndex = 1;
         myActiveIndices = new ArrayList<>();
         myActiveIndices.add(1);
     }
 
-    public Map<Integer, Creature> getListCreatures () { return myListCreatures; }
+    public Map<Integer, Creature> getListCreatures () { return myCreaturesMap; }
     public List<Integer> getActiveIndices () { return myActiveIndices; }
 
     public void addNewCreature () {
         myMaxIndex++;
-        myListCreatures.put(myMaxIndex, new Creature());
+        myCreaturesMap.put(myMaxIndex, new Creature());
     }
 
     public void step (String command) {
@@ -39,7 +39,7 @@ public class Game {
         }
         else {
             for (int index: myActiveIndices) {
-                Creature current = myListCreatures.get(index);
+                Creature current = myCreaturesMap.get(index);
                 current.setStatusStamp(false);
                 switch (commands[0]) {
                     case "fd" -> current.move(Integer.valueOf(commands[1]));
