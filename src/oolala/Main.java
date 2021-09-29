@@ -12,8 +12,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static final String TITLE = "OOLALA";
     public static final Paint BACKGROUND = Color.THISTLE;
-    private static int ORIGIN_X = 650;
-    private static int ORIGIN_Y = 300;
+    public static int ORIGIN_X = 650;
+    public static int ORIGIN_Y = 300;
 
     /**
      * Organize display of game in a scene and start the game.
