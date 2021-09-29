@@ -30,9 +30,9 @@ public class TurtleView extends GameView {
    * @param y        is the starting y position of the turtle
    */
   public TurtleView(Creature creature, double x, double y) { // x and y based on canvas/scene size
-    drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT);
     myModel = creature;
     myTurtlePane = new Pane();
+    drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT);
   }
 
   /**

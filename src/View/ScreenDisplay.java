@@ -5,6 +5,7 @@ import Games.FractalGame;
 import Games.Game;
 import Games.TurtleGame;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -12,10 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -24,11 +22,12 @@ public class ScreenDisplay {
     private final int MY_HEIGHT = 45;
     private final int MY_SPACING = 10;
     private TextArea myCommandBox;
+    private TurtleView myGame;
 
-    public ScreenDisplay () {
+    public ScreenDisplay (TurtleView game) {
+        myGame = game;
 
     }
-
 
     public Scene setupDisplay (Paint background) {
         VBox root = new VBox();
@@ -88,12 +87,18 @@ public class ScreenDisplay {
 
     private Node makeCanvas() {
         BorderPane panel = new BorderPane();
-        ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        Rectangle canvas = displayComponents.makeCanvas();
-        panel.setLeft(canvas);
+        panel.setLeft(makeCanvasPanel());
         // panel.setRight(makeDarwinPanel());
         // panel.setRight(makeFractalPanel());
         return panel;
+    }
+
+    private Node makeCanvasPanel() {
+        StackPane pane = new StackPane();
+        ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
+        Rectangle canvas = displayComponents.makeCanvas();
+        pane.getChildren().addAll(canvas, myGame.getMyTurtlePane());
+        return pane;
     }
 
     private Node makeDarwinPanel() {
