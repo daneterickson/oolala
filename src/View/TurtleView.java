@@ -82,7 +82,7 @@ public class TurtleView extends GameView {
   public void updateCanvas () {
     for (int i : myModel.getActiveIndices()) {
       Creature currentModel = myModel.getCreaturesMap().get(i);
-      myTurtleMap.putIfAbsent(i, drawCreature(currentModel.getNewX(),
+      if (!myTurtleMap.containsKey(i)) myTurtleMap.put(i, drawCreature(currentModel.getNewX(),
           currentModel.getNewY(), TURTLE_WIDTH, TURTLE_HEIGHT, i));
       ImageView currentTurtle = myTurtleMap.get(i);
       drawLine(currentModel, i);
