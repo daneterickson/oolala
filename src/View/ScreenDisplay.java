@@ -24,15 +24,22 @@ public class ScreenDisplay {
     private final int MY_HEIGHT = 45;
     private final int MY_SPACING = 20;
     private TextArea myCommandBox;
-    private TurtleView myGame;
+    private TurtleView myGameView;
     private ResourceBundle myResources;
+    private int myStartX;
+    private int myStartY;
+    private TurtleGame myGame;
 
     public static final String DEFAULT_RESOURCE_PACKAGE = "View.Resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
 
-    public ScreenDisplay (TurtleView game, String language) {
-        myGame = game;
+    public ScreenDisplay (TurtleView game, String language, int startX, int startY) {
+        myGameView = game;
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+        myGame = new TurtleGame(startX, startY);
+        myStartX = startX;
+        myStartY = startY;
+
     }
 
     public Scene setupDisplay (Paint background) {
@@ -52,7 +59,7 @@ public class ScreenDisplay {
         panel.setSpacing(5);
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
 
-        Node turtleMode = displayComponents.makeButton("Turtle", value -> setCanvas(new TurtleGame()));
+        Node turtleMode = displayComponents.makeButton("Turtle", value -> setCanvas(myGame));
         Node fractalMode = displayComponents.makeButton("Fractal", value -> setCanvas(new FractalGame()));
         Node darwinMode = displayComponents.makeButton("Darwin", value -> setCanvas(new DarwinGame()));
 
@@ -64,7 +71,7 @@ public class ScreenDisplay {
     private Node makeCommandBox() {
         BorderPane panel = new BorderPane();
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        myCommandBox = displayComponents.makeCommandBox(value -> setCanvas(new TurtleGame()));
+        myCommandBox = displayComponents.makeCommandBox(value -> setCanvas(myGame));
         panel.setLeft(myCommandBox);
         panel.setRight(makeCommandBoxButtons());
 
@@ -79,11 +86,10 @@ public class ScreenDisplay {
 
     private Node makeCommandBoxButtons() {
         VBox panel = new VBox();
-        Game game = new Game();
 //        panel.getStyleClass().add("buttonDefault");
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        Node runCommand = displayComponents.makeButton("Run", value -> game.step(getCommandBoxInput()));
-        Node clear = displayComponents.makeButton("Clear", value -> setCanvas(new TurtleGame()));
+        Node runCommand = displayComponents.makeButton("Run", value -> myGame.step(getCommandBoxInput()));
+        Node clear = displayComponents.makeButton("Clear", value -> setCanvas(myGame)); // Clear screen functionality not done
 //        runCommand.setPrefWidth(MY_WIDTH);
 //        runCommand.setPrefHeight(MY_HEIGHT);
 //        clear.setPrefWidth(MY_WIDTH);
@@ -105,7 +111,7 @@ public class ScreenDisplay {
         StackPane pane = new StackPane();
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
         Rectangle canvas = displayComponents.makeCanvas();
-        pane.getChildren().addAll(canvas, myGame.getMyTurtlePane());
+        pane.getChildren().addAll(canvas, myGameView.getMyTurtlePane());
         return pane;
     }
 
@@ -120,7 +126,7 @@ public class ScreenDisplay {
     }
 
     private void setCanvas (Game game) {
-        if (game.equals(new TurtleGame())) {
+        if (game.equals(myGame)) {
             // initialize Turtle Game
         }
 

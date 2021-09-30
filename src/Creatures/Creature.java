@@ -7,16 +7,19 @@ public class Creature {
     private int myAngle;
 
 
-    public Creature () {
+    public Creature (int x, int y) {
         isPenActive = true;
         isStamp = false;
         isCreatureVisible = true;
+        setInitialPosition(x, y,0);
+    }
 
-        myOldPosX = 0;
-        myOldPoxY = 0;
-        myNewPosX = 0;
-        myNewPosY = 0;
-        myAngle = 0;
+    public void setInitialPosition (double x, double y, int angle) {
+        myOldPosX = x;
+        myNewPosX = x;
+        myOldPoxY = y;
+        myNewPosY = y;
+        myAngle = angle;
     }
 
     public boolean getPenActivity () { return isPenActive; }
@@ -46,8 +49,8 @@ public class Creature {
 
     public void move (int distance) {
         updateOldPos();
-        myNewPosX = myOldPosX + distance * Math.cos(Math.toRadians(myAngle));
-        myNewPosY = myOldPoxY + distance * Math.sin(Math.toRadians(myAngle));
+        myNewPosX = myOldPosX + distance * Math.sin(Math.toRadians(myAngle));
+        myNewPosY = myOldPoxY - distance * Math.cos(Math.toRadians(myAngle));
     }
 
     public void changeOrientation (int angle) {
