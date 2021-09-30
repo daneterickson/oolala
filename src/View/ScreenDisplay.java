@@ -17,16 +17,22 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+import java.util.ResourceBundle;
+
 public class ScreenDisplay {
     private final int MY_WIDTH = 200;
     private final int MY_HEIGHT = 45;
-    private final int MY_SPACING = 10;
+    private final int MY_SPACING = 20;
     private TextArea myCommandBox;
     private TurtleView myGame;
+    private ResourceBundle myResources;
 
-    public ScreenDisplay (TurtleView game) {
+    public static final String DEFAULT_RESOURCE_PACKAGE = "View.Resources.";
+    public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
+
+    public ScreenDisplay (TurtleView game, String language) {
         myGame = game;
-
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
     }
 
     public Scene setupDisplay (Paint background) {
@@ -37,6 +43,7 @@ public class ScreenDisplay {
 
         Scene scene = new Scene(root, background);
         scene.setOnKeyPressed(e -> handleKeyInput(e.getCode()));
+        scene.getStylesheets().add(getClass().getResource(DEFAULT_STYLESHEET).toExternalForm());
         return scene;
     }
 
@@ -45,9 +52,9 @@ public class ScreenDisplay {
         panel.setSpacing(5);
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
 
-        Button turtleMode = displayComponents.makeButton("Turtle", value -> setCanvas(new TurtleGame()));
-        Button fractalMode = displayComponents.makeButton("Fractal", value -> setCanvas(new FractalGame()));
-        Button darwinMode = displayComponents.makeButton("Darwin", value -> setCanvas(new DarwinGame()));
+        Node turtleMode = displayComponents.makeButton("Turtle", value -> setCanvas(new TurtleGame()));
+        Node fractalMode = displayComponents.makeButton("Fractal", value -> setCanvas(new FractalGame()));
+        Node darwinMode = displayComponents.makeButton("Darwin", value -> setCanvas(new DarwinGame()));
 
         panel.getChildren().addAll(turtleMode, fractalMode, darwinMode);
 
@@ -73,13 +80,14 @@ public class ScreenDisplay {
     private Node makeCommandBoxButtons() {
         VBox panel = new VBox();
         Game game = new Game();
+//        panel.getStyleClass().add("buttonDefault");
         ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        Button runCommand = displayComponents.makeButton("Run", value -> game.step(getCommandBoxInput()));
-        Button clear = displayComponents.makeButton("Clear", value -> setCanvas(new TurtleGame()));
-        runCommand.setPrefWidth(MY_WIDTH);
-        runCommand.setPrefHeight(MY_HEIGHT);
-        clear.setPrefWidth(MY_WIDTH);
-        clear.setPrefHeight(MY_HEIGHT);
+        Node runCommand = displayComponents.makeButton("Run", value -> game.step(getCommandBoxInput()));
+        Node clear = displayComponents.makeButton("Clear", value -> setCanvas(new TurtleGame()));
+//        runCommand.setPrefWidth(MY_WIDTH);
+//        runCommand.setPrefHeight(MY_HEIGHT);
+//        clear.setPrefWidth(MY_WIDTH);
+//        clear.setPrefHeight(MY_HEIGHT);
         panel.getChildren().addAll(runCommand, clear);
         panel.setSpacing(MY_SPACING);
         return panel;

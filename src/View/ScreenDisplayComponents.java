@@ -19,11 +19,11 @@ public class ScreenDisplayComponents {
     private final int COMMAND_BOX_X = 250;
     private final int COMMAND_BOX_Y = 50;
 
-    public Button makeButton (String label, EventHandler<ActionEvent> handler) {
+    public Node makeButton (String label, EventHandler<ActionEvent> handler) {
         Button result = new Button();
         result.setText(label);
         result.setOnAction(handler);
-        return result;
+        return setId(label, result);
     }
 
     public TextArea makeCommandBox(EventHandler handler) {
@@ -41,6 +41,11 @@ public class ScreenDisplayComponents {
         Rectangle result = new Rectangle(CANVAS_X, CANVAS_Y, MY_WIDTH, CANVAS_HEIGHT);
         result.setFill(Color.WHITE);
         return result;
+    }
+
+    private Node setId (String id, Node node) {
+        node.setId(id);
+        return node;
     }
 
 }
