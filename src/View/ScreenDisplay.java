@@ -40,10 +40,10 @@ public class ScreenDisplay {
     public static final String DEFAULT_RESOURCE_PACKAGE = "View.Resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
 
-    public ScreenDisplay (TurtleView game, String language, int startX, int startY) {
-        myGameView = game;
+    public ScreenDisplay (TurtleView gameView, TurtleGame game, String language, int startX, int startY) {
+        myGameView = gameView;
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
-        myGame = new TurtleGame(startX, startY);
+        myGame = game;
         myStartX = startX;
         myStartY = startY;
 

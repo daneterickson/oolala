@@ -24,7 +24,7 @@ public class Main extends Application {
         // Creature turtle = new Creature(ORIGIN_X, ORIGIN_Y);
         TurtleGame turtle = new TurtleGame(ORIGIN_X, ORIGIN_Y);
         TurtleView game = new TurtleView(turtle, ORIGIN_X, ORIGIN_Y);
-        ScreenDisplay display = new ScreenDisplay(game, "English", ORIGIN_X, ORIGIN_Y);
+        ScreenDisplay display = new ScreenDisplay(game, turtle, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
