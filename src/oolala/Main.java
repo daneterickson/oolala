@@ -1,6 +1,7 @@
 package oolala;
 
 import Creatures.Creature;
+import Games.TurtleGame;
 import View.GameView;
 import View.ScreenDisplay;
 import View.TurtleView;
@@ -20,7 +21,8 @@ public class Main extends Application {
      */
     @Override
     public void start (Stage stage) {
-        Creature turtle = new Creature(ORIGIN_X, ORIGIN_Y);
+        // Creature turtle = new Creature(ORIGIN_X, ORIGIN_Y);
+        TurtleGame turtle = new TurtleGame(ORIGIN_X, ORIGIN_Y);
         TurtleView game = new TurtleView(turtle, ORIGIN_X, ORIGIN_Y);
         ScreenDisplay display = new ScreenDisplay(game, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));

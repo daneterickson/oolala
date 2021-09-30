@@ -2,6 +2,8 @@ package View;
 
 import Creatures.Creature;
 import Games.TurtleGame;
+
+import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +36,7 @@ public class TurtleView extends GameView {
   public TurtleView(TurtleGame game, double x, double y) { // x and y based on canvas/scene size
     myModel = game;
     myTurtlePane = new Pane();
+    myTurtleMap = new HashMap<>();
     drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT, 1);
   }
 
