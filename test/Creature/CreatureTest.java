@@ -15,7 +15,7 @@ public class CreatureTest {
 
     @BeforeEach
     public void setUp () {
-        myCreature = new Creature();
+        myCreature = new Creature(0, 0);
     }
 
     @Test

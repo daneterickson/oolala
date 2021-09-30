@@ -2,34 +2,35 @@ package Games;
 
 import Creatures.Creature;
 
-import java.util.List;
+import java.util.*;
 
-public class Game {
+public abstract class Game {
 
-    //    private List<Creature> myListCreatures;
-    private Creature myCurrent;
+    private Map<Integer, Creature> myCreaturesMap;
 
     public Game () {
-        myCurrent = new Creature();
+        myCreaturesMap = new HashMap<>();
     }
 
-    public void step (String command) {
-        System.out.println("We entered step");
+    public Map<Integer, Creature> getCreaturesMap () { return myCreaturesMap; }
+
+
+    public void step (String command) {}
+
+    public void executeCommand (String command, Creature current) {
         String[] commands = command.split(" ");
-        myCurrent.setStatusStamp(false);
-        System.out.println(commands[0]);
+        current.setStatusStamp(false);
         switch (commands[0]) {
-            case "fd" -> myCurrent.move(Integer.valueOf(commands[1]));
-            case "bk" -> myCurrent.move(-Integer.valueOf(commands[1]));
-            case "lt" -> myCurrent.changeOrientation(-Integer.valueOf(commands[1]));
-            case "rt" -> myCurrent.changeOrientation(Integer.valueOf(commands[1]));
-            case "pd" -> myCurrent.setPenActivity(true);
-            case "pu" -> myCurrent.setPenActivity(false);
-            case "st" -> myCurrent.setCreatureVisibility(true);
-            case "ht" -> myCurrent.setCreatureVisibility(false);
-            case "home" -> myCurrent.reset();
-            case "stamp" -> myCurrent.setStatusStamp(true);
-//            case "tell" ->
+            case "fd" -> current.move(Integer.valueOf(commands[1]));
+            case "bk" -> current.move(-Integer.valueOf(commands[1]));
+            case "lt" -> current.changeOrientation(-Integer.valueOf(commands[1]));
+            case "rt" -> current.changeOrientation(Integer.valueOf(commands[1]));
+            case "pd" -> current.setPenActivity(true);
+            case "pu" -> current.setPenActivity(false);
+            case "st" -> current.setCreatureVisibility(true);
+            case "ht" -> current.setCreatureVisibility(false);
+            case "home" -> current.reset();
+            case "stamp" -> current.setStatusStamp(true);
         }
     }
 
