@@ -85,14 +85,14 @@ public class TurtleView extends GameView {
       myTurtleMap.putIfAbsent(i, drawCreature(currentModel.getNewX(),
           currentModel.getNewY(), TURTLE_WIDTH, TURTLE_HEIGHT, i));
       ImageView currentTurtle = myTurtleMap.get(i);
-      updateCreature(currentModel, currentTurtle);
       drawLine(currentModel, i);
+      updateCreature(currentModel, currentTurtle);
     }
   }
 
   private void drawLine(Creature currentModel, int index) {
-    Line path = new Line(currentModel.getOldX(), currentModel.getOldY(), currentModel.getNewX(),
-        currentModel.getNewY());
+    Line path = new Line(currentModel.getOldX() + TURTLE_WIDTH/2, currentModel.getOldY() + TURTLE_HEIGHT/2,
+        currentModel.getNewX() + TURTLE_WIDTH/2, currentModel.getNewY() + TURTLE_HEIGHT/2);
     path.setId("line" + index);
     if (currentModel.getPenActivity()) {
       myTurtlePane.getChildren().add(path);
