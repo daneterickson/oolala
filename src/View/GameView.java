@@ -4,11 +4,9 @@ import javafx.scene.image.ImageView;
 
 public abstract class GameView {
 
-    protected abstract void drawCreature(double x, double y, double width, double height);
+    protected abstract ImageView drawCreature(double x, double y, double width, double height, int index);
 
-    public abstract void drawLine();
-
-    public abstract void updateCreature();
+    public abstract void updateCanvas ();
 
 
 }
