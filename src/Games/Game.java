@@ -15,7 +15,7 @@ public abstract class Game {
     public Map<Integer, Creature> getCreaturesMap () { return myCreaturesMap; }
 
 
-    public void step (String command) {}
+  public void step (String command) {}
 
     public void executeCommand (String command, Creature current) {
         String[] commands = command.split(" ");
@@ -33,6 +33,4 @@ public abstract class Game {
             case "stamp" -> current.setStatusStamp(true);
         }
     }
-
-    // will possibly need a helper method to parse the string
 }

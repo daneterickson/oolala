@@ -20,9 +20,9 @@ public class Main extends Application {
      */
     @Override
     public void start (Stage stage) {
-        Creature turtle = new Creature();
+        Creature turtle = new Creature(ORIGIN_X, ORIGIN_Y);
         TurtleView game = new TurtleView(turtle, ORIGIN_X, ORIGIN_Y);
-        ScreenDisplay display = new ScreenDisplay(game);
+        ScreenDisplay display = new ScreenDisplay(game, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
