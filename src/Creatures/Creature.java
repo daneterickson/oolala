@@ -26,11 +26,20 @@ public class Creature {
     }
 
     public boolean getPenActivity () { return isPenActive; }
-    public void setPenActivity (boolean status) { isPenActive = status; }
+    public void setPenActivity (boolean status) {
+        isPenActive = status;
+        updateOldPos();
+    }
     public boolean getCreatureVisibility () { return isCreatureVisible; }
-    public void setCreatureVisibility (boolean status) { isCreatureVisible = status; }
+    public void setCreatureVisibility (boolean status) {
+        isCreatureVisible = status;
+        updateOldPos();
+    }
     public boolean getStatusStamp () { return isStamp; }
-    public void setStatusStamp (boolean status) { isStamp = status; }
+    public void setStatusStamp (boolean status) {
+        isStamp = status;
+        updateOldPos();
+    }
 
     public double getOldX () { return myOldPosX; }
     public double getOldY () { return myOldPoxY; }
