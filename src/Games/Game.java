@@ -7,18 +7,21 @@ import java.util.*;
 public abstract class Game {
 
     private Map<Integer, Creature> myCreaturesMap;
+    private List<Integer> myActiveIndices;
 
     public Game () {
         myCreaturesMap = new HashMap<>();
+        myActiveIndices = new ArrayList<>();
     }
 
     public Map<Integer, Creature> getCreaturesMap () { return myCreaturesMap; }
+    public List<Integer> getActiveIndices () { return myActiveIndices; }
 
 
     public void step (String command) {}
 
     public void executeCommand (String command, Creature current) {
-        String[] commands = command.split(" ");
+        String[] commands = command.toLowerCase().split(" ");
         current.setStatusStamp(false);
         switch (commands[0]) {
             case "fd" -> current.move(Integer.valueOf(commands[1]));
