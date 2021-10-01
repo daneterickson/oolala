@@ -1,6 +1,5 @@
-package Creature;
+package oolala.creatures;
 
-import oolala.creatures.Creature;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 
