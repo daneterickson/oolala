@@ -101,6 +101,26 @@ public class TurtleViewTest extends DukeApplicationTest {
     testMoveTurtle(100, 45, "fd");
   }
 
+  @Test
+  void testAddTurtle () {
+    String command = "tell 2";
+    clickOn(myTextField);
+    writeInputTo(myTextField, command);
+    clickOn(myRunButton);
+    assertEquals(2, myTurtleView.getMyTurtleMap().size());
+  }
+
+  @Test
+  void testAddAndMoveTurtle () {
+    String command = "fd 100\ntell 2\nrt 90\nfd 100";
+    clickOn(myTextField);
+    writeInputTo(myTextField, command);
+    clickOn(myRunButton);
+    assertEquals(2, myTurtleView.getMyTurtleMap().size());
+    assertEquals(originY - 100, myTurtleView.getMyTurtleMap().get(1).getY());
+    assertEquals(originX + 100, myTurtleView.getMyTurtleMap().get(2).getX());
+  }
+
   private void testMoveTurtle(int distance, int angle, String direction) {
     String command = String.format("rt %d\n%s %d", angle, direction, distance);
     clickOn(myTextField);
@@ -119,7 +139,6 @@ public class TurtleViewTest extends DukeApplicationTest {
       expectedY = originY + cosDistance;
     }
     ImageView turtleImage = myTurtleView.getMyTurtleMap().get(1);
-
     assertEquals(expectedX, turtleImage.getX());
     assertEquals(expectedY, turtleImage.getY());
   }
