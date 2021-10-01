@@ -41,6 +41,7 @@ public class FractalGame extends Game {
         // same as the Turtle game
     }
 
+    @Override
     public String compile (String paragraph) {
         String[] lines = paragraph.split("\n");
         for (String command: lines) {
