@@ -100,7 +100,7 @@ public class TurtleView extends GameView {
   }
 
   private void updateCreature(Creature currentModel, ImageView currentTurtle) {
-    currentTurtle.setX(currentModel.getNewX()); // - TURTLE_WIDTH / 2 ??
+    currentTurtle.setX(currentModel.getNewX());
     currentTurtle.setY(currentModel.getNewY());
     currentTurtle.setRotate(currentModel.getAngle());
     currentTurtle.setVisible(currentModel.getCreatureVisibility());
