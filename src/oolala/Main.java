@@ -21,7 +21,6 @@ public class Main extends Application {
      */
     @Override
     public void start (Stage stage) {
-        // Creature turtle = new Creature(ORIGIN_X, ORIGIN_Y);
         TurtleGame turtle = new TurtleGame(ORIGIN_X, ORIGIN_Y);
         TurtleView game = new TurtleView(turtle, ORIGIN_X, ORIGIN_Y);
         ScreenDisplay display = new ScreenDisplay(game, turtle, "English", ORIGIN_X, ORIGIN_Y);

@@ -36,6 +36,7 @@ public class ScreenDisplay {
     private TurtleGame myGame;
     private Timeline myAnimation;
     private double SECONDS_DELAY = 0.01;
+    private ScreenDisplayComponents myDisplayComponents;
 
     public static final String DEFAULT_RESOURCE_PACKAGE = "View.Resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
@@ -46,11 +47,13 @@ public class ScreenDisplay {
         myGame = game;
         myStartX = startX;
         myStartY = startY;
+        myDisplayComponents = new ScreenDisplayComponents();
 
     }
 
     public Scene setupDisplay (Paint background) {
         VBox root = new VBox();
+        root.setId("Pane");
         root.setSpacing(20);
         root.setPadding(new Insets(MY_SPACING, MY_SPACING, MY_SPACING, MY_SPACING));
         root.getChildren().addAll(makeGameModesPanel(), makeCanvas(), makeCommandBox());
@@ -64,11 +67,11 @@ public class ScreenDisplay {
     private Node makeGameModesPanel () {
         HBox panel = new HBox();
         panel.setSpacing(5);
-        ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
+        panel.setId("GameModePanel");
 
-        Node turtleMode = displayComponents.makeButton("Turtle", value -> setCanvas(myGame));
-        Node fractalMode = displayComponents.makeButton("Fractal", value -> setCanvas(new FractalGame()));
-        Node darwinMode = displayComponents.makeButton("Darwin", value -> setCanvas(new DarwinGame()));
+        Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(myGame));
+        Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(new FractalGame()));
+        Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(new DarwinGame()));
 
         panel.getChildren().addAll(turtleMode, fractalMode, darwinMode);
 
@@ -77,8 +80,8 @@ public class ScreenDisplay {
 
     private Node makeCommandBox() {
         BorderPane panel = new BorderPane();
-        ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        myCommandBox = displayComponents.makeCommandBox(value -> setCanvas(myGame));
+        panel.setId("CommandBoxPanel");
+        myCommandBox = myDisplayComponents.makeCommandBox("CommandBox", value -> setCanvas(myGame));
         panel.setLeft(myCommandBox);
         panel.setRight(makeCommandBoxButtons());
 
@@ -108,10 +111,10 @@ public class ScreenDisplay {
 
     private Node makeCommandBoxButtons() {
         VBox panel = new VBox();
+        panel.setId("CommandBoxButtonPanel");
 //        panel.getStyleClass().add("buttonDefault");
-        ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        Node runCommand = displayComponents.makeButton("Run", value -> getCommandBoxInput());
-        Node clear = displayComponents.makeButton("Clear", value -> getCommandBoxInput()); // Clear screen functionality not done
+        Node runCommand = myDisplayComponents.makeButton("Run", value -> getCommandBoxInput());
+        Node clear = myDisplayComponents.makeButton("Clear", value -> getCommandBoxInput()); // Clear screen functionality not done
 //        runCommand.setPrefWidth(MY_WIDTH);
 //        runCommand.setPrefHeight(MY_HEIGHT);
 //        clear.setPrefWidth(MY_WIDTH);
@@ -123,6 +126,7 @@ public class ScreenDisplay {
 
     private Node makeCanvas() {
         BorderPane panel = new BorderPane();
+        panel.setId("CanvasPanel");
         panel.setLeft(makeCanvasPanel());
         // panel.setRight(makeDarwinPanel());
         // panel.setRight(makeFractalPanel());
@@ -131,8 +135,8 @@ public class ScreenDisplay {
 
     private Node makeCanvasPanel() {
         StackPane pane = new StackPane();
-        ScreenDisplayComponents displayComponents = new ScreenDisplayComponents();
-        Rectangle canvas = displayComponents.makeCanvas();
+        pane.setId("CanvasComponentPane");
+        Rectangle canvas = myDisplayComponents.makeCanvas();
         pane.getChildren().addAll(canvas, myGameView.getMyTurtlePane());
         return pane;
     }

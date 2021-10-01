@@ -34,7 +34,7 @@ public class TurtleViewTest extends DukeApplicationTest {
     stage.setTitle(Main.TITLE);
     stage.show();
 
-    myTextField = lookup("#command-box").query();
+    myTextField = lookup("#CommandBox").query();
     myTextField.clear();
     myRunButton = lookup("Run").query();
   }

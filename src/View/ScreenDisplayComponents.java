@@ -26,7 +26,7 @@ public class ScreenDisplayComponents {
         return setId(label, result);
     }
 
-    public TextArea makeCommandBox(EventHandler handler) {
+    public TextArea makeCommandBox(String id, EventHandler handler) {
         TextArea result = new TextArea();
         result.setOnKeyPressed(handler);
         result.setText("Type your code here...");
@@ -34,13 +34,13 @@ public class ScreenDisplayComponents {
         result.setPrefHeight(COMMAND_BOX_HEIGHT);
         result.setLayoutX(COMMAND_BOX_X);
         result.setLayoutY(COMMAND_BOX_Y);
-        return result;
+        return (TextArea)setId(id, result);
     }
 
     public Rectangle makeCanvas() {
         Rectangle result = new Rectangle(CANVAS_X, CANVAS_Y, MY_WIDTH, CANVAS_HEIGHT);
         result.setFill(Color.WHITE);
-        return result;
+        return (Rectangle)setId("Canvas", result);
     }
 
     private Node setId (String id, Node node) {
