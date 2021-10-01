@@ -75,7 +75,7 @@ public class ScreenDisplay {
     // Trying to figure out the connection from ScreenDisplay to model
     public void getCommandBoxInput () {
         String commandText = myCommandBox.getText();
-        String[] splitCommand = commandText.split("\n");
+        String[] splitCommand = myGame.compile(commandText).split("\n");
         for (String command : splitCommand) {
             myGame.step(command);
             myGameView.updateCanvas();

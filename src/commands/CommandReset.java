@@ -4,7 +4,7 @@ import oolala.creatures.Creature;
 
 public class CommandReset extends Command {
     public CommandReset () {
-        setName("reset");
+        setName("home");
         setNumArgs(1);
     }
 

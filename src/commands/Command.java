@@ -36,6 +36,7 @@ public class Command {
         myCommandsList.add(new CommandHideTurtle());
         myCommandsList.add(new CommandReset());
         myCommandsList.add(new CommandStamp());
+        myCommandsList.add(new CommandTell());
     }
 
     public String getName () { return myName; }
