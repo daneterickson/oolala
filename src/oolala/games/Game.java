@@ -1,6 +1,6 @@
-package Games;
+package oolala.games;
 
-import Creatures.Creature;
+import oolala.creatures.Creature;
 
 import java.util.*;
 

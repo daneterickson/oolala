@@ -1,4 +1,4 @@
-package View;
+package oolala.view;
 
 public class FractalView {
 }

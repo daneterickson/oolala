@@ -1,10 +1,8 @@
 package oolala;
 
-import Creatures.Creature;
-import Games.TurtleGame;
-import View.GameView;
-import View.ScreenDisplay;
-import View.TurtleView;
+import oolala.games.TurtleGame;
+import oolala.view.ScreenDisplay;
+import oolala.view.TurtleView;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;

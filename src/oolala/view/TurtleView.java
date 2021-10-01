@@ -1,7 +1,7 @@
-package View;
+package oolala.view;
 
-import Creatures.Creature;
-import Games.TurtleGame;
+import oolala.creatures.Creature;
+import oolala.games.TurtleGame;
 
 import java.util.HashMap;
 import java.util.Map;

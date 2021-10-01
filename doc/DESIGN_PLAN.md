@@ -12,7 +12,7 @@
     - Turtle: commands/creatures
     - Fractal: commands
     - Darwin: commands/creatures
-- View folder
+- oolala.view folder
   - ScreenDisplay --> text box to run code and screen for drawing
   - CreatureView
     - TurtleView

@@ -1,9 +1,8 @@
-package View;
+package oolala.view;
 
-import Creatures.Creature;
-import Games.TurtleGame;
+import oolala.creatures.Creature;
+import oolala.games.TurtleGame;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextInputControl;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
