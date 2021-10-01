@@ -24,7 +24,7 @@ public class TurtleGame extends Game {
             for (int i = 1; i < commands.length; i++) {
                 int index = Integer.valueOf(commands[i]);
                 getActiveIndices().add(index);
-                if (getCreaturesMap().containsKey(index)) getCreaturesMap().put(index, new Creature(myHomeX, myHomeY));
+                if (!getCreaturesMap().containsKey(index)) getCreaturesMap().put(index, new Creature(myHomeX, myHomeY));
             }
         }
         else {
