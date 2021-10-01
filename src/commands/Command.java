@@ -1,4 +1,4 @@
-package Commands;
+package commands;
 
 import oolala.creatures.Creature;
 
@@ -8,16 +8,16 @@ import java.util.List;
 public class Command {
 
     private List<Command> myCommandsList = new ArrayList<>() {{
-            add(new CommandForward());
-            add(new CommandBackward());
-            add(new CommandLeftTurn());
-            add(new CommandRightTurn());
-            add(new CommandPenDown());
-            add(new CommandPenUp());
-            add(new CommandShowTurtle());
-            add(new CommandHideTurtle());
-            add(new CommandReset());
-            add(new CommandStamp());
+//            add(new CommandForward());
+//            add(new CommandBackward());
+//            add(new CommandLeftTurn());
+//            add(new CommandRightTurn());
+//            add(new CommandPenDown());
+//            add(new CommandPenUp());
+//            add(new CommandShowTurtle());
+//            add(new CommandHideTurtle());
+//            add(new CommandReset());
+//            add(new CommandStamp());
     }};
     private String myName;
     private int myNumArgs;
@@ -26,6 +26,16 @@ public class Command {
 
     public Command (String name) {
         myName = name.toLowerCase();
+        myCommandsList.add(new CommandForward());
+        myCommandsList.add(new CommandBackward());
+        myCommandsList.add(new CommandLeftTurn());
+        myCommandsList.add(new CommandRightTurn());
+        myCommandsList.add(new CommandPenDown());
+        myCommandsList.add(new CommandPenUp());
+        myCommandsList.add(new CommandShowTurtle());
+        myCommandsList.add(new CommandHideTurtle());
+        myCommandsList.add(new CommandReset());
+        myCommandsList.add(new CommandStamp());
     }
 
     public String getName () { return myName; }

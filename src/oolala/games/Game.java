@@ -1,7 +1,7 @@
 package oolala.games;
 
 
-import Commands.Command;
+import commands.Command;
 import oolala.creatures.Creature;
 
 import java.util.*;
@@ -26,6 +26,7 @@ public abstract class Game {
         current.setStatusStamp(false);
         Command input = new Command(commands[0]);
         Command result = input.recognize();
+        if (result == null ) return;
         if (result.getNumArgs() == 2) result.execute(current, Integer.valueOf(commands[1]));
         else result.execute(current, 0);
     }
