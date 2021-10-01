@@ -5,9 +5,12 @@ public class Creature {
     private boolean isPenActive, isCreatureVisible, isStamp;
     private double myOldPosX, myOldPoxY, myNewPosX, myNewPosY;
     private int myAngle;
+    private double myHomeX, myHomeY;
 
 
     public Creature (int x, int y) {
+        myHomeX = x;
+        myHomeY = y;
         isPenActive = true;
         isStamp = false;
         isCreatureVisible = true;
@@ -37,8 +40,8 @@ public class Creature {
 
     public void reset () {
         updateOldPos();
-        myNewPosX = 0;
-        myNewPosY = 0;
+        myNewPosX = myHomeX;
+        myNewPosY = myHomeY;
         myAngle = 0;
     }
 
