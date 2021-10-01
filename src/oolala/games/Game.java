@@ -1,6 +1,6 @@
-package Games;
+package oolala.games;
 
-import Creatures.Creature;
+import oolala.creatures.Creature;
 
 import java.util.*;
 
@@ -18,7 +18,7 @@ public abstract class Game {
     public List<Integer> getActiveIndices () { return myActiveIndices; }
 
 
-    public void step (String command) {}
+  public void step (String command) {}
 
     public void executeCommand (String command, Creature current) {
         String[] commands = command.toLowerCase().split(" ");

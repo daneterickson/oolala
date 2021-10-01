@@ -1,13 +1,16 @@
-package View;
+package oolala.view;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+
+import java.util.ResourceBundle;
+
+import static oolala.view.ScreenDisplay.DEFAULT_RESOURCE_PACKAGE;
 
 // Class that creates components for the ScreenDisplay class
 public class ScreenDisplayComponents {
@@ -18,29 +21,40 @@ public class ScreenDisplayComponents {
     private final int COMMAND_BOX_HEIGHT = 100;
     private final int COMMAND_BOX_X = 250;
     private final int COMMAND_BOX_Y = 50;
+    private ResourceBundle myResources;
 
-    public Button makeButton (String label, EventHandler<ActionEvent> handler) {
+    public ScreenDisplayComponents(String language) {
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
+    }
+
+    public Node makeButton (String label, EventHandler<ActionEvent> handler) {
         Button result = new Button();
         result.setText(label);
         result.setOnAction(handler);
-        return result;
+        return setId(label, result);
     }
 
-    public TextArea makeCommandBox(EventHandler handler) {
+    public TextArea makeCommandBox(String id, EventHandler handler) {
         TextArea result = new TextArea();
         result.setOnKeyPressed(handler);
-        result.setText("Type your code here...");
+        result.setText(myResources.getString(id));
         result.setPrefWidth(MY_WIDTH);
         result.setPrefHeight(COMMAND_BOX_HEIGHT);
         result.setLayoutX(COMMAND_BOX_X);
         result.setLayoutY(COMMAND_BOX_Y);
-        return result;
+        return (TextArea)setId(id, result);
     }
 
     public Rectangle makeCanvas() {
         Rectangle result = new Rectangle(CANVAS_X, CANVAS_Y, MY_WIDTH, CANVAS_HEIGHT);
         result.setFill(Color.WHITE);
-        return result;
+
+        return (Rectangle)setId("Canvas", result);
+    }
+
+    private Node setId (String id, Node node) {
+        node.setId(id);
+        return node;
     }
 
 }

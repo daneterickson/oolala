@@ -1,4 +1,4 @@
-package Creatures;
+package oolala.creatures;
 
 public class Creature {
 
