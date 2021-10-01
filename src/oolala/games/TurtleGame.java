@@ -1,9 +1,6 @@
-package Games;
+package oolala.games;
 
-import Creatures.Creature;
-
-import java.util.ArrayList;
-import java.util.List;
+import oolala.creatures.Creature;
 
 public class TurtleGame extends Game {
 

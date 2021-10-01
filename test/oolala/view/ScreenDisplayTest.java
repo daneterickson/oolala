@@ -1,32 +1,22 @@
-package View;
+package oolala.view;
 
-import Games.TurtleGame;
+import oolala.games.TurtleGame;
 import javafx.scene.control.Button;
-import javafx.scene.control.Labeled;
 import javafx.scene.control.TextInputControl;
 import static org.junit.jupiter.api.Assertions.*;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
-import java.util.ResourceBundle;
-
 public class ScreenDisplayTest extends DukeApplicationTest {
-    private ScreenDisplay myScreenDisplay;
-    private ScreenDisplayComponents myScreenDisplayComponents;
-    private ResourceBundle myResources;
     private static final String TITLE = "OOLALA";
     private static final Paint BACKGROUND = Color.THISTLE;
     private static int ORIGIN_X = 650;
     private static int ORIGIN_Y = 300;
     private TextInputControl myCommandBox;
     private Button myRunButton;
-
-
-
 
     @Override
     public void start (Stage stage) {
@@ -43,7 +33,7 @@ public class ScreenDisplayTest extends DukeApplicationTest {
     }
 
     @Test
-    void commandBoxAction() {
+    void commandBoxAction () {
         String expected = "fd 100";
         clickOn(myCommandBox).write(expected).clickOn(myRunButton);
         assertLabelText(expected);
@@ -52,6 +42,5 @@ public class ScreenDisplayTest extends DukeApplicationTest {
     private void assertLabelText (String expected) {
         assertEquals(expected, myCommandBox.getText());
     }
-
 
 }

@@ -7,12 +7,12 @@
 
 ### High Level Design
 - Model folder
-  - Creature Superclass --> turtles etc.
+  - oolala.creatures Superclass --> turtles etc.
   - Game Superclass
     - Turtle: commands/creatures
     - Fractal: commands
     - Darwin: commands/creatures
-- View folder
+- oolala.view folder
   - ScreenDisplay --> text box to run code and screen for drawing
   - CreatureView
     - TurtleView
@@ -21,10 +21,10 @@
     
 ### Logo Programming IDE Card Classes
 
-#### Creature Class
-This class's purpose is to represent the Creature Superclass:
+#### oolala.creatures Class
+This class's purpose is to represent the oolala.creatures Superclass:
 
-|Creature| |
+|oolala.creatures| |
 |---|---|
 |getXPosition         ||
 |getYPosition      ||
@@ -43,9 +43,9 @@ This class's purpose is to represent the Game Superclass:
 
 |Game| |
 |---|---|
-|step()         | Creature |
-|initializeCreature()      | Creature |
-|interpretCommand(String command) | Creature |
+|step()         | oolala.creatures |
+|initializeCreature()      | oolala.creatures |
+|interpretCommand(String command) | oolala.creatures |
 
 #### ScreenDisplay Class
 This class's purpose is to represent the ScreenDisplay Superclass:
@@ -64,6 +64,6 @@ This class's purpose is to represent the CreatureView Superclass:
 
 |CreatureView| |
 |---|---|
-| drawCreature(int x, int y)        | Creature |
-| drawLine(Creature creature)   |  Creature |
-| updateCreature(Creature creature) | Creature |
+| drawCreature(int x, int y)        | oolala.creatures |
+| drawLine(oolala.creatures creature)   |  oolala.creatures |
+| updateCreature(oolala.creatures creature) | oolala.creatures |

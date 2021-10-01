@@ -1,4 +1,4 @@
-package Games;
+package oolala.games;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,7 +1,7 @@
-package View;
+package oolala.view;
 
-import Creatures.Creature;
-import Games.TurtleGame;
+import oolala.creatures.Creature;
+import oolala.games.TurtleGame;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class TurtleView extends GameView {
    * Constructor to create a TurtleView, which is the turtle and lines that go on the canvas in the
    * ScreenDisplay class
    *
-   * @param game is the Creature object that is used as the model for this view class
+   * @param game is the oolala.Creature object that is used as the model for this view class
    * @param x        is the starting x position of the turtle
    * @param y        is the starting y position of the turtle
    */
