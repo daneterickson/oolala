@@ -7,30 +7,27 @@ import java.util.List;
 
 public class TurtleGame extends Game {
 
-    private List<Integer> myActiveIndices;
-    private int myOriginX, myOriginY;
+
+    private int myHomeX, myHomeY;
 
     public TurtleGame (int originX, int originY) {
         super();
-        myOriginX = originX;
-        myOriginY = originY;
-        myActiveIndices = new ArrayList<>();
-        getCreaturesMap().put(1, new Creature(myOriginX, myOriginY));
+        myHomeX = originX;
+        myHomeY = originY;
+        getCreaturesMap().put(1, new Creature(myHomeX, myHomeY));
         getActiveIndices().add(1);
     }
 
-    public List<Integer> getActiveIndices () { return myActiveIndices; }
-
     @Override
     public void step (String command) {
-        String[] commands = command.split(" ");
+        String[] commands = command.toLowerCase().split(" ");
 
         if (commands[0].equals("tell")) {
             getActiveIndices().clear();
             for (int i = 1; i < commands.length; i++) {
                 int index = Integer.valueOf(commands[i]);
                 getActiveIndices().add(index);
-                getCreaturesMap().putIfAbsent(index, new Creature(myOriginX, myOriginY));
+                if (getCreaturesMap().containsKey(index)) getCreaturesMap().put(index, new Creature(myHomeX, myHomeY));
             }
         }
         else {
