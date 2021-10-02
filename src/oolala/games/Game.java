@@ -1,9 +1,7 @@
 package oolala.games;
 
-
-import commands.Command;
+import oolala.commands.Command;
 import oolala.creatures.Creature;
-import org.junit.platform.commons.util.StringUtils;
 
 import java.util.*;
 
@@ -45,6 +43,7 @@ public abstract class Game {
                     i++;
                     continue;
                 }
+                
                 Command input = new Command(commands[i]);
                 Command result = input.recognize();
                 try {
