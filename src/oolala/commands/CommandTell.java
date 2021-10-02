@@ -1,6 +1,6 @@
-package commands;
+package oolala.commands;
 
-public class CommandTell extends Command{
+public class CommandTell extends Command {
 
     public CommandTell () {
         setName("tell");

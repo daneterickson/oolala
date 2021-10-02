@@ -1,4 +1,4 @@
-package commands;
+package oolala.commands;
 
 import oolala.creatures.Creature;
 
