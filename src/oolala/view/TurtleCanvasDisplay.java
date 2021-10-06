@@ -8,10 +8,15 @@ import javafx.scene.shape.Rectangle;
 import oolala.games.Game;
 import oolala.games.TurtleGame;
 
-public class DarwinScreenDisplay extends ScreenDisplay{
+public class TurtleCanvasDisplay extends CanvasDisplay{
 
-  public DarwinScreenDisplay(TurtleView gameView, TurtleGame game, String language, int startX, int startY) {
-    super(gameView, game, language, startX, startY);
+  private TurtleView myTurtleView;
+  private ScreenDisplayComponents myDisplayComponents;
+
+  public TurtleCanvasDisplay(TurtleView gameView, TurtleGame game, ScreenDisplayComponents components) {
+    super(gameView, game, components);
+    myTurtleView = gameView;
+    myDisplayComponents = components;
   }
 
   @Override
@@ -19,8 +24,7 @@ public class DarwinScreenDisplay extends ScreenDisplay{
     BorderPane panel = new BorderPane();
     panel.setId("CanvasPanel");
     panel.setLeft(makeCanvasPanel());
-    // TODO: Implement other panel views
-    panel.setRight(makeDarwinPanel());
+    panel.setRight(makeLogoPanel());
     return panel;
   }
 
@@ -29,16 +33,11 @@ public class DarwinScreenDisplay extends ScreenDisplay{
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
     Rectangle canvas = myDisplayComponents.makeCanvas();
-    pane.getChildren().addAll(canvas, myGameView.getMyTurtlePane());
+    pane.getChildren().addAll(canvas, myTurtleView.getMyTurtlePane());
     return pane;
   }
 
-  @Override
-  protected void setCanvas (Game game) {
-
-  }
-
-  private Node makeDarwinPanel () {
+  private Node makeLogoPanel () {
     VBox panel = new VBox();
     return panel;
   }

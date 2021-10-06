@@ -5,13 +5,19 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import oolala.games.FractalGame;
 import oolala.games.Game;
 import oolala.games.TurtleGame;
 
-public class FractalScreenDisplay extends ScreenDisplay {
+public class FractalCanvasDisplay extends CanvasDisplay {
 
-  public FractalScreenDisplay(TurtleView gameView, TurtleGame game, String language, int startX, int startY) {
-    super(gameView, game, language, startX, startY);
+  private GameView myFractalView;
+  private ScreenDisplayComponents myDisplayComponents;
+
+  public FractalCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
+    super(gameView, game, components);
+    myFractalView = gameView;
+    myDisplayComponents = components;
   }
 
   @Override
@@ -19,7 +25,6 @@ public class FractalScreenDisplay extends ScreenDisplay {
     BorderPane panel = new BorderPane();
     panel.setId("CanvasPanel");
     panel.setLeft(makeCanvasPanel());
-    // TODO: Implement other panel views
     panel.setRight(makeFractalPanel());
     return panel;
   }
@@ -29,13 +34,8 @@ public class FractalScreenDisplay extends ScreenDisplay {
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
     Rectangle canvas = myDisplayComponents.makeCanvas();
-    pane.getChildren().addAll(canvas, myGameView.getMyTurtlePane());
+//    pane.getChildren().addAll(canvas, myFractalView.getMyTurtlePane());
     return pane;
-  }
-
-  @Override
-  protected void setCanvas (Game game) {
-
   }
 
   private Node makeFractalPanel () {

@@ -34,9 +34,8 @@ public class ScreenDisplayComponents {
         return setId(label, result);
     }
 
-    public TextArea makeCommandBox(String id, EventHandler handler) {
+    public TextArea makeCommandBox(String id) {
         TextArea result = new TextArea();
-        result.setOnKeyPressed(handler);
         result.setText(myResources.getString(id));
         result.setPrefWidth(MY_WIDTH);
         result.setPrefHeight(COMMAND_BOX_HEIGHT);
