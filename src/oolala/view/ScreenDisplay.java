@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.ResourceBundle;
 
 public class ScreenDisplay {
-    private final int MY_SPACING = 20;
+    private static final int MY_SPACING = 20;
     private TextArea myCommandBox;
     private TurtleView myGameView;
     private ResourceBundle myResources;
