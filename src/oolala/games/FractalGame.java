@@ -9,7 +9,6 @@ public class FractalGame extends Game {
     private int myLevels;
     private double myLength;
     private int myRotation;
-//    private int myStartX, myStartY, myLevelSpan;
     private String myStartSymbol;
     private Map<String, String> myRulesMap;
     private Map<String, List<String>> myCommandsMap = new HashMap<>() {{
@@ -32,12 +31,8 @@ public class FractalGame extends Game {
         myLevels = numLevels;
         myLength = length;
         myRotation = angle;
-//        myStartX = startX;
-//        myStartY = startY;
-//        myLevelSpan = levelSpan;
         for (int i = 0; i < numLevels; i++) {
             getCreaturesMap().put(i, new Creature(startX,startY + i * levelSpan));
-            //need to figure out the initial positions for these fractal creatures
         }
     }
     
