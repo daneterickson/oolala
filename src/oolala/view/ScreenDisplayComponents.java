@@ -14,13 +14,13 @@ import static oolala.view.ScreenDisplay.DEFAULT_RESOURCE_PACKAGE;
 
 // Class that creates components for the ScreenDisplay class
 public class ScreenDisplayComponents {
-    private final int MY_WIDTH = 1300;
-    private final int CANVAS_X = 350;
-    private final int CANVAS_Y = 300;
-    private final int CANVAS_HEIGHT = 600;
-    private final int COMMAND_BOX_HEIGHT = 100;
-    private final int COMMAND_BOX_X = 250;
-    private final int COMMAND_BOX_Y = 50;
+    private static final int MY_WIDTH = 1300;
+    private static final int CANVAS_X = 350;
+    private static final int CANVAS_Y = 300;
+    private static final int CANVAS_HEIGHT = 600;
+    private static final int COMMAND_BOX_HEIGHT = 100;
+    private static final int COMMAND_BOX_X = 250;
+    private static final int COMMAND_BOX_Y = 50;
     private ResourceBundle myResources;
 
     public ScreenDisplayComponents(String language) {
@@ -34,12 +34,9 @@ public class ScreenDisplayComponents {
         return setId(label, result);
     }
 
-    public TextArea makeCommandBox(String id, EventHandler handler) {
+    public TextArea makeCommandBox(String id) {
         TextArea result = new TextArea();
-        result.setOnKeyPressed(handler);
         result.setText(myResources.getString(id));
-        result.setPrefWidth(MY_WIDTH);
-        result.setPrefHeight(COMMAND_BOX_HEIGHT);
         result.setLayoutX(COMMAND_BOX_X);
         result.setLayoutY(COMMAND_BOX_Y);
         return (TextArea)setId(id, result);
