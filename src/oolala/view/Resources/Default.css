@@ -14,7 +14,12 @@
 }
 
 #CommandBoxButtonPanel {
-    -fx-spacing: 20px;
+    -fx-spacing: 30px;
+}
+
+.text-area {
+    -fx-pref-width: 1200;
+    -fx-pref-height: 80;
 }
 
 .button {
