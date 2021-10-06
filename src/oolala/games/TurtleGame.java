@@ -3,6 +3,9 @@ package oolala.games;
 import oolala.commands.Command;
 import oolala.creatures.Creature;
 
+import java.util.Arrays;
+import java.util.Iterator;
+
 public class TurtleGame extends Game {
 
 
@@ -43,6 +46,43 @@ public class TurtleGame extends Game {
 
         for (String command: lines) {
             String[] commands = command.split(" ");
+
+            Iterator<String> commandIterator = Arrays.stream(commands).iterator();
+            while (commandIterator.hasNext()) {
+                String temp = commandIterator.next();
+                if (temp.startsWith("#")) break;
+                if (temp.equals("")) continue;
+
+                Command input = new Command(temp);
+                Command result = input.recognize();
+
+                try {
+                    if (result.getNumArgs() == 2) {
+                        ret.append(temp + " ");
+                        commandIterator.hasNext();
+                        ret.append(commandIterator.next() + "\n");
+                    }
+                    else if (result.getNumArgs() == 1) {
+                        ret.append(temp + "\n");
+                    }
+                    else if (result.getNumArgs() == -1) {
+                        ret.append(temp + " ");
+                        while (commandIterator.hasNext() && isNumeric(commandIterator.next())) {
+                            ret.append(commandIterator.next() + " ");
+                        }
+                        ret.append("\n");
+                    }
+                }
+                catch (Exception e) {
+                    System.out.println("Error: Not a valid command");
+                }
+
+            }
+
+
+
+
+
             int i = 0;
             while (i < commands.length) {
                 if (commands[i].startsWith("#")) break;
