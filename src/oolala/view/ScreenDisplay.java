@@ -17,12 +17,12 @@ import java.util.ResourceBundle;
 public class ScreenDisplay {
     private static final int MY_SPACING = 20;
     private TextArea myCommandBox;
-    private TurtleView myGameView;
+    protected TurtleView myGameView;
     private ResourceBundle myResources;
     private int myStartX;
     private int myStartY;
     private TurtleGame myGame;
-    private ScreenDisplayComponents myDisplayComponents;
+    protected ScreenDisplayComponents myDisplayComponents;
 
     public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.View.Resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
@@ -92,42 +92,16 @@ public class ScreenDisplay {
         return panel;
     }
 
-    private Node makeCanvas () {
-        BorderPane panel = new BorderPane();
-        panel.setId("CanvasPanel");
-        panel.setLeft(makeCanvasPanel());
-        // TODO: Implement other panel views
-        // panel.setRight(makeDarwinPanel());
-        // panel.setRight(makeFractalPanel());
-        // panel.setRight(makeLogoPanel());
-        return panel;
-    }
+    protected Node makeCanvas () {
+        return null;
+    };
 
-    private Node makeCanvasPanel () {
-        StackPane pane = new StackPane();
-        pane.setId("CanvasComponentPane");
-        Rectangle canvas = myDisplayComponents.makeCanvas();
-        pane.getChildren().addAll(canvas, myGameView.getMyTurtlePane());
-        return pane;
-    }
-    // TODO: Implement this for other games
-    private Node makeDarwinPanel () {
-        VBox panel = new VBox();
-        return panel;
-    }
-    // TODO: Implement this for other games
-    private Node makeFractalPanel () {
-        VBox panel = new VBox();
-        return panel;
-    }
-    // TODO: Implement this for other games
-    private Node makeLogoPanel () {
-        VBox panel = new VBox();
-        return panel;
-    }
+    protected Node makeCanvasPanel () {
+        return null;
+    };
 
     // TODO: Set up canvas based on each game
-    private void setCanvas (Game game) {
+    protected void setCanvas (Game game) {
 
     }
 }
