@@ -1,8 +1,11 @@
 package oolala.view;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class DarwinView extends GameView{
+
+  private Pane myDarwinPane;
 
   @Override
   protected ImageView drawCreature(double x, double y, double width,
@@ -17,5 +20,16 @@ public class DarwinView extends GameView{
    */
   @Override
   public void updateCanvas () {
+  }
+
+  /**
+   * Getter method to get the Pane with the turtle and lines to be added to the scene in
+   * ScreenDisplay
+   *
+   * @return myTurtlePane
+   */
+  @Override
+  public Pane getMyCreaturePane() {
+    return myDarwinPane;
   }
 }

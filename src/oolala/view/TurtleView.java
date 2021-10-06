@@ -46,7 +46,8 @@ public class TurtleView extends GameView {
    *
    * @return myTurtlePane
    */
-  public Pane getMyTurtlePane() {
+  @Override
+  public Pane getMyCreaturePane() {
     return myTurtlePane;
   }
 

@@ -3,9 +3,12 @@ package oolala.view;
 import java.util.Map;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import oolala.creatures.Creature;
 
 public class FractalView extends GameView{
+
+  private Pane myFractalPane;
 
   @Override
   protected ImageView drawCreature(double x, double y, double width,
@@ -20,5 +23,16 @@ public class FractalView extends GameView{
    */
   @Override
   public void updateCanvas () {
+  }
+
+  /**
+   * Getter method to get the Pane with the turtle and lines to be added to the scene in
+   * ScreenDisplay
+   *
+   * @return myTurtlePane
+   */
+  @Override
+  public Pane getMyCreaturePane() {
+    return myFractalPane;
   }
 }
