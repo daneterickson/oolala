@@ -39,7 +39,9 @@ public abstract class Game {
         try {
             intValue = Integer.parseInt(string);
             return true;
-        } catch (NumberFormatException e) {}
-        return false;
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
