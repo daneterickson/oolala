@@ -17,17 +17,17 @@ import java.util.ResourceBundle;
 public class ScreenDisplay {
     private final int MY_SPACING = 20;
     private TextArea myCommandBox;
-    private TurtleView myGameView;
+    private GameView myGameView;
     private ResourceBundle myResources;
     private int myStartX;
     private int myStartY;
-    private TurtleGame myGame;
+    private Game myGame;
     private ScreenDisplayComponents myDisplayComponents;
 
     public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.View.Resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
 
-    public ScreenDisplay (TurtleView gameView, TurtleGame game, String language, int startX, int startY) {
+    public ScreenDisplay (GameView gameView, Game game, String language, int startX, int startY) {
         myGameView = gameView;
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myGame = game;
@@ -54,8 +54,8 @@ public class ScreenDisplay {
         panel.setId("GameModePanel");
 
         Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(myGame));
-        Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(new FractalGame()));
-        Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(new DarwinGame()));
+        Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(myGame));
+        Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(myGame));
 
         panel.getChildren().addAll(turtleMode, fractalMode, darwinMode);
 
@@ -96,6 +96,7 @@ public class ScreenDisplay {
         BorderPane panel = new BorderPane();
         panel.setId("CanvasPanel");
         panel.setLeft(makeCanvasPanel());
+
         // TODO: Implement other panel views
         // panel.setRight(makeDarwinPanel());
         // panel.setRight(makeFractalPanel());
@@ -123,11 +124,22 @@ public class ScreenDisplay {
     // TODO: Implement this for other games
     private Node makeLogoPanel () {
         VBox panel = new VBox();
+        
         return panel;
     }
 
     // TODO: Set up canvas based on each game
     private void setCanvas (Game game) {
+        if (game.getClass() == TurtleGame.class) {
+            System.out.println("We are a turtle");
+        }
 
+        if (game.getClass() == DarwinGame.class) {
+            System.out.println("We are Darwin");
+        }
+
+        if(game.getClass() == FractalGame.class) {
+            System.out.println("We are Fractal");
+        }
     }
 }
