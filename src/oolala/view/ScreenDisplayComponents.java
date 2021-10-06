@@ -37,8 +37,6 @@ public class ScreenDisplayComponents {
     public TextArea makeCommandBox(String id) {
         TextArea result = new TextArea();
         result.setText(myResources.getString(id));
-        result.setPrefWidth(MY_WIDTH);
-        result.setPrefHeight(COMMAND_BOX_HEIGHT);
         result.setLayoutX(COMMAND_BOX_X);
         result.setLayoutY(COMMAND_BOX_Y);
         return (TextArea)setId(id, result);
