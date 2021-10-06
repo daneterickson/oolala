@@ -15,7 +15,7 @@ import javafx.scene.shape.Rectangle;
 import java.util.ResourceBundle;
 
 public class ScreenDisplay {
-    private static final int MY_SPACING = 20;
+    private static final int MY_PADDING = 20;
     private TextArea myCommandBox;
     private TurtleView myGameView;
     private ResourceBundle myResources;
@@ -39,8 +39,7 @@ public class ScreenDisplay {
     public Scene setupDisplay (Paint background) {
         VBox root = new VBox();
         root.setId("Pane");
-        root.setSpacing(20);
-        root.setPadding(new Insets(MY_SPACING, MY_SPACING, MY_SPACING, MY_SPACING));
+        root.setPadding(new Insets(MY_PADDING, MY_PADDING, MY_PADDING, MY_PADDING));
         root.getChildren().addAll(makeGameModesPanel(), makeCanvas(), makeCommandBox());
 
         Scene scene = new Scene(root, background);
@@ -50,7 +49,6 @@ public class ScreenDisplay {
 
     private Node makeGameModesPanel () {
         HBox panel = new HBox();
-        panel.setSpacing(5);
         panel.setId("GameModePanel");
 
         Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(myGame));
@@ -88,7 +86,6 @@ public class ScreenDisplay {
         Node runCommand = myDisplayComponents.makeButton("Run", value -> getCommandBoxInput());
         Node clear = myDisplayComponents.makeButton("Clear", value -> getCommandBoxInput()); // Clear screen functionality not done
         panel.getChildren().addAll(runCommand, clear);
-        panel.setSpacing(MY_SPACING);
         return panel;
     }
 

@@ -5,6 +5,17 @@
     /* define variables to avoid duplicating values */
     text_color: black;
 }
+#Pane {
+    -fx-spacing: 20px;
+}
+
+#GameModePanel {
+    -fx-spacing: 10px;
+}
+
+#CommandBoxButtonPanel {
+    -fx-spacing: 20px;
+}
 
 .button {
     -fx-text-fill: text_color;
