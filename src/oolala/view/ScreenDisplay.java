@@ -17,18 +17,18 @@ import java.util.ResourceBundle;
 public class ScreenDisplay {
     private static final int MY_PADDING = 20;
     private TextArea myCommandBox;
-    private TurtleView myGameView;
+    private GameView myGameView;
     private ResourceBundle myResources;
     private int myStartX;
     private int myStartY;
-    private TurtleGame myGame;
+    private Game myGame;
     private ScreenDisplayComponents myDisplayComponents;
     private CanvasDisplay myCanvasDisplay;
 
     public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.View.Resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
 
-    public ScreenDisplay (TurtleView gameView, TurtleGame game, String language, int startX, int startY) {
+    public ScreenDisplay (GameView gameView, Game game, String language, int startX, int startY) {
         myGameView = gameView;
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myGame = game;

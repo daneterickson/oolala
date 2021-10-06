@@ -1,5 +1,6 @@
 package oolala.view;
 
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 public abstract class GameView {
@@ -8,6 +9,7 @@ public abstract class GameView {
 
     public abstract void updateCanvas ();
 
+    public abstract Node getMyTurtlePane();
 
 }
 

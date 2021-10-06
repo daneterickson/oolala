@@ -10,10 +10,10 @@ import oolala.games.TurtleGame;
 
 public class TurtleCanvasDisplay extends CanvasDisplay{
 
-  private TurtleView myTurtleView;
+  private GameView myTurtleView;
   private ScreenDisplayComponents myDisplayComponents;
 
-  public TurtleCanvasDisplay(TurtleView gameView, TurtleGame game, ScreenDisplayComponents components) {
+  public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
     myTurtleView = gameView;
     myDisplayComponents = components;

@@ -1,7 +1,7 @@
 ## Names
 Dane Erickson (dte12)
 Norah Tan (xt22)
-Evelyn Chupil-Garcia (ec220)
+Evelyn Cupil-Garcia (ec220)
 
 ## View
 We decided to **refactor the ScreenDisplay** class to create a separate class that controls the canvas on the screen, 
@@ -11,5 +11,7 @@ create the canvases for each application. This inheritance made it so the Screen
 which is to create the buttons and window, and the CanvasDisplay only has one responsibility, which is
 to create the canvas for the creature and lines to be drawn on and move around on. 
 
+We refactored some JavaFX code that was styling to the Resources CSS file and fixed variables so that they were public static
+final.
 ## Model
 
