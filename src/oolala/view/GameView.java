@@ -9,7 +9,13 @@ public abstract class GameView {
 
     public abstract void updateCanvas ();
 
-    public abstract Node getMyTurtlePane();
+    /**
+     * Getter method to get the Pane with the creature and lines to be added to the scene in
+     * ScreenDisplay
+     *
+     * @return myCreaturePane
+     */
+    public abstract Node getMyCreaturePane();
 
 }
 

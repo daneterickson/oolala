@@ -33,7 +33,7 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
     Rectangle canvas = myDisplayComponents.makeCanvas();
-    pane.getChildren().addAll(canvas, myTurtleView.getMyTurtlePane());
+    pane.getChildren().addAll(canvas, myTurtleView.getMyCreaturePane());
     return pane;
   }
 
