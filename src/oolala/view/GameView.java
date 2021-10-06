@@ -1,5 +1,6 @@
 package oolala.view;
 
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
@@ -10,14 +11,12 @@ public abstract class GameView {
     public abstract void updateCanvas ();
 
     /**
-     * Getter method to get the Pane with the turtle and lines to be added to the scene in
+     * Getter method to get the Pane with the creature and lines to be added to the scene in
      * ScreenDisplay
      *
-     * @return myTurtlePane
+     * @return myCreaturePane
      */
-    public abstract Pane getMyCreaturePane();
-
-
+    public abstract Node getMyCreaturePane();
 
 }
 

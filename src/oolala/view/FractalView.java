@@ -26,10 +26,10 @@ public class FractalView extends GameView{
   }
 
   /**
-   * Getter method to get the Pane with the turtle and lines to be added to the scene in
+   * Getter method to get the Pane with the creature and lines to be added to the scene in
    * ScreenDisplay
    *
-   * @return myTurtlePane
+   * @return myFractalPane
    */
   @Override
   public Pane getMyCreaturePane() {

@@ -10,10 +10,10 @@ import oolala.games.TurtleGame;
 
 public class TurtleCanvasDisplay extends CanvasDisplay{
 
-  private TurtleView myTurtleView;
+  private GameView myTurtleView;
   private ScreenDisplayComponents myDisplayComponents;
 
-  public TurtleCanvasDisplay(TurtleView gameView, TurtleGame game, ScreenDisplayComponents components) {
+  public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
     myTurtleView = gameView;
     myDisplayComponents = components;
@@ -33,7 +33,7 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
     Rectangle canvas = myDisplayComponents.makeCanvas();
-    pane.getChildren().addAll(canvas, myTurtleView.getMyTurtlePane());
+    pane.getChildren().addAll(canvas, myTurtleView.getMyCreaturePane());
     return pane;
   }
 
