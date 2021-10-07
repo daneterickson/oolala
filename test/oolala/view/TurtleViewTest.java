@@ -7,6 +7,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import oolala.Main;
+import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 

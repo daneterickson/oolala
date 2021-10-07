@@ -2,10 +2,11 @@ package oolala.games;
 
 import oolala.creatures.Creature;
 
+
 public class TurtleGame extends Game {
 
 
-    private int myHomeX, myHomeY;
+    private final int myHomeX, myHomeY;
 
     public TurtleGame (int originX, int originY) {
         super();
@@ -34,6 +35,5 @@ public class TurtleGame extends Game {
             }
         }
     }
-
 
 }

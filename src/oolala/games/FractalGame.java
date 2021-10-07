@@ -9,17 +9,16 @@ public class FractalGame extends Game {
     private int myLevels;
     private double myLength;
     private int myRotation;
-//    private int myStartX, myStartY, myLevelSpan;
     private String myStartSymbol;
     private Map<String, String> myRulesMap;
-    private Map<String, List<String>> myCommandsMap = new HashMap<>() {{
-        put("F", Arrays.asList("pd", "fd LENGTH"));
-        put("G", Arrays.asList("pu", "fd LENGTH"));
-        put("A", Arrays.asList("pu", "bk LENGTH"));
-        put("B", Arrays.asList("pd", "bk LENGTH"));
-        put("+", Arrays.asList("rt ANGLE"));
-        put("-", Arrays.asList("lt ANGLE"));
-        put("X", Arrays.asList("stamp"));
+    private Map<String, String> myCommandsMap = new HashMap<>() {{
+        put("F", "pd\nfd LENGTH");
+        put("G", "pu\nfd LENGTH");
+        put("A", "pu\nbk LENGTH");
+        put("B", "pd\nbk LENGTH");
+        put("+", "rt ANGLE");
+        put("-", "lt ANGLE");
+        put("X", "stamp");
     }};
 
     public FractalGame () {
@@ -32,12 +31,8 @@ public class FractalGame extends Game {
         myLevels = numLevels;
         myLength = length;
         myRotation = angle;
-//        myStartX = startX;
-//        myStartY = startY;
-//        myLevelSpan = levelSpan;
         for (int i = 0; i < numLevels; i++) {
             getCreaturesMap().put(i, new Creature(startX,startY + i * levelSpan));
-            //need to figure out the initial positions for these fractal creatures
         }
     }
     
@@ -70,13 +65,12 @@ public class FractalGame extends Game {
             }
             else if (commands[0].equals("set")) {
                 String[] logoCommand = command.split("\"");
-                myCommandsMap.put(commands[1], parseLogoCommand(logoCommand[1]));
+                myCommandsMap.put(commands[1], super.compile(logoCommand[1]));
             }
         }
         String expandedCommands = expand();
         return expandedCommands;
     }
-
 
     public String expand () {
         StringBuilder expandedCommands = new StringBuilder();
@@ -86,24 +80,15 @@ public class FractalGame extends Game {
             String newSymbols = currentSymbols;
             for (int j = 0; j < currentSymbols.length(); j++ ) {
                 String symbol = String.valueOf(currentSymbols.charAt(j));
-                newSymbols = newSymbols.replaceAll(symbol, myRulesMap.get(symbol));
-                for (String command: myCommandsMap.get(symbol)) {
-                    command = command.replace("ANGLE", String.valueOf(myRotation))
-                            .replace("LENGTH", String.valueOf(myLength / (i + 1)));
-                    expandedCommands.append(command+"\n");
-                }
+                newSymbols = newSymbols.substring(0, j) + myRulesMap.get(symbol) + newSymbols.substring(j+1);
+
+                String command = myCommandsMap.get(symbol);
+                command = command.replace("ANGLE", String.valueOf(myRotation))
+                        .replace("LENGTH", String.valueOf(myLength / (i + 1)));
+                expandedCommands.append(command + "\n");
             }
+            currentSymbols = newSymbols;
         }
         return expandedCommands.toString();
-    }
-
-    public List<String> parseLogoCommand (String command) {
-        String[] commands = command.split(" ");
-        if (commands.length == 3) {
-            return Arrays.asList(commands[0], commands[1]+commands[2]);
-        }
-        else{
-            return Arrays.asList(command);
-        }
     }
 }

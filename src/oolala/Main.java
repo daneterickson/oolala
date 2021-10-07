@@ -2,7 +2,7 @@ package oolala;
 
 import oolala.games.TurtleGame;
 import oolala.view.ScreenDisplay;
-import oolala.view.TurtleView;
+import oolala.view.game.TurtleView;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -11,8 +11,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static final String TITLE = "OOLALA";
     public static final Paint BACKGROUND = Color.THISTLE;
-    public static int ORIGIN_X = 650;
-    public static int ORIGIN_Y = 300;
+    public static final int ORIGIN_X = 650;
+    public static final int ORIGIN_Y = 300;
 
     /**
      * Organize display of game in a scene and start the game.

@@ -1,4 +1,4 @@
-package oolala.view;
+package oolala.view.game;
 
 import oolala.creatures.Creature;
 import oolala.games.TurtleGame;
@@ -46,7 +46,8 @@ public class TurtleView extends GameView {
    *
    * @return myTurtlePane
    */
-  public Pane getMyTurtlePane() {
+  @Override
+  public Pane getMyCreaturePane() {
     return myTurtlePane;
   }
 
