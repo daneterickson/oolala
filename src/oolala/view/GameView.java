@@ -1,5 +1,6 @@
 package oolala.view;
 
+import javafx.scene.Node;
 import javafx.scene.image.ImageView;
 
 public abstract class GameView {
@@ -8,6 +9,13 @@ public abstract class GameView {
 
     public abstract void updateCanvas ();
 
+    /**
+     * Getter method to get the Pane with the creature and lines to be added to the scene in
+     * ScreenDisplay
+     *
+     * @return myCreaturePane
+     */
+    public abstract Node getMyCreaturePane();
 
 }
 
