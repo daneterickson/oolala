@@ -46,7 +46,8 @@ public class TurtleView extends GameView {
    *
    * @return myTurtlePane
    */
-  public Pane getMyTurtlePane() {
+  @Override
+  public Pane getMyCreaturePane() {
     return myTurtlePane;
   }
 
@@ -100,6 +101,10 @@ public class TurtleView extends GameView {
   }
 
   private void updateCreature(Creature currentModel, ImageView currentTurtle) {
+    if (currentModel.getStatusStamp()) {
+      drawCreature(currentModel.getOldX(), currentModel.getOldY(), TURTLE_WIDTH, TURTLE_HEIGHT,
+          -1).setRotate(currentModel.getAngle());
+    }
     currentTurtle.setX(currentModel.getNewX());
     currentTurtle.setY(currentModel.getNewY());
     currentTurtle.setRotate(currentModel.getAngle());

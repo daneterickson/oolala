@@ -48,5 +48,18 @@ public class TurtleGameTest {
         assertEquals(3, myGame.getCreaturesMap().size());
     }
 
+    @Test
+    void compileTellCommand () {
+        String paragraph = "tell 1 2 rt 20";
+        String expected = "tell 1 2 \nrt 20 \n";
+        assertTrue(myGame.compile(paragraph).equals(expected));
+    }
+
+    @Test
+    void compileLogoCommand () {
+        String paragraph = "pd fd 10 pu";
+        String expected = "pd \nfd 10 \npu \n";
+        assertTrue(myGame.compile(paragraph).equals(expected));
+    }
 
 }

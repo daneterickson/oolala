@@ -15,33 +15,34 @@ import javafx.scene.shape.Rectangle;
 import java.util.ResourceBundle;
 
 public class ScreenDisplay {
-    private final int MY_SPACING = 20;
+    private static final int MY_PADDING = 20;
     private TextArea myCommandBox;
-    private TurtleView myGameView;
+    private GameView myGameView;
     private ResourceBundle myResources;
     private int myStartX;
     private int myStartY;
-    private TurtleGame myGame;
+    private Game myGame;
     private ScreenDisplayComponents myDisplayComponents;
+    private CanvasDisplay myCanvasDisplay;
 
     public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.View.Resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
 
-    public ScreenDisplay (TurtleView gameView, TurtleGame game, String language, int startX, int startY) {
+    public ScreenDisplay (GameView gameView, Game game, String language, int startX, int startY) {
         myGameView = gameView;
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myGame = game;
         myStartX = startX;
         myStartY = startY;
         myDisplayComponents = new ScreenDisplayComponents(language);
+        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents); // initialize it to Turtle Canvas for default and change depending on what user inputs
     }
 
     public Scene setupDisplay (Paint background) {
         VBox root = new VBox();
         root.setId("Pane");
-        root.setSpacing(20);
-        root.setPadding(new Insets(MY_SPACING, MY_SPACING, MY_SPACING, MY_SPACING));
-        root.getChildren().addAll(makeGameModesPanel(), makeCanvas(), makeCommandBox());
+        root.setPadding(new Insets(MY_PADDING, MY_PADDING, MY_PADDING, MY_PADDING));
+        root.getChildren().addAll(makeGameModesPanel(), myCanvasDisplay.makeCanvas(), makeCommandBox());
 
         Scene scene = new Scene(root, background);
         scene.getStylesheets().add(getClass().getResource(DEFAULT_STYLESHEET).toExternalForm());
@@ -50,12 +51,11 @@ public class ScreenDisplay {
 
     private Node makeGameModesPanel () {
         HBox panel = new HBox();
-        panel.setSpacing(5);
         panel.setId("GameModePanel");
 
-        Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(myGame));
-        Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(new FractalGame()));
-        Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(new DarwinGame()));
+        Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents)));
+        Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents)));
+        Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(new DarwinCanvasDisplay(myGameView,myGame, myDisplayComponents)));
 
         panel.getChildren().addAll(turtleMode, fractalMode, darwinMode);
 
@@ -65,7 +65,7 @@ public class ScreenDisplay {
     private Node makeCommandBox () {
         BorderPane panel = new BorderPane();
         panel.setId("CommandBoxPanel");
-        myCommandBox = myDisplayComponents.makeCommandBox("CommandBox", value -> setCanvas(myGame));
+        myCommandBox = myDisplayComponents.makeCommandBox("CommandBox");
         panel.setLeft(myCommandBox);
         panel.setRight(makeCommandBoxButtons());
 
@@ -88,46 +88,27 @@ public class ScreenDisplay {
         Node runCommand = myDisplayComponents.makeButton("Run", value -> getCommandBoxInput());
         Node clear = myDisplayComponents.makeButton("Clear", value -> getCommandBoxInput()); // Clear screen functionality not done
         panel.getChildren().addAll(runCommand, clear);
-        panel.setSpacing(MY_SPACING);
         return panel;
     }
-
-    private Node makeCanvas () {
-        BorderPane panel = new BorderPane();
-        panel.setId("CanvasPanel");
-        panel.setLeft(makeCanvasPanel());
-        // TODO: Implement other panel views
-        // panel.setRight(makeDarwinPanel());
-        // panel.setRight(makeFractalPanel());
-        // panel.setRight(makeLogoPanel());
-        return panel;
-    }
-
-    private Node makeCanvasPanel () {
-        StackPane pane = new StackPane();
-        pane.setId("CanvasComponentPane");
-        Rectangle canvas = myDisplayComponents.makeCanvas();
-        pane.getChildren().addAll(canvas, myGameView.getMyTurtlePane());
-        return pane;
-    }
-    // TODO: Implement this for other games
-    private Node makeDarwinPanel () {
-        VBox panel = new VBox();
-        return panel;
-    }
-    // TODO: Implement this for other games
-    private Node makeFractalPanel () {
-        VBox panel = new VBox();
-        return panel;
-    }
-    // TODO: Implement this for other games
-    private Node makeLogoPanel () {
-        VBox panel = new VBox();
-        return panel;
-    }
+//
+//    protected Node makeCanvas () {
+//        return null;
+//    };
+//
+//    protected Node makeCanvasPanel () {
+//        return null;
+//    };
 
     // TODO: Set up canvas based on each game
-    private void setCanvas (Game game) {
+    protected void setCanvas (CanvasDisplay canvas) {
+        myCanvasDisplay = canvas;
+    }
 
+    public Game getMyGame () {
+        return myGame;
+    }
+
+    public GameView getMyGameView () {
+        return myGameView;
     }
 }

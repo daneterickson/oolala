@@ -20,7 +20,57 @@ public abstract class Game {
 
     public abstract void step (String command);
 
-    public abstract String compile (String paragraph);
+    public String compile (String paragraph) {
+        StringBuilder compiledText = new StringBuilder();
+        String[] lines = paragraph.toLowerCase().split("\n");
+
+        for (String command: lines) {
+            String[] commands = command.split(" ");
+            compiledText.append(breakCommands(commands));
+        }
+        return compiledText.toString();
+    }
+
+    private StringBuilder breakCommands (String[] commands) {
+        StringBuilder ret = new StringBuilder();
+        ListIterator<String> commandIterator = Arrays.asList(commands).listIterator();
+        while (commandIterator.hasNext()) {
+            String temp = commandIterator.next();
+            if (temp.startsWith("#")) break;
+            if (temp.equals("")) continue;
+
+            Command input = new Command(temp);
+            Command result = input.recognize();
+
+            try {
+                if (result.getNumArgs() == 2) {
+                    ret.append(String.format("%s %s \n", temp, commandIterator.next()));
+                }
+                else if (result.getNumArgs() == 1) {
+                    ret.append(String.format("%s \n", temp));
+                }
+                else if (result.getNumArgs() == -1) {
+                    ret.append(String.format("%s ", temp));
+                    while (commandIterator.hasNext()) {
+                        temp = commandIterator.next();
+                        if (isNumeric(temp)) {
+                            ret.append(String.format("%s ", temp));
+                        }
+                        else {
+                            commandIterator.previous();
+                            break;
+                        }
+                    }
+                    ret.append("\n");
+                }
+            }
+            catch (Exception e) {
+                System.out.println("Error: Not a valid command");
+                break;
+            }
+        }
+        return ret;
+    }
 
     public void executeCommand (String command, Creature current) {
         String[] commands = command.split(" ");
@@ -32,14 +82,15 @@ public abstract class Game {
         else result.execute(current, 0);
     }
 
-    public static boolean isNumeric (String string) {
-        int intValue;
-        if(string == null || string.equals("")) { return false; }
+    private static boolean isNumeric (String string) {
+        if (string == null || string.equals("")) { return false; }
 
         try {
-            intValue = Integer.parseInt(string);
+            Integer.parseInt(string);
             return true;
-        } catch (NumberFormatException e) {}
-        return false;
+        }
+        catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
