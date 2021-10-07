@@ -6,7 +6,7 @@
     text_color: black;
 }
 #Pane {
-    -fx-spacing: 20px;
+    -fx-spacing: 10px;
 }
 
 #GameModePanel {
@@ -14,11 +14,11 @@
 }
 
 #CommandBoxButtonPanel {
-    -fx-spacing: 30px;
+    -fx-spacing: 20px;
 }
 
 .text-area {
-    -fx-pref-width: 1200;
+    -fx-pref-width: 1300;
     -fx-pref-height: 80;
 }
 

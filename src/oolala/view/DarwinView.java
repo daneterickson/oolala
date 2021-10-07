@@ -1,12 +1,15 @@
 package oolala.view;
 
+import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import oolala.creatures.Creature;
+import oolala.games.DarwinGame;
+import oolala.games.TurtleGame;
 
-public class DarwinView extends GameView{
+public class DarwinView extends GameView {
 
   private Pane myDarwinPane;
 
