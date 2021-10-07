@@ -1,6 +1,8 @@
 package oolala;
 
+import oolala.games.DarwinGame;
 import oolala.games.TurtleGame;
+import oolala.view.DarwinView;
 import oolala.view.ScreenDisplay;
 import oolala.view.TurtleView;
 import javafx.application.Application;

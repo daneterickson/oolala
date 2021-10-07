@@ -5,7 +5,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-public class DarwinView extends GameView{
+
+public class DarwinView extends GameView {
 
   private Pane myDarwinPane;
 
