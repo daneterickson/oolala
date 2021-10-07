@@ -13,5 +13,9 @@ to create the canvas for the creature and lines to be drawn on and move around o
 
 We refactored some JavaFX code that was styling to the Resources CSS file and fixed variables so that they were public static
 final.
-## Model
 
+## Model
+We modified some data structures used in Model. 
+Design Coach alerts to us that one method is too long and the structure is too nested (while, for, if statements).
+We reread the code and refactored it using Iterator, instead of a while loop (with an index i), since it makes the code more concise and easy to understand.
+We also added more tests to verify that the refactored codes still work properly. 
