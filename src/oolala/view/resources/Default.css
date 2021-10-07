@@ -17,6 +17,41 @@
     -fx-spacing: 20px;
 }
 
+#PenThicknessPanel {
+    -fx-alignment: center;
+}
+
+#HomeLocationPanel {
+    -fx-alignment: center;
+}
+
+#HomeLocationX {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+#HomeLocationY {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+#TurtleImagePanelButtons {
+    -fx-spacing: 10px;
+}
+
+#TurtleImagePanel {
+    -fx-alignment: center;
+    -fx-spacing: 5px;
+}
+
+#TurtleStatePanel {
+    -fx-alignment: center;
+}
+
+#LogoPanel {
+    -fx-spacing: 50px;
+}
+
 .text-area {
     -fx-pref-width: 1300;
     -fx-pref-height: 80;
