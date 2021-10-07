@@ -21,9 +21,9 @@ public class TurtleViewTest extends DukeApplicationTest {
   private TextInputControl myTextField;
   private Button myRunButton;
 
-  TurtleGame myTurtleGame;
-  TurtleView myTurtleView;
-  ScreenDisplay myDisplay;
+  private TurtleGame myTurtleGame;
+  private TurtleView myTurtleView;
+  private ScreenDisplay myDisplay;
 
   @Override
   public void start (Stage stage) {

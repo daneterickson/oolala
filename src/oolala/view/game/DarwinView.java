@@ -2,14 +2,14 @@ package oolala.view.game;
 
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import oolala.creatures.Creature;
 
 
 public class DarwinView extends GameView {
 
   private Pane myDarwinPane;
 
-  @Override
-  protected ImageView drawCreature(double x, double y, double width,
+  private ImageView drawCreature(double x, double y, double width,
       double height, int index) { // final will just be double size for turtle
     return null;
   }
@@ -21,6 +21,11 @@ public class DarwinView extends GameView {
    */
   @Override
   public void updateCanvas () {
+  }
+
+  @Override
+  protected void drawLine(Creature currentModel, int index) {
+
   }
 
   /**

@@ -1,25 +1,45 @@
 package oolala.view.game;
 
+import java.util.HashMap;
+import java.util.Map;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Line;
+import oolala.creatures.Creature;
+import oolala.games.FractalGame;
 
-public class FractalView extends GameView{
+public class FractalView extends GameView {
 
+  private FractalGame myModel;
   private Pane myFractalPane;
 
-  @Override
-  protected ImageView drawCreature(double x, double y, double width,
-      double height, int index) { // final will just be double size for turtle
-    return null;
+  public FractalView(FractalGame game) {
+    myModel = game;
+    myFractalPane = new Pane();
   }
 
   /**
-   * Iterates through each turtle on the canvas.
-   * Calls updateCreature to update the position, orientation, and visibility of the turtle on the screen
-   * Calls drawLine to draw the line that follows the turtle using the old and new position from the model
+   * Iterates through each turtle on the canvas. Calls updateCreature to update the position,
+   * orientation, and visibility of the turtle on the screen Calls drawLine to draw the line that
+   * follows the turtle using the old and new position from the model
    */
   @Override
-  public void updateCanvas () {
+  public void updateCanvas() {
+    for (int i : myModel.getActiveIndices()) {
+      Creature currentModel = myModel.getCreaturesMap().get(i);
+      drawLine(currentModel, i);
+    }
+  }
+
+  @Override
+  protected void drawLine(Creature currentModel, int index) {
+    Line path = new Line(currentModel.getOldX(), currentModel.getOldY(), currentModel.getNewX(),
+        currentModel.getNewY());
+    path.setId("line" + index);
+    if (currentModel.getPenActivity()) {
+      myFractalPane.getChildren().add(path);
+    }
   }
 
   /**
