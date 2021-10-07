@@ -90,25 +90,9 @@ public class ScreenDisplay {
         panel.getChildren().addAll(runCommand, clear);
         return panel;
     }
-//
-//    protected Node makeCanvas () {
-//        return null;
-//    };
-//
-//    protected Node makeCanvasPanel () {
-//        return null;
-//    };
 
-    // TODO: Set up canvas based on each game
     protected void setCanvas (CanvasDisplay canvas) {
         myCanvasDisplay = canvas;
     }
 
-    public Game getMyGame () {
-        return myGame;
-    }
-
-    public GameView getMyGameView () {
-        return myGameView;
-    }
 }
