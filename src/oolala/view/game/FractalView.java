@@ -1,10 +1,7 @@
-package oolala.view;
+package oolala.view.game;
 
-import java.util.Map;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import oolala.creatures.Creature;
 
 public class FractalView extends GameView{
 

@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 

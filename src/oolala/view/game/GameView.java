@@ -1,4 +1,4 @@
-package oolala.view;
+package oolala.view.game;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;

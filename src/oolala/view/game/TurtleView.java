@@ -1,4 +1,4 @@
-package oolala.view;
+package oolala.view.game;
 
 import oolala.creatures.Creature;
 import oolala.games.TurtleGame;

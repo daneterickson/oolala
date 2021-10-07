@@ -1,4 +1,4 @@
-package oolala.view;
+package oolala.view.canvas;
 
 import javafx.scene.Node;
 import javafx.scene.layout.BorderPane;
@@ -6,7 +6,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import oolala.games.Game;
-import oolala.games.TurtleGame;
+import oolala.view.game.GameView;
+import oolala.view.ScreenDisplayComponents;
 
 public class TurtleCanvasDisplay extends CanvasDisplay{
 
@@ -19,8 +20,13 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
     myDisplayComponents = components;
   }
 
+  /**
+   * Creates a border pane where the window that displays the output of the game is on the left and
+   * the UI controls for the game are on the left
+   * @return BorderPane panel
+   */
   @Override
-  protected Node makeCanvas () {
+  public Node makeCanvas () {
     BorderPane panel = new BorderPane();
     panel.setId("CanvasPanel");
     panel.setLeft(makeCanvasPanel());
