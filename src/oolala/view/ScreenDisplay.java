@@ -80,6 +80,7 @@ public class ScreenDisplay {
         for (String command : splitCommand) {
             myGame.step(command);
             myGameView.updateCanvas();
+            myCanvasDisplay.updateTurtleStatePanel();
         }
     }
 

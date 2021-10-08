@@ -47,4 +47,8 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     VBox panel = new VBox();
     return panel;
   }
+  @Override
+  public void updateTurtleStatePanel() {
+
+  }
 }

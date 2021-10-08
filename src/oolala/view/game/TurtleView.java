@@ -26,6 +26,8 @@ public class TurtleView extends GameView {
   private TurtleGame myModel;
   private Pane myTurtlePane;
   private Map<Integer, ImageView> myTurtleMap;
+  private double newX;
+  private double newY;
 
   /**
    * Constructor to create a TurtleView, which is the turtle and lines that go on the canvas in the
@@ -120,8 +122,10 @@ public class TurtleView extends GameView {
       drawCreature(currentModel.getOldX(), currentModel.getOldY(), TURTLE_WIDTH, TURTLE_HEIGHT,
           -1).setRotate(currentModel.getAngle());
     }
-    currentTurtle.setX(currentModel.getNewX());
-    currentTurtle.setY(currentModel.getNewY());
+    newX = currentModel.getNewX();
+    currentTurtle.setX(newX);
+    newY = currentModel.getNewY();
+    currentTurtle.setY(newY);
     currentTurtle.setRotate(currentModel.getAngle());
     currentTurtle.setVisible(currentModel.getCreatureVisibility());
   }
@@ -132,6 +136,7 @@ public class TurtleView extends GameView {
    *
    * @param width is the line width
    */
+  @Override
   public void setMyLineWidth(double width) {
     myLineWidth = width;
   }
@@ -142,7 +147,16 @@ public class TurtleView extends GameView {
    *
    * @param creature is the creature used in the game
    */
+  @Override
   public void setTurtleImage(String creature) {
     turtleImage = creature + ".png";
+  }
+
+  public double getX() {
+    return newX;
+  }
+
+  public double getY() {
+    return newY;
   }
 }

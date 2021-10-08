@@ -20,4 +20,7 @@ public abstract class CanvasDisplay {
 
   protected abstract Node makeCanvasPanel ();
 
+  public abstract void updateTurtleStatePanel();
+
+
   }

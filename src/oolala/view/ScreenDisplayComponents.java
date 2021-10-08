@@ -70,7 +70,7 @@ public class ScreenDisplayComponents {
         return (TextField)setId(id, result);
     }
 
-    public Node makeLabel (String id) {
+    public Label makeLabel (String id) {
         Label label = new Label(myResources.getString(id));
         return (Label)setId(id, label);
     }

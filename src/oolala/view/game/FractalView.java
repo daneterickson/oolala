@@ -52,4 +52,33 @@ public class FractalView extends GameView {
   public Pane getMyCreaturePane() {
     return myFractalPane;
   }
+
+  /**
+   * Setter method to change the width of the line drawn on the screen. ScreenDisplay gets the line
+   * width from the user and uses this method to set the line width.
+   *
+   * @param width is the line width
+   */
+  @Override
+  public void setMyLineWidth(double width) {
+
+  }
+
+  /**
+   * Setter method to change the creature on the screen. ScreenDisplay gets the creature type
+   * from the user and uses this method to set the creature image.
+   *
+   * @param creature is the creature used in the game
+   */
+  @Override
+  public void setTurtleImage(String creature) {
+
+  }
+  public double getX() {
+    return 1.0;
+  }
+
+  public double getY() {
+    return 1.0;
+  }
 }

@@ -47,4 +47,8 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     VBox panel = new VBox();
     return panel;
   }
+  @Override
+  public void updateTurtleStatePanel() {
+
+  }
 }
