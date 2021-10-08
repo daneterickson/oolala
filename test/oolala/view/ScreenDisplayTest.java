@@ -28,8 +28,8 @@ public class ScreenDisplayTest extends DukeApplicationTest {
         stage.setTitle(TITLE);
         stage.show();
 
-        myCommandBox = lookup("#Pane #CommandBoxPanel #CommandBox").query();
-        myRunButton =  (Button)lookup("#Pane #CommandBoxPanel #CommandBoxButtonPanel #Run").query();
+        myCommandBox = lookup("#CommandBox").query();
+        myRunButton =  (Button)lookup("#Run").query();
         myCommandBox.clear();
     }
 

@@ -26,7 +26,7 @@ public class ScreenDisplay {
     private ScreenDisplayComponents myDisplayComponents;
     private CanvasDisplay myCanvasDisplay;
 
-    public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.View.Resources.";
+    public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.view.resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
 
     public ScreenDisplay (GameView gameView, Game game, String language, int startX, int startY) {
