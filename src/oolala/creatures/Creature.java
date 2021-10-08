@@ -1,19 +1,21 @@
 package oolala.creatures;
 
+import oolala.games.Game;
+
 public class Creature {
 
     private boolean isPenActive, isCreatureVisible, isStamp;
     private double myOldPosX, myOldPoxY, myNewPosX, myNewPosY;
     private int myAngle;
-    private double myHomeX, myHomeY;
+    private String myType;
+    private boolean isInfected;
 
 
     public Creature (int x, int y) {
-        myHomeX = x;
-        myHomeY = y;
         isPenActive = true;
         isStamp = false;
         isCreatureVisible = true;
+        isInfected = false;
         setInitialPosition(x, y,0);
     }
 
@@ -24,6 +26,12 @@ public class Creature {
         myNewPosY = y;
         myAngle = angle;
     }
+
+    public void setType (String type) { myType = type; }
+    public String getType () { return myType; }
+
+    public void setStatusInfection (boolean status) { isInfected = status; }
+    public boolean getStatusInfection () { return isInfected; }
 
     public boolean getPenActivity () { return isPenActive; }
     public void setPenActivity (boolean status) {
@@ -47,10 +55,10 @@ public class Creature {
     public double getNewY () { return myNewPosY; }
     public int getAngle () { return myAngle; }
 
-    public void reset () {
+    public void reset (Game game) {
         updateOldPos();
-        myNewPosX = myHomeX;
-        myNewPosY = myHomeY;
+        myNewPosX = game.getHomeX();
+        myNewPosY = game.getHomeY();
         myAngle = 0;
     }
 
@@ -67,6 +75,14 @@ public class Creature {
 
     public void changeOrientation (int angle) {
         myAngle += angle;
+    }
+
+    public void infect (Creature c, int distance) {
+        if (Math.pow(c.getNewX() - myNewPosX, 2) + Math.pow(c.getNewY() - myNewPosY, 2)
+                < Math.pow(distance, 2)) {
+            c.setStatusInfection(true);
+            c.setType(myType);
+        }
     }
 
 }
