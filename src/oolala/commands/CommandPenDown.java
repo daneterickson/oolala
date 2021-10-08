@@ -9,7 +9,8 @@ public class CommandPenDown extends Command {
     }
 
     @Override
-    public void execute (Creature current, int val) {
+    public boolean execute (Creature current) {
         current.setPenActivity(true);
+        return false;
     }
 }

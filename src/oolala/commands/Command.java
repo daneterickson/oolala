@@ -1,24 +1,16 @@
 package oolala.commands;
 
 import oolala.creatures.Creature;
+import oolala.games.Game;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class Command {
 
-    private List<Command> myCommandsList = new ArrayList<>() {{
-//            add(new CommandForward());
-//            add(new CommandBackward());
-//            add(new CommandLeftTurn());
-//            add(new CommandRightTurn());
-//            add(new CommandPenDown());
-//            add(new CommandPenUp());
-//            add(new CommandShowTurtle());
-//            add(new CommandHideTurtle());
-//            add(new CommandReset());
-//            add(new CommandStamp());
-    }};
+    private List<Command> myCommandsList = new ArrayList<>();
     private String myName;
     private int myNumArgs;
 
@@ -37,6 +29,9 @@ public class Command {
         myCommandsList.add(new CommandReset());
         myCommandsList.add(new CommandStamp());
         myCommandsList.add(new CommandTell());
+        myCommandsList.add(new CommandGo());
+        myCommandsList.add(new CommandIfEnemy());
+        myCommandsList.add(new CommandInfect());
     }
 
     public String getName () { return myName; }
@@ -54,24 +49,18 @@ public class Command {
     }
 
 
+    public boolean execute () { return false; }
+    public boolean execute (Creature current) { return false; }
+    public boolean execute (Creature current, Game game) { return false; }
+    public boolean execute (Creature current, Collection<Creature> creaturesList) { return false; }
+    public boolean execute (Creature current, int val) { return false; }
 
-    public void execute (Creature current, int val) {}
+    public boolean isAction () { return false; }
 
-
-
-//     switch (commands[0]) {
-//        case "fd" -> current.move(Integer.valueOf(commands[1]));
-//        case "bk" -> current.move(-Integer.valueOf(commands[1]));
-//        case "lt" -> current.changeOrientation(-Integer.valueOf(commands[1]));
-//        case "rt" -> current.changeOrientation(Integer.valueOf(commands[1]));
-//        case "pd" -> current.setPenActivity(true);
-//        case "pu" -> current.setPenActivity(false);
-
-//        case "st" -> current.setCreatureVisibility(true);
-//        case "ht" -> current.setCreatureVisibility(false);
-//        case "home" -> current.reset();
-//        case "stamp" -> current.setStatusStamp(true);
-//    }
+    @Override
+    public boolean equals (Object obj) {
+        return myName.equals(((Command) obj).getName());
+    }
 
 
 }
