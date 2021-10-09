@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -23,10 +24,12 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
   private Label turtleStateX;
   private Label turtleStateY;
   private Slider lineWidthSlider;
+  private Game myGame;
 
   public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
     myTurtleView = (TurtleView) gameView;
+    myGame = game;
     myDisplayComponents = components;
   }
 
@@ -63,9 +66,8 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
   private Node makePenThicknessPanel () {
     VBox panel = new VBox();
     panel.setId("PenThicknessPanel");
-    Consumer<String> updateAction = e -> temporary(); // update with model's pen thickness method
     Node sliderLabel = myDisplayComponents.makeLabel("PenThickness");
-    lineWidthSlider = myDisplayComponents.makeSlider("PenSlider", 1, 1, 4, updateAction);
+    lineWidthSlider = myDisplayComponents.makeSlider("PenSlider", 1, 1, 4);
     panel.getChildren().addAll(sliderLabel, lineWidthSlider);
     return panel;
   }
@@ -84,9 +86,11 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
     VBox panel = new VBox();
     panel.setId("HomeLocationPanel");
     Node homeLocationLabel = myDisplayComponents.makeLabel("HomeLocationLabel");
-    Node homeLocationX = myDisplayComponents.makeTextBoxWithLabel("HomeLocationX", "LocationX", e -> temporary());
-    Node homeLocationY = myDisplayComponents.makeTextBoxWithLabel("HomeLocationY", "LocationY", e -> temporary());
-    panel.getChildren().addAll(homeLocationLabel, homeLocationX, homeLocationY);
+    Node homeLocationX = myDisplayComponents.makeTextBoxWithLabel("HomeLocationX", "LocationX");
+    Node homeLocationY = myDisplayComponents.makeTextBoxWithLabel("HomeLocationY", "LocationY");
+    // set the button to grab stuff
+    Node setHomeLocation = myDisplayComponents.makeButton("SetHomeLocation", e -> updateHomeLocation((TextField)panel.lookup("#LocationX"), (TextField)panel.lookup("#LocationY")));
+    panel.getChildren().addAll(homeLocationLabel, homeLocationX, homeLocationY, setHomeLocation);
     return panel;
   }
 
@@ -142,7 +146,7 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
   }
 
 
-  private void temporary () {
-
+  private void updateHomeLocation (TextField x, TextField y) {
+    myGame.updateHome(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
   }
 }

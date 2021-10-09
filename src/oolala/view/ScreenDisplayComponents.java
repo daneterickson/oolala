@@ -50,7 +50,7 @@ public class ScreenDisplayComponents {
         return (Rectangle)setId("Canvas", result);
     }
 
-    public Slider makeSlider (String id, int min, int start, int max, Consumer<String> response) {
+    public Slider makeSlider (String id, int min, int start, int max) {
         Slider slider = new Slider();
         slider.setMin(min);
         slider.setMax(max);
@@ -60,12 +60,10 @@ public class ScreenDisplayComponents {
         slider.setSnapToTicks(true);
         slider.setShowTickLabels(true);
         slider.setShowTickMarks(true);
-
-        slider.valueProperty().addListener((o, oldValue, newValue) -> response.accept(newValue.toString()));
         return (Slider)setId(id, slider);
     }
 
-    public TextField makeTextBox (String id, EventHandler<ActionEvent> handler) {
+    public TextField makeTextBox (String id) {
         TextField result = new TextField();
         result.setText(myResources.getString(id));
         return (TextField)setId(id, result);
@@ -76,10 +74,10 @@ public class ScreenDisplayComponents {
         return (Label)setId(id, label);
     }
 
-    public Node makeTextBoxWithLabel (String labelId, String textBoxId, EventHandler<ActionEvent> handler) {
+    public Node makeTextBoxWithLabel (String labelId, String textBoxId) {
         HBox panel = new HBox();
         Node label = makeLabel(labelId);
-        Node textBox = makeTextBox(textBoxId, handler);
+        Node textBox = makeTextBox(textBoxId);
         panel.getChildren().addAll(label, textBox);
         return setId(labelId, panel);
     }

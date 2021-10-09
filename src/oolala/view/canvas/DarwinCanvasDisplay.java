@@ -1,6 +1,7 @@
 package oolala.view.canvas;
 
 import javafx.scene.Node;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -15,9 +16,11 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
 
   private DarwinView myDarwinView;
   private ScreenDisplayComponents myDisplayComponents;
+  private Game myGame;
 
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
+    myGame = game;
     myDarwinView = (DarwinView) gameView;
     myDisplayComponents = components;
   }
@@ -55,8 +58,9 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
   private Node makeRadiusPanel() {
     VBox panel = new VBox();
     panel.setId("RadiusPanel");
-    Node radius = myDisplayComponents.makeTextBoxWithLabel("RadiusLabel", "RadiusBox", e -> temporary());
-    panel.getChildren().add(radius);
+    Node radius = myDisplayComponents.makeTextBoxWithLabel("RadiusLabel", "RadiusBox");
+    Node radiusButton = myDisplayComponents.makeButton("RadiusButton", e-> temporary());
+    panel.getChildren().addAll(radius, radiusButton);
     return panel;
   }
 
@@ -64,9 +68,10 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     VBox panel = new VBox();
     panel.setId("SpeciesPanel");
     Node speciesLabel = myDisplayComponents.makeLabel("SpeciesLabel");
-    Node speciesX = myDisplayComponents.makeTextBoxWithLabel("HomeLocationX", "LocationX", e -> temporary());
-    Node speciesY = myDisplayComponents.makeTextBoxWithLabel("HomeLocationY", "LocationY", e -> temporary());
-    panel.getChildren().addAll(speciesLabel, speciesX, speciesY);
+    Node speciesX = myDisplayComponents.makeTextBoxWithLabel("HomeLocationX", "LocationX");
+    Node speciesY = myDisplayComponents.makeTextBoxWithLabel("HomeLocationY", "LocationY");
+    Node setHomeLocation = myDisplayComponents.makeButton("SetHomeLocation", e -> updateHomeLocation((TextField)panel.lookup("#LocationX"), (TextField)panel.lookup("#LocationY")));
+    panel.getChildren().addAll(speciesLabel, speciesX, speciesY, setHomeLocation);
     return panel;
   }
 
@@ -86,6 +91,10 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     Node turtleButton = myDisplayComponents.makeButton("TurtleButton", e -> temporary());
     panel.getChildren().addAll(catButton, dogButton, turtleButton);
     return panel;
+  }
+
+  private void updateHomeLocation (TextField x, TextField y) {
+    myGame.updateHome(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
   }
 
   private void temporary() {}
