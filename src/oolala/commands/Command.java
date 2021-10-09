@@ -55,7 +55,7 @@ public class Command {
 
     public boolean execute () { return false; }
     public boolean execute (Creature current) { return false; }
-    public boolean execute (Creature current, int val, Game game) { return false; }
+    public boolean execute (Creature current, double val, Game game) { return false; }
     public boolean execute (Creature current, Game game) { return false; }
 
     public boolean isAction () { return false; }

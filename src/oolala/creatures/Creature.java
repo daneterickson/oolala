@@ -68,7 +68,7 @@ public class Creature {
         myOldPoxY = myNewPosY;
     }
 
-    public void move (int distance, Game game) {
+    public void move (double distance, Game game) {
         double newX = myOldPosX + distance * Math.sin(Math.toRadians(myAngle));
         double newY = myOldPoxY - distance * Math.cos(Math.toRadians(myAngle));
         if (game instanceof DarwinGame) {
@@ -90,7 +90,7 @@ public class Creature {
         myNewPosY = newY;
     }
 
-    public void changeOrientation (int angle) {
+    public void changeOrientation (double angle) {
         myAngle += angle;
     }
 

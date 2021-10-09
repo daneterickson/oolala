@@ -26,7 +26,7 @@ public class FractalGame extends Game {
         myRulesMap = new HashMap<>();
     }
 
-    public void initialize (int numLevels, double length, int angle,
+    public void initialize (int numLevels, int length, int angle,
                             int startX, int startY, int levelSpan) {
         myLevels = numLevels;
         myLength = length;
