@@ -11,7 +11,7 @@ public class CommandForward extends Command {
     }
 
     @Override
-    public boolean execute (Creature current, int val, Game game) {
+    public boolean execute (Creature current, double val, Game game) {
         current.move(val, game);
         return false;
     }

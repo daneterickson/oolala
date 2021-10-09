@@ -25,7 +25,7 @@ public class Main extends Application {
         TurtleView turtleView = new TurtleView(turtleGame, ORIGIN_X, ORIGIN_Y);
         FractalGame fractalGame = new FractalGame();
         FractalView fractalView = new FractalView(fractalGame);
-        ScreenDisplay display = new ScreenDisplay(turtleView, turtleGame, "English", ORIGIN_X, ORIGIN_Y);
+        ScreenDisplay display = new ScreenDisplay(fractalView, fractalGame, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
