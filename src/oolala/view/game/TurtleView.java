@@ -5,7 +5,6 @@ import oolala.games.TurtleGame;
 
 import java.util.HashMap;
 import java.util.Map;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
@@ -17,15 +16,12 @@ import javafx.scene.shape.Line;
  */
 public class TurtleView extends GameView {
 
-  public static final double TURTLE_WIDTH = 60;
-  public static final double TURTLE_HEIGHT = 80;
-
-  private String turtleImage = "turtle.png";
+//  private String turtleImage = "turtle.png";
   private double myLineWidth = 1;
 
   private TurtleGame myModel;
-  private Pane myTurtlePane;
-  private Map<Integer, ImageView> myTurtleMap;
+//  private Pane myTurtlePane;
+//  private Map<Integer, ImageView> myTurtleMap;
   private double newX;
   private double newY;
 
@@ -39,8 +35,8 @@ public class TurtleView extends GameView {
    */
   public TurtleView(TurtleGame game, double x, double y) { // x and y based on canvas/scene size
     myModel = game;
-    myTurtlePane = new Pane();
-    myTurtleMap = new HashMap<>();
+    myCreaturePane = new Pane();
+    myCreatureMap = new HashMap<>();
     drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT, 1);
   }
 
@@ -52,22 +48,22 @@ public class TurtleView extends GameView {
    */
   @Override
   public Pane getMyCreaturePane() {
-    return myTurtlePane;
+    return myCreaturePane;
   }
 
-  private ImageView drawCreature(double x, double y, double width,
-      double height, int index) { // final will just be double size for turtle
-    myTurtleMap.put(index, new ImageView(new Image(turtleImage)));
-    ImageView turtle = myTurtleMap.get(index);
-    turtle.setFitHeight(height);
-    turtle.setFitWidth(width);
-    turtle.setX(x);
-    turtle.setY(y);
-    turtle.setVisible(true);
-    turtle.setId("turtle-image");
-    myTurtlePane.getChildren().add(turtle);
-    return turtle;
-  }
+//  private ImageView drawCreature(double x, double y, double width,
+//      double height, int index) { // final will just be double size for turtle
+//    myTurtleMap.put(index, new ImageView(new Image(turtleImage)));
+//    ImageView turtle = myTurtleMap.get(index);
+//    turtle.setFitHeight(height);
+//    turtle.setFitWidth(width);
+//    turtle.setX(x);
+//    turtle.setY(y);
+//    turtle.setVisible(true);
+//    turtle.setId("turtle-image");
+//    myTurtlePane.getChildren().add(turtle);
+//    return turtle;
+//  }
 
   /**
    * Getter method to get the myTurtleImage, which is the actual turtle on the screen
@@ -75,7 +71,7 @@ public class TurtleView extends GameView {
    * @return myTurtleImage
    */
   public Map<Integer, ImageView> getMyTurtleMap() {
-    return myTurtleMap;
+    return myCreatureMap;
   }
 
   /**
@@ -87,11 +83,7 @@ public class TurtleView extends GameView {
   public void updateCanvas() {
     for (int i : myModel.getActiveIndices()) {
       Creature currentModel = myModel.getCreaturesMap().get(i);
-      if (!myTurtleMap.containsKey(i)) {
-        myTurtleMap.put(i, drawCreature(currentModel.getNewX(),
-            currentModel.getNewY(), TURTLE_WIDTH, TURTLE_HEIGHT, i));
-      }
-      ImageView currentTurtle = myTurtleMap.get(i);
+      ImageView currentTurtle = findCurrentTurtle(currentModel, i);
       drawLine(currentModel, i);
       updateCreature(currentModel, currentTurtle);
     }
@@ -105,7 +97,7 @@ public class TurtleView extends GameView {
     path.setStrokeWidth(myLineWidth);
     path.setId("line" + index);
     if (currentModel.getPenActivity()) {
-      myTurtlePane.getChildren().add(path);
+      myCreaturePane.getChildren().add(path);
     }
   }
 
@@ -158,6 +150,7 @@ public class TurtleView extends GameView {
    */
   @Override
   public void setTurtleImage(String creature) {
+
     turtleImage = creature + ".png";
   }
 

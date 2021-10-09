@@ -1,11 +1,45 @@
 package oolala.view.game;
 
+import java.util.Map;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import oolala.creatures.Creature;
 
 public abstract class GameView { // make it an interface if I don't make any methods in this class
+
+    public static final double TURTLE_WIDTH = 60;
+    public static final double TURTLE_HEIGHT = 80;
+
+    protected Pane myCreaturePane;
+    protected Map<Integer, ImageView> myCreatureMap;
+    protected String turtleImage = "turtle.png";
+
+    protected ImageView drawCreature(double x, double y, double width,
+        double height, int index) { // final will just be double size for turtle
+        myCreatureMap.put(index, new ImageView(new Image(turtleImage)));
+        ImageView turtle = myCreatureMap.get(index);
+        turtle.setFitHeight(height);
+        turtle.setFitWidth(width);
+        turtle.setX(x);
+        turtle.setY(y);
+        turtle.setVisible(true);
+        turtle.setId("turtle-image");
+        myCreaturePane.getChildren().add(turtle);
+        return turtle;
+    }
+
+    protected ImageView findCurrentTurtle(Creature model, int index) {
+        if (!myCreatureMap.containsKey(index)) {
+            myCreatureMap.put(index, drawCreature(model.getNewX(),
+                model.getNewY(), TURTLE_WIDTH, TURTLE_HEIGHT, index));
+        }
+        ImageView currentTurtle = myCreatureMap.get(index);
+        myCreaturePane.getChildren().remove(currentTurtle);
+        currentTurtle = drawCreature(model.getOldX(), model.getOldY(), TURTLE_WIDTH, TURTLE_HEIGHT, index);
+        return currentTurtle;
+    }
 
     public abstract void updateCanvas ();
 
