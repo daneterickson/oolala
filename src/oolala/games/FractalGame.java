@@ -32,7 +32,9 @@ public class FractalGame extends Game {
         myLength = length;
         myRotation = angle;
         for (int i = 0; i < numLevels; i++) {
-            getCreaturesMap().put(i + 1, new Creature(startX,startY + i * levelSpan));
+            Creature c = new Creature(startX,startY + i * levelSpan);
+            c.changeOrientation(90);
+            getCreaturesMap().put(i + 1, c);
         }
     }
     

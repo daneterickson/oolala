@@ -47,7 +47,7 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
     Rectangle canvas = myDisplayComponents.makeCanvas();
-    myFractalGame.initialize(myNumLevels, myLength, myAngle, 650, 300, 100); //GET RID OF IMAGINARY NUMBERS
+    myFractalGame.initialize(myNumLevels, myLength, myAngle, 650, 100, 100); //GET RID OF IMAGINARY NUMBERS
     pane.getChildren().addAll(canvas, myFractalView.getMyCreaturePane());
     return pane;
   }

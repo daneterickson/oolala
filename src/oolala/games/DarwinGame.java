@@ -29,9 +29,13 @@ public class DarwinGame extends Game {
         myMaxX = maxX;
         myMaxY = maxY;
         myRadius = radius;
-        // put(CreatureIndex, 1) in myIndexMap when initialize every creature
-        // initialize creature's type
-        // maybe also put every Creature into myActiveIndicesMap
+    }
+
+    public void addCreature (String type, int x, int y) {
+        Creature c = new Creature(x, y);
+        c.setType(type);
+        getCreaturesMap().put(getCreaturesMap().size() + 1, c);
+        myIndexMap.put(getCreaturesMap().size() + 1, 1);
     }
 
     public double getRadius () { return myRadius; }
@@ -40,6 +44,8 @@ public class DarwinGame extends Game {
 
     @Override
     public void step (String command) {
+        myShuffledIndices = new ArrayList<>(getCreaturesMap().keySet());
+        getActiveIndices().clear();
         Collections.shuffle(myShuffledIndices);
         for (Integer index: myShuffledIndices) {
             Creature currentCreature = getCreaturesMap().get(index);
@@ -61,6 +67,7 @@ public class DarwinGame extends Game {
                     case 3 -> result.execute(currentCreature, arg, this); //fd,rt,lt
                     case 2 -> result.execute(currentCreature, this); //infect,other non-action commands except go, ifrandom
                 }
+                getActiveIndices().add(index);
                 myIndexMap.put(index, myIndexMap.get(index)+1);
                 return;
             }
