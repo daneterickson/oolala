@@ -142,6 +142,15 @@ public class TurtleView extends GameView {
   }
 
   /**
+   * Getter method to get the width of the line drawn on the screen - Used for testing
+   *
+   * @return myLineWidth is the line width
+   */
+  public double getMyLineWidth() {
+    return myLineWidth;
+  }
+
+  /**
    * Setter method to change the creature on the screen. ScreenDisplay gets the creature type
    * from the user and uses this method to set the creature image.
    *
@@ -152,10 +161,21 @@ public class TurtleView extends GameView {
     turtleImage = creature + ".png";
   }
 
+  /**
+   * Getter method to get the creature on the screen - Used for testing
+   *
+   * @return turtleImage is the URL of the creature Image on the screen
+   */
+  public String getTurtleImage() {
+    return turtleImage;
+  }
+
+  @Override
   public double getX() {
     return newX;
   }
 
+  @Override
   public double getY() {
     return newY;
   }

@@ -2,6 +2,7 @@ package oolala.view.canvas;
 
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -17,12 +18,13 @@ import oolala.view.game.TurtleView;
 
 public class TurtleCanvasDisplay extends CanvasDisplay{
 
-  private GameView myTurtleView;
+  private TurtleView myTurtleView;
   private ScreenDisplayComponents myDisplayComponents;
   private Label turtleStateX;
   private Label turtleStateY;
+  private Slider lineWidthSlider;
 
-  public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
+  public TurtleCanvasDisplay(TurtleView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
     myTurtleView = gameView;
     myDisplayComponents = components;
@@ -63,9 +65,19 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
     panel.setId("PenThicknessPanel");
     Consumer<String> updateAction = e -> temporary(); // update with model's pen thickness method
     Node sliderLabel = myDisplayComponents.makeLabel("PenThickness");
-    Node slider = myDisplayComponents.makeSlider("PenSlider", 1, 1, 4, updateAction);
-    panel.getChildren().addAll(sliderLabel, slider);
+    lineWidthSlider = myDisplayComponents.makeSlider("PenSlider", 1, 1, 4, updateAction);
+    panel.getChildren().addAll(sliderLabel, lineWidthSlider);
     return panel;
+  }
+
+  /**
+   * Getter method to get the slider that changes the line width so ScreenDisplay can access the
+   * slider and change the line width each command.
+   *
+   * @return lineWidthSlider
+   */
+  public Slider getLineWidthSlider () {
+    return lineWidthSlider;
   }
 
   private Node makeHomeLocationPanel() {
@@ -108,9 +120,10 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
 
   @Override
   public void updateTurtleStatePanel() {
-    turtleStateX.setText(turtleStateX.getText() + " " + myTurtleView.getX());
-    turtleStateY.setText(turtleStateY.getText() + " " + myTurtleView.getY());
+    turtleStateX.setText("TurtleStateX: " + myTurtleView.getX());
+    turtleStateY.setText("TurtleStateY: " + myTurtleView.getY());
   }
+
 
   private void temporary () {
 
