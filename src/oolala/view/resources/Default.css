@@ -52,6 +52,54 @@
     -fx-spacing: 50px;
 }
 
+#AngleAndLevelPanel {
+    -fx-spacing: 10px;
+}
+
+#FractalPanel {
+    -fx-spacing: 50px;
+    -fx-alignment: center;
+}
+
+#ImagePanel {
+    -fx-alignment: center;
+}
+
+#AngleBox {
+    -fx-pref-width: 100px;
+}
+
+#AngleLabel {
+    -fx-spacing: 5px;
+}
+
+#LengthLabel {
+    -fx-spacing: 5px;
+}
+
+#LevelLabel {
+    -fx-spacing: 5px;
+}
+#AngleButton {
+    -fx-padding: 3px 5px;
+}
+
+#LengthButton {
+    -fx-padding: 3px 5px;
+}
+
+#LevelButton {
+    -fx-padding: 3px 5px;
+}
+
+#LengthBox {
+    -fx-pref-width: 100px;
+}
+
+#LevelBox {
+    -fx-pref-width: 100px;
+}
+
 .text-area {
     -fx-pref-width: 1300;
     -fx-pref-height: 80;

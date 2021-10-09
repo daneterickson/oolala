@@ -82,6 +82,15 @@ public class ScreenDisplayComponents {
         return setId(labelId, panel);
     }
 
+    public Node makeTextBoxWithLabelAndButton (String labelId, String textBoxId, String buttonId, EventHandler<ActionEvent> handler) {
+        HBox panel = new HBox();
+        Node label = makeLabel(labelId);
+        Node textBox = makeTextBox(textBoxId);
+        Node button = makeButton(buttonId, handler);
+        panel.getChildren().addAll(label, textBox, button);
+        return setId(labelId, panel);
+    }
+
     private Node setId (String id, Node node) {
         node.setId(id);
         return node;

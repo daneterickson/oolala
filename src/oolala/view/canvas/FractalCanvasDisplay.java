@@ -63,20 +63,17 @@ public class FractalCanvasDisplay extends CanvasDisplay {
   private Node makeAngleAndLengthPanel() {
     VBox panel = new VBox();
     panel.setId("AngleAndLevelPanel");
-    Node angle = myDisplayComponents.makeTextBoxWithLabel("AngleLabel", "AngleBox");
-    Node angleButton = myDisplayComponents.makeButton("AngleButton", e-> temporary());
-    Node length = myDisplayComponents.makeTextBoxWithLabel("LengthLabel", "LengthBox");
-    Node lengthButton = myDisplayComponents.makeButton("LengthButton", e -> temporary());
-    panel.getChildren().addAll(angle, angleButton, length, lengthButton);
+    Node angle = myDisplayComponents.makeTextBoxWithLabelAndButton("AngleLabel", "AngleBox", "AngleButton", e -> temporary());
+    Node length = myDisplayComponents.makeTextBoxWithLabelAndButton("LengthLabel", "LengthBox", "LengthButton", e -> temporary());
+    panel.getChildren().addAll(angle, length);
     return panel;
   }
 
   private Node makeLevelPanel() {
     VBox panel = new VBox();
     panel.setId("LevelPanel");
-    Node level = myDisplayComponents.makeTextBoxWithLabel("LevelLabel", "LevelBox");
-    Node levelButton = myDisplayComponents.makeButton("LevelButton", e -> temporary());
-    panel.getChildren().addAll(level, levelButton);
+    Node level = myDisplayComponents.makeTextBoxWithLabelAndButton("LevelLabel", "LevelBox", "LevelButton", e-> temporary());
+    panel.getChildren().addAll(level);
     return panel;
   }
 
@@ -85,7 +82,7 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     panel.setId("ImagePanel");
     Node imageLabel = myDisplayComponents.makeLabel("LeafLabel");
     Node image = myDisplayComponents.makeButton("LeafImage", e -> temporary());
-    panel.getChildren().addAll(image);
+    panel.getChildren().addAll(imageLabel, image);
     return panel;
   }
 
