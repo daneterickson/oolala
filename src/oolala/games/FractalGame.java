@@ -80,7 +80,9 @@ public class FractalGame extends Game {
             String newSymbols = currentSymbols;
             for (int j = 0; j < currentSymbols.length(); j++ ) {
                 String symbol = String.valueOf(currentSymbols.charAt(j));
-                newSymbols = newSymbols.substring(0, j) + myRulesMap.get(symbol) + newSymbols.substring(j+1);
+                if (myRulesMap.containsKey(symbol)) {
+                    newSymbols = newSymbols.substring(0, j) + myRulesMap.get(symbol) + newSymbols.substring(j+1);
+                }
 
                 String command = myCommandsMap.get(symbol);
                 command = command.replace("ANGLE", String.valueOf(myRotation))
