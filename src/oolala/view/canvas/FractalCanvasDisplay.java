@@ -21,6 +21,7 @@ public class FractalCanvasDisplay extends CanvasDisplay {
   private FractalView myFractalView;
   private FractalGame myFractalGame;
   private ScreenDisplayComponents myDisplayComponents;
+  private BorderPane myPane;
 
   public FractalCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
@@ -36,11 +37,11 @@ public class FractalCanvasDisplay extends CanvasDisplay {
    */
   @Override
   public Node makeCanvas () {
-    BorderPane panel = new BorderPane();
-    panel.setId("CanvasPanel");
-    panel.setLeft(makeCanvasPanel());
-    panel.setRight(makeFractalPanel());
-    return panel;
+    myPane = new BorderPane();
+    myPane.setId("CanvasPanel");
+    myPane.setLeft(makeCanvasPanel());
+    myPane.setRight(makeFractalPanel());
+    return myPane;
   }
 
   @Override
@@ -48,7 +49,7 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
     Rectangle canvas = myDisplayComponents.makeCanvas();
-    myFractalGame.initialize(myNumLevels, myLength, myAngle, 650, 100, 100); //GET RID OF IMAGINARY NUMBERS
+    // myFractalGame.initialize(myNumLevels, myLength, myAngle, 650, 100, 100); //GET RID OF IMAGINARY NUMBERS
     pane.getChildren().addAll(canvas, myFractalView.getMyCreaturePane());
     return pane;
   }
@@ -63,8 +64,8 @@ public class FractalCanvasDisplay extends CanvasDisplay {
   private Node makeAngleAndLengthPanel() {
     VBox panel = new VBox();
     panel.setId("AngleAndLevelPanel");
-    Node angle = myDisplayComponents.makeTextBoxWithLabelAndButton("AngleLabel", "AngleBox", "AngleButton", e -> temporary());
-    Node length = myDisplayComponents.makeTextBoxWithLabelAndButton("LengthLabel", "LengthBox", "LengthButton", e -> temporary());
+    Node angle = myDisplayComponents.makeTextBoxWithLabel("AngleLabel", "AngleBox");
+    Node length = myDisplayComponents.makeTextBoxWithLabel("LengthLabel", "LengthBox");
     panel.getChildren().addAll(angle, length);
     return panel;
   }
@@ -72,7 +73,7 @@ public class FractalCanvasDisplay extends CanvasDisplay {
   private Node makeLevelPanel() {
     VBox panel = new VBox();
     panel.setId("LevelPanel");
-    Node level = myDisplayComponents.makeTextBoxWithLabelAndButton("LevelLabel", "LevelBox", "LevelButton", e-> temporary());
+    Node level = myDisplayComponents.makeTextBoxWithLabel("LevelLabel", "LevelBox");
     panel.getChildren().addAll(level);
     return panel;
   }
@@ -92,18 +93,24 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     Node homeLocationLabel = myDisplayComponents.makeLabel("HomeLocationLabel");
     Node homeLocationX = myDisplayComponents.makeTextBoxWithLabel("HomeLocationX", "LocationX");
     Node homeLocationY = myDisplayComponents.makeTextBoxWithLabel("HomeLocationY", "LocationY");
-    Node setHomeLocation = myDisplayComponents.makeButton("SetHomeLocation", e -> updateHomeLocation((TextField)panel.lookup("#LocationX"), (TextField)panel.lookup("#LocationY")));
-    panel.getChildren().addAll(homeLocationLabel, homeLocationX, homeLocationY, setHomeLocation);
+    Node renderButton = myDisplayComponents.makeButton("SetButton", e -> renderFractal((TextField)myPane.lookup("#LevelBox"),
+            (TextField)myPane.lookup("#LengthBox"), (TextField)myPane.lookup("#AngleBox"), (TextField)myPane.lookup("#LocationX")
+    , (TextField)myPane.lookup("#LocationY")));
+    panel.getChildren().addAll(homeLocationLabel, homeLocationX, homeLocationY, renderButton);
     return panel;
   }
 
-  private void temporary() {
+  private void renderFractal(TextField level, TextField length, TextField angle, TextField startX, TextField startY) {
+    int levelNum = Integer.parseInt(level.getText());
+    int lengthNum = Integer.parseInt(length.getText());
+    int angleNum = Integer.parseInt(angle.getText());
+    int xNum = Integer.parseInt(startX.getText());
+    int yNum = Integer.parseInt(startY.getText());
+    myFractalGame.initialize(levelNum, lengthNum, angleNum, xNum, yNum, 100);
 
   }
 
-  private void updateHomeLocation (TextField x, TextField y) {
-    myFractalGame.updateHome(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
-  }
+  private void temporary() {}
 
   @Override
   public void updateTurtleStatePanel() {

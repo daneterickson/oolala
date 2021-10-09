@@ -70,7 +70,7 @@
 }
 
 #AngleLabel {
-    -fx-spacing: 5px;
+    -fx-spacing: 8px;
 }
 
 #LengthLabel {
@@ -78,14 +78,15 @@
 }
 
 #LevelLabel {
-    -fx-spacing: 5px;
+    -fx-spacing: 12px;
 }
-#AngleButton {
-    -fx-padding: 3px 5px;
+#SetButton {
+    -fx-padding: 10px 7px;
 }
 
-#LengthButton {
-    -fx-padding: 3px 5px;
+#LevelPanel {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
 }
 
 #LevelButton {
