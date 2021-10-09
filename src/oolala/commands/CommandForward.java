@@ -9,9 +9,18 @@ public class CommandForward extends Command {
         setNumArgs(2);
     }
 
-    @Override
-    public void execute (Creature current, int val) {
+    public boolean execute (Creature current, int val) {
         current.move(val);
+        return false;
+    }
+
+    @Override
+    public boolean isAction () { return true; }
+
+    @Override
+    public boolean equals (Object obj) {
+        Command cmd = (Command) obj;
+        return cmd.getName().equals("fd") || cmd.getName().equals("move");
     }
 
 

@@ -10,7 +10,8 @@ public class CommandPenUp extends Command {
     }
 
     @Override
-    public void execute (Creature current, int val) {
+    public boolean execute (Creature current) {
         current.setPenActivity(false);
+        return false;
     }
 }

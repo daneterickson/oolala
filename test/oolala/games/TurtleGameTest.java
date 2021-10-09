@@ -17,7 +17,7 @@ public class TurtleGameTest {
     @Test
     void stepCommandParsing () {
         myGame.step("fd 50");
-        assertEquals(50, myGame.getCreaturesMap().get(1).getNewX());
+        assertEquals(-50, myGame.getCreaturesMap().get(1).getNewY());
         myGame.step("pd");
         assertTrue(myGame.getCreaturesMap().get(1).getPenActivity());
     }

@@ -10,5 +10,8 @@ public class CommandBackward extends Command {
     }
 
     @Override
-    public void execute (Creature current, int val) { current.move(-val); }
+    public boolean execute (Creature current, int val) {
+        current.move(-val);
+        return false;
+    }
 }
