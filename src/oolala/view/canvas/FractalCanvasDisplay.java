@@ -19,10 +19,10 @@ public class FractalCanvasDisplay extends CanvasDisplay {
   private FractalGame myFractalGame;
   private ScreenDisplayComponents myDisplayComponents;
 
-  public FractalCanvasDisplay(FractalView gameView, FractalGame game, ScreenDisplayComponents components) {
+  public FractalCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
-    myFractalView = gameView;
-    myFractalGame = game;
+    myFractalView = (FractalView) gameView;
+    myFractalGame = (FractalGame) game;
     myDisplayComponents = components;
   }
 

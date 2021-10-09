@@ -32,13 +32,6 @@ public class ScreenDisplay {
     private ScreenDisplayComponents myDisplayComponents;
     private CanvasDisplay myCanvasDisplay;
 
-    private TurtleView myTurtleView;
-    private FractalView myFractalView;
-    private DarwinView myDarwinView;
-    private TurtleGame myTurtleGame;
-    private FractalGame myFractalGame;
-    private DarwinGame myDarwinGame;
-
     public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.view.resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
 
@@ -46,26 +39,10 @@ public class ScreenDisplay {
         myGameView = gameView;
         myGame = game;
         myDisplayComponents = new ScreenDisplayComponents(language);
-        if (gameView instanceof TurtleView) {
-            myTurtleView = (TurtleView) gameView;
-            myTurtleGame = (TurtleGame) game;
-            myCanvasDisplay = new TurtleCanvasDisplay(myTurtleView, myTurtleGame, myDisplayComponents);
-        }
-        else if (gameView instanceof FractalView) {
-            myFractalView = (FractalView) gameView;
-            myFractalGame = (FractalGame) game;
-            myCanvasDisplay = new FractalCanvasDisplay(myFractalView, myFractalGame, myDisplayComponents);
-        }
-        else {
-            myDarwinView = (DarwinView) gameView;
-            myDarwinGame = (DarwinGame) game;
-            myCanvasDisplay = new DarwinCanvasDisplay(myDarwinView, myDarwinGame, myDisplayComponents);
-        }
-
+        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myStartX = startX;
         myStartY = startY;
-//        myCanvasDisplay = new FractalCanvasDisplay(myFractalView, myFractalGame, myDisplayComponents);
     }
 
     public Scene setupDisplay (Paint background) {
@@ -82,9 +59,9 @@ public class ScreenDisplay {
         HBox panel = new HBox();
         panel.setId("GameModePanel");
 
-        Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(new TurtleCanvasDisplay(myTurtleView, myTurtleGame, myDisplayComponents)));
-        Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(new FractalCanvasDisplay(myFractalView, myFractalGame, myDisplayComponents)));
-        Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(new DarwinCanvasDisplay(myDarwinView,myDarwinGame, myDisplayComponents)));
+        Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents)));
+        Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents)));
+        Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents)));
 
         panel.getChildren().addAll(turtleMode, fractalMode, darwinMode);
 
@@ -108,7 +85,7 @@ public class ScreenDisplay {
         for (String command : splitCommand) {
             myGame.step(command);
             if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
-                myTurtleView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
+                myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
             }
             myGameView.updateCanvas();
             myCanvasDisplay.updateTurtleStatePanel();

@@ -24,9 +24,9 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
   private Label turtleStateY;
   private Slider lineWidthSlider;
 
-  public TurtleCanvasDisplay(TurtleView gameView, Game game, ScreenDisplayComponents components) {
+  public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
-    myTurtleView = gameView;
+    myTurtleView = (TurtleView) gameView;
     myDisplayComponents = components;
   }
 
