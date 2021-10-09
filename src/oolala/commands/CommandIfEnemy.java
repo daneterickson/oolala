@@ -6,7 +6,7 @@ import oolala.games.Game;
 public class CommandIfEnemy extends Command {
     public CommandIfEnemy () {
         setName("ifenemy");
-        setNumArgs(3);
+        setNumArgs(2);
     }
 
     public boolean execute (Creature current, Game game) {

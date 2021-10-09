@@ -9,7 +9,6 @@ public class DarwinGame extends Game {
 
     private List<Integer> myShuffledIndices;
 
-
     // myCreaturesMap = <CreatureIndex, Creature>
     // myInstructionsMap = <InstructionIndex, correspondingCommand>
     private Map<Integer, Command> myInstructionsMap;
@@ -18,16 +17,26 @@ public class DarwinGame extends Game {
     // myCommandArgs = <InstructionIndex, correspondingArgs> (If no args -> -1)
     private Map<Integer, Integer> myCommandArgs;
 
+    private int myMaxX, myMaxY, myRadius;
+
     public DarwinGame() {
         myInstructionsMap = new HashMap<>();
         myIndexMap = new HashMap<>();
         myCommandArgs = new HashMap<>();
     }
 
-    public void initialize () {
+    public void initialize (int maxX, int maxY, int radius) {
+        myMaxX = maxX;
+        myMaxY = maxY;
+        myRadius = radius;
         // put(CreatureIndex, 1) in myIndexMap when initialize every creature
         // initialize creature's type
+        // maybe also put every Creature into myActiveIndicesMap
     }
+
+    public double getRadius () { return myRadius; }
+    public double getMaxX () { return myMaxX; }
+    public double getMaxY () { return myMaxY; }
 
     @Override
     public void step (String command) {
@@ -49,8 +58,8 @@ public class DarwinGame extends Game {
             int arg = myCommandArgs.get(currentInstruction);
             if (result.isAction()) {
                 switch (result.getNumArgs()) {
-                    case 2 -> result.execute(currentCreature, arg); //fd,rt,lt
-                    case 3 -> result.execute(currentCreature, this); //infect,other non-action commands except go, ifrandom
+                    case 3 -> result.execute(currentCreature, arg, this); //fd,rt,lt
+                    case 2 -> result.execute(currentCreature, this); //infect,other non-action commands except go, ifrandom
                 }
                 myIndexMap.put(index, myIndexMap.get(index)+1);
                 return;
@@ -59,7 +68,7 @@ public class DarwinGame extends Game {
                 boolean ifContinue = false;
                 switch (result.getNumArgs()) {
                     case 0 -> ifContinue = result.execute();//go,ifrandom
-                    case 3 -> ifContinue = result.execute(currentCreature, this);
+                    case 2 -> ifContinue = result.execute(currentCreature, this);
                 }
                 if (ifContinue) currentInstruction = arg;
                 else currentInstruction++;

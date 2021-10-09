@@ -3,20 +3,19 @@ package oolala.commands;
 import oolala.creatures.Creature;
 import oolala.games.Game;
 
-public class CommandInfect extends Command {
-    public CommandInfect () {
-        setName("infect");
+public class CommandIfEmpty extends Command {
+
+    public CommandIfEmpty () {
+        setName("ifempty");
         setNumArgs(2);
     }
 
     @Override
     public boolean execute (Creature current, Game game) {
         for (Creature c: game.getCreaturesMap().values()) {
-            current.infect(c, game);
+            if (current.isNearbyAhead(c, game)) return false;
         }
-        return false;
+        return true;
     }
 
-    @Override
-    public boolean isAction () { return true; }
 }

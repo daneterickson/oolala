@@ -1,5 +1,6 @@
 package oolala.creatures;
 
+import oolala.games.DarwinGame;
 import oolala.games.Game;
 
 public class Creature {
@@ -67,19 +68,49 @@ public class Creature {
         myOldPoxY = myNewPosY;
     }
 
-    public void move (int distance) {
+    public void move (int distance, Game game) {
+        double newX = myOldPosX + distance * Math.sin(Math.toRadians(myAngle));
+        double newY = myOldPoxY - distance * Math.cos(Math.toRadians(myAngle));
+        if (game instanceof DarwinGame) {
+            DarwinGame DGame = (DarwinGame) game;
+            if (newX < 0 || newX > DGame.getMaxX()
+                    || newY < 0 || newY > DGame.getMaxY()){
+                return;
+            }
+            else {
+                for (Creature c: game.getCreaturesMap().values()) {
+                    if (newX == c.getNewX() && newY == c.getNewY()) {
+                        return;
+                    }
+                }
+            }
+        }
         updateOldPos();
-        myNewPosX = myOldPosX + distance * Math.sin(Math.toRadians(myAngle));
-        myNewPosY = myOldPoxY - distance * Math.cos(Math.toRadians(myAngle));
+        myNewPosX = newX;
+        myNewPosY = newY;
     }
 
     public void changeOrientation (int angle) {
         myAngle += angle;
     }
 
-    public void infect (Creature c, int distance) {
-        if (Math.pow(c.getNewX() - myNewPosX, 2) + Math.pow(c.getNewY() - myNewPosY, 2)
-                < Math.pow(distance, 2)) {
+    public boolean isNearbyAhead (Creature c, Game game) {
+        if (game instanceof DarwinGame) {
+            DarwinGame DGame = (DarwinGame) game;
+            if (Math.pow(c.getNewX() - myNewPosX, 2) + Math.pow(c.getNewY() - myNewPosY, 2)
+                    < Math.pow(DGame.getRadius(), 2)) {
+                double directX = Math.sin(Math.toRadians(myAngle));
+                double directY = -Math.cos(Math.toRadians(myAngle));
+                double creatureX = c.getNewX() - myNewPosX;
+                double creatureY = c.getNewY() - myNewPosY;
+                return (directX * creatureX + directY * creatureY > 0);
+            }
+        }
+        return false;
+    }
+
+    public void infect (Creature c, Game game) {
+        if (isNearbyAhead(c, game)) {
             c.setStatusInfection(true);
             c.setType(myType);
         }

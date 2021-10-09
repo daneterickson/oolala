@@ -6,7 +6,7 @@ import oolala.games.Game;
 public class CommandReset extends Command {
     public CommandReset () {
         setName("home");
-        setNumArgs(3);
+        setNumArgs(2);
     }
 
     @Override

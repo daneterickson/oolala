@@ -33,6 +33,9 @@ public class Command {
         myCommandsList.add(new CommandIfEnemy());
         myCommandsList.add(new CommandInfect());
         myCommandsList.add(new CommandIfRandom());
+        myCommandsList.add(new CommandIfEmpty());
+        myCommandsList.add(new CommandIfSame());
+        myCommandsList.add(new CommandIfWall());
     }
 
     public String getName () { return myName; }
@@ -52,7 +55,7 @@ public class Command {
 
     public boolean execute () { return false; }
     public boolean execute (Creature current) { return false; }
-    public boolean execute (Creature current, int val) { return false; }
+    public boolean execute (Creature current, int val, Game game) { return false; }
     public boolean execute (Creature current, Game game) { return false; }
 
     public boolean isAction () { return false; }
