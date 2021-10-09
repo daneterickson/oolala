@@ -54,8 +54,8 @@ public abstract class Game {
 
             try {
                 switch (result.getNumArgs()) {
-                    case 2 -> ret.append(String.format("%s %s \n", temp, commandIterator.next()));
-                    case 1 -> ret.append(String.format("%s \n", temp));
+                    case 3 -> ret.append(String.format("%s %s \n", temp, commandIterator.next()));
+                    case 1, 2 -> ret.append(String.format("%s \n", temp));//
                     case -1 -> {
                         ret.append(String.format("%s ", temp));
                         while (commandIterator.hasNext()) {
@@ -88,8 +88,8 @@ public abstract class Game {
         Command result = input.recognize();
         switch (result.getNumArgs()) {
             case 1 -> result.execute(current); //ht,st,pd,pu,stamp
-            case 2 -> result.execute(current, Integer.valueOf(commands[1])); //bk,fk,lt,rt
-            case 3 -> result.execute(current, this); // for reset()
+            case 2 -> result.execute(current, this); // for reset()
+            case 3 -> result.execute(current, Integer.valueOf(commands[1]), this); //bk,fk,lt,rt
             case 0 -> result.execute(); // go
 //            case -1 -> //tell, indefinite number of arguments
         }

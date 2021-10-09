@@ -1,16 +1,17 @@
 package oolala.commands;
 
 import oolala.creatures.Creature;
+import oolala.games.Game;
 
 public class CommandLeftTurn extends Command {
 
     public CommandLeftTurn () {
         setName("lt");
-        setNumArgs(2);
+        setNumArgs(3);
     }
 
     @Override
-    public boolean execute (Creature current, int val) {
+    public boolean execute (Creature current, int val, Game game) {
         current.changeOrientation(-val);
         return false;
     }

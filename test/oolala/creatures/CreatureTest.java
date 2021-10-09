@@ -19,10 +19,10 @@ public class CreatureTest {
 
     @Test
     void moveTwice() {
-        myCreature.move(3);
-        myCreature.move(-2);
-        assertEquals(1, myCreature.getNewX());
-        assertEquals(0, myCreature.getNewY());
+        myCreature.move(3, null);
+        myCreature.move(-2, null);
+        assertEquals(0, myCreature.getNewX());
+        assertEquals(-1, myCreature.getNewY());
     }
 
     @Test
@@ -36,9 +36,9 @@ public class CreatureTest {
     @Test
     void rotateThenMove() {
         myCreature.changeOrientation(30);
-        myCreature.move(20);
-        assertTrue(Math.abs(myCreature.getNewX() - 10*Math.sqrt(3)) < THRESHOLD);
-        assertTrue(Math.abs(myCreature.getNewY() - 10) < THRESHOLD);
+        myCreature.move(20, null);
+        assertTrue(Math.abs(myCreature.getNewY() + 10*Math.sqrt(3)) < THRESHOLD);
+        assertTrue(Math.abs(myCreature.getNewX() - 10) < THRESHOLD);
     }
 
 
