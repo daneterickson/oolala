@@ -1,5 +1,7 @@
 package oolala.view;
 
+import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
 import oolala.creatures.Creature;
 import oolala.games.TurtleGame;
 import javafx.scene.control.Button;

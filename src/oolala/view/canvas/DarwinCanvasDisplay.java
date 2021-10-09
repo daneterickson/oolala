@@ -7,17 +7,18 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import oolala.games.Game;
+import oolala.view.game.DarwinView;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
 
 public class DarwinCanvasDisplay extends CanvasDisplay{
 
-  private GameView myDarwinView;
+  private DarwinView myDarwinView;
   private ScreenDisplayComponents myDisplayComponents;
 
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
-    myDarwinView = gameView;
+    myDarwinView = (DarwinView) gameView;
     myDisplayComponents = components;
   }
 

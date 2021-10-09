@@ -74,10 +74,12 @@ public class FractalView extends GameView {
   public void setTurtleImage(String creature) {
 
   }
+  @Override
   public double getX() {
     return 1.0;
   }
 
+  @Override
   public double getY() {
     return 1.0;
   }

@@ -5,18 +5,26 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import oolala.games.FractalGame;
 import oolala.games.Game;
+import oolala.view.game.FractalView;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
 
 public class FractalCanvasDisplay extends CanvasDisplay {
 
-  private GameView myFractalView;
+  private int myNumLevels = 3;
+  private int myLength = 10;
+  private int myAngle = 45;
+
+  private FractalView myFractalView;
+  private FractalGame myFractalGame;
   private ScreenDisplayComponents myDisplayComponents;
 
   public FractalCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
-    myFractalView = gameView;
+    myFractalView = (FractalView) gameView;
+    myFractalGame = (FractalGame) game;
     myDisplayComponents = components;
   }
 
@@ -39,7 +47,8 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
     Rectangle canvas = myDisplayComponents.makeCanvas();
-//    pane.getChildren().addAll(canvas, myFractalView.getMyTurtlePane());
+    myFractalGame.initialize(myNumLevels, myLength, myAngle, 650, 300, 2);
+    pane.getChildren().addAll(canvas, myFractalView.getMyCreaturePane());
     return pane;
   }
 

@@ -1,7 +1,9 @@
 package oolala;
 
+import oolala.games.FractalGame;
 import oolala.games.TurtleGame;
 import oolala.view.ScreenDisplay;
+import oolala.view.game.FractalView;
 import oolala.view.game.TurtleView;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
@@ -19,9 +21,11 @@ public class Main extends Application {
      */
     @Override
     public void start (Stage stage) {
-        TurtleGame turtle = new TurtleGame(ORIGIN_X, ORIGIN_Y);
-        TurtleView game = new TurtleView(turtle, ORIGIN_X, ORIGIN_Y);
-        ScreenDisplay display = new ScreenDisplay(game, turtle, "English", ORIGIN_X, ORIGIN_Y);
+        TurtleGame turtleGame = new TurtleGame(ORIGIN_X, ORIGIN_Y);
+        TurtleView turtleView = new TurtleView(turtleGame, ORIGIN_X, ORIGIN_Y);
+        FractalGame fractalGame = new FractalGame();
+        FractalView fractalView = new FractalView(fractalGame);
+        ScreenDisplay display = new ScreenDisplay(turtleView, turtleGame, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
