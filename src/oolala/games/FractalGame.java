@@ -26,13 +26,13 @@ public class FractalGame extends Game {
         myRulesMap = new HashMap<>();
     }
 
-    public void initialize (int numLevels, double length, int angle,
+    public void initialize (int numLevels, int length, int angle,
                             int startX, int startY, int levelSpan) {
         myLevels = numLevels;
         myLength = length;
         myRotation = angle;
         for (int i = 0; i < numLevels; i++) {
-            getCreaturesMap().put(i, new Creature(startX,startY + i * levelSpan));
+            getCreaturesMap().put(i + 1, new Creature(startX,startY + i * levelSpan));
         }
     }
     
@@ -47,7 +47,7 @@ public class FractalGame extends Game {
             getCreaturesMap().get(index);
         }
         else {
-            Creature current = getCreaturesMap().get(0);
+            Creature current = getCreaturesMap().get(getActiveIndices().get(0));
             executeCommand(command, current);
         }
     }
@@ -80,7 +80,9 @@ public class FractalGame extends Game {
             String newSymbols = currentSymbols;
             for (int j = 0; j < currentSymbols.length(); j++ ) {
                 String symbol = String.valueOf(currentSymbols.charAt(j));
-                newSymbols = newSymbols.substring(0, j) + myRulesMap.get(symbol) + newSymbols.substring(j+1);
+                if (myRulesMap.containsKey(symbol)) {
+                    newSymbols = newSymbols.substring(0, j) + myRulesMap.get(symbol) + newSymbols.substring(j+1);
+                }
 
                 String command = myCommandsMap.get(symbol);
                 command = command.replace("ANGLE", String.valueOf(myRotation))

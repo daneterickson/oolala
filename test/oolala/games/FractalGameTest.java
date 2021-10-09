@@ -8,14 +8,16 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class FractalGameTest {
 
-    private FractalGame myGameOne, myGameTwo;
+    private FractalGame myGameOne, myGameTwo, myGameThree;
 
     @BeforeEach
     public void setUp () {
         myGameOne = new FractalGame();
         myGameTwo = new FractalGame();
+        myGameThree = new FractalGame();
         myGameOne.initialize(1, 30, 30, 0, 0, 20);
         myGameTwo.initialize(2, 30, 30, 0, 0, 20);
+        myGameThree.initialize(3, 30, 30, 0, 0, 20);
     }
 
     @Test
@@ -32,6 +34,16 @@ public class FractalGameTest {
                 "rule F F-F++F-F";
         String expectedTwo = "tell 1\npd\nfd 30.0\ntell 2\npd\nfd 15.0\nlt 30\npd\nfd 15.0\nrt 30\nrt 30\npd\nfd 15.0\nlt 30\npd\nfd 15.0\n";
         assertTrue(myGameTwo.compile(paragraph).equals(expectedTwo));
+    }
+
+    @Test
+    void testCompileThreeLevels () {
+        String paragraph = "start F\n" +
+                "rule F F++F";
+        String expectedThree = "tell 1\npd\nfd 30.0\n" +
+                "tell 2\npd\nfd 15.0\nrt 30\nrt 30\npd\nfd 15.0\n" +
+                "tell 3\npd\nfd 10.0\nrt 30\nrt 30\npd\nfd 10.0\nrt 30\nrt 30\npd\nfd 10.0\nrt 30\nrt 30\npd\nfd 10.0\n";
+        assertTrue(myGameThree.compile(paragraph).equals(expectedThree));
     }
 
 

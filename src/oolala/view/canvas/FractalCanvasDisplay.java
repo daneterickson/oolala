@@ -14,8 +14,8 @@ import oolala.view.ScreenDisplayComponents;
 public class FractalCanvasDisplay extends CanvasDisplay {
 
   private int myNumLevels = 3;
-  private int myLength = 10;
-  private int myAngle = 45;
+  private int myLength = 60;
+  private int myAngle = 30;
 
   private FractalView myFractalView;
   private FractalGame myFractalGame;
@@ -47,7 +47,7 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
     Rectangle canvas = myDisplayComponents.makeCanvas();
-    myFractalGame.initialize(myNumLevels, myLength, myAngle, 650, 300, 2);
+    myFractalGame.initialize(myNumLevels, myLength, myAngle, 650, 300, 100); //GET RID OF IMAGINARY NUMBERS
     pane.getChildren().addAll(canvas, myFractalView.getMyCreaturePane());
     return pane;
   }

@@ -89,7 +89,7 @@ public abstract class Game {
         switch (result.getNumArgs()) {
             case 1 -> result.execute(current); //ht,st,pd,pu,stamp
             case 2 -> result.execute(current, this); // for reset()
-            case 3 -> result.execute(current, Integer.valueOf(commands[1]), this); //bk,fk,lt,rt
+            case 3 -> result.execute(current, Double.valueOf(commands[1]), this); //bk,fk,lt,rt
             case 0 -> result.execute(); // go
 //            case -1 -> //tell, indefinite number of arguments
         }
