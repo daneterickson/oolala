@@ -1,17 +1,28 @@
 package oolala.commands;
 
 import oolala.creatures.Creature;
+import oolala.games.Game;
 
 public class CommandForward extends Command {
 
     public CommandForward () {
         setName("fd");
-        setNumArgs(2);
+        setNumArgs(3);
     }
 
     @Override
-    public void execute (Creature current, int val) {
-        current.move(val);
+    public boolean execute (Creature current, int val, Game game) {
+        current.move(val, game);
+        return false;
+    }
+
+    @Override
+    public boolean isAction () { return true; }
+
+    @Override
+    public boolean equals (Object obj) {
+        Command cmd = (Command) obj;
+        return cmd.getName().equals("fd") || cmd.getName().equals("move");
     }
 
 

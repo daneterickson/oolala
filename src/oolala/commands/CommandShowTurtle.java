@@ -9,7 +9,8 @@ public class CommandShowTurtle extends Command {
     }
 
     @Override
-    public void execute (Creature current, int val) {
+    public boolean execute (Creature current) {
         current.setCreatureVisibility(true);
+        return false;
     }
 }

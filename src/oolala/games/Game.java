@@ -10,10 +10,20 @@ public abstract class Game {
     private Map<Integer, Creature> myCreaturesMap;
     private List<Integer> myActiveIndices;
 
+    private int myHomeX, myHomeY;
+
     public Game () {
         myCreaturesMap = new HashMap<>();
         myActiveIndices = new ArrayList<>();
     }
+
+    public void updateHome (int x, int y) {
+        myHomeX = x;
+        myHomeY = y;
+    }
+
+    public int getHomeX () { return myHomeX; }
+    public int getHomeY () { return myHomeY; }
 
     public Map<Integer, Creature> getCreaturesMap () { return myCreaturesMap; }
     public List<Integer> getActiveIndices () { return myActiveIndices; }
@@ -43,25 +53,24 @@ public abstract class Game {
             Command result = input.recognize();
 
             try {
-                if (result.getNumArgs() == 2) {
-                    ret.append(String.format("%s %s \n", temp, commandIterator.next()));
-                }
-                else if (result.getNumArgs() == 1) {
-                    ret.append(String.format("%s \n", temp));
-                }
-                else if (result.getNumArgs() == -1) {
-                    ret.append(String.format("%s ", temp));
-                    while (commandIterator.hasNext()) {
-                        temp = commandIterator.next();
-                        if (isNumeric(temp)) {
-                            ret.append(String.format("%s ", temp));
+                switch (result.getNumArgs()) {
+                    case 3 -> ret.append(String.format("%s %s \n", temp, commandIterator.next()));
+                    case 1, 2 -> ret.append(String.format("%s \n", temp));//
+                    case -1 -> {
+                        ret.append(String.format("%s ", temp));
+                        while (commandIterator.hasNext()) {
+                            temp = commandIterator.next();
+                            if (isNumeric(temp)) {
+                                ret.append(String.format("%s ", temp));
+                            }
+                            else {
+                                commandIterator.previous();
+                                break;
+                            }
                         }
-                        else {
-                            commandIterator.previous();
-                            break;
-                        }
+                        ret.append("\n");
+                        break;
                     }
-                    ret.append("\n");
                 }
             }
             catch (Exception e) {
@@ -77,9 +86,13 @@ public abstract class Game {
         current.setStatusStamp(false);
         Command input = new Command(commands[0]);
         Command result = input.recognize();
-        if (result == null ) return;
-        if (result.getNumArgs() == 2) result.execute(current, Integer.valueOf(commands[1]));
-        else result.execute(current, 0);
+        switch (result.getNumArgs()) {
+            case 1 -> result.execute(current); //ht,st,pd,pu,stamp
+            case 2 -> result.execute(current, this); // for reset()
+            case 3 -> result.execute(current, Integer.valueOf(commands[1]), this); //bk,fk,lt,rt
+            case 0 -> result.execute(); // go
+//            case -1 -> //tell, indefinite number of arguments
+        }
     }
 
     private static boolean isNumeric (String string) {

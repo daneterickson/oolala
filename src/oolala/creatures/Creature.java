@@ -1,19 +1,22 @@
 package oolala.creatures;
 
+import oolala.games.DarwinGame;
+import oolala.games.Game;
+
 public class Creature {
 
     private boolean isPenActive, isCreatureVisible, isStamp;
     private double myOldPosX, myOldPoxY, myNewPosX, myNewPosY;
     private int myAngle;
-    private double myHomeX, myHomeY;
+    private String myType;
+    private boolean isInfected;
 
 
     public Creature (int x, int y) {
-        myHomeX = x;
-        myHomeY = y;
         isPenActive = true;
         isStamp = false;
         isCreatureVisible = true;
+        isInfected = false;
         setInitialPosition(x, y,0);
     }
 
@@ -24,6 +27,12 @@ public class Creature {
         myNewPosY = y;
         myAngle = angle;
     }
+
+    public void setType (String type) { myType = type; }
+    public String getType () { return myType; }
+
+    public void setStatusInfection (boolean status) { isInfected = status; }
+    public boolean getStatusInfection () { return isInfected; }
 
     public boolean getPenActivity () { return isPenActive; }
     public void setPenActivity (boolean status) {
@@ -47,10 +56,10 @@ public class Creature {
     public double getNewY () { return myNewPosY; }
     public int getAngle () { return myAngle; }
 
-    public void reset () {
+    public void reset (Game game) {
         updateOldPos();
-        myNewPosX = myHomeX;
-        myNewPosY = myHomeY;
+        myNewPosX = game.getHomeX();
+        myNewPosY = game.getHomeY();
         myAngle = 0;
     }
 
@@ -59,14 +68,52 @@ public class Creature {
         myOldPoxY = myNewPosY;
     }
 
-    public void move (int distance) {
+    public void move (int distance, Game game) {
+        double newX = myOldPosX + distance * Math.sin(Math.toRadians(myAngle));
+        double newY = myOldPoxY - distance * Math.cos(Math.toRadians(myAngle));
+        if (game instanceof DarwinGame) {
+            DarwinGame DGame = (DarwinGame) game;
+            if (newX < 0 || newX > DGame.getMaxX()
+                    || newY < 0 || newY > DGame.getMaxY()){
+                return;
+            }
+            else {
+                for (Creature c: game.getCreaturesMap().values()) {
+                    if (newX == c.getNewX() && newY == c.getNewY()) {
+                        return;
+                    }
+                }
+            }
+        }
         updateOldPos();
-        myNewPosX = myOldPosX + distance * Math.sin(Math.toRadians(myAngle));
-        myNewPosY = myOldPoxY - distance * Math.cos(Math.toRadians(myAngle));
+        myNewPosX = newX;
+        myNewPosY = newY;
     }
 
     public void changeOrientation (int angle) {
         myAngle += angle;
+    }
+
+    public boolean isNearbyAhead (Creature c, Game game) {
+        if (game instanceof DarwinGame) {
+            DarwinGame DGame = (DarwinGame) game;
+            if (Math.pow(c.getNewX() - myNewPosX, 2) + Math.pow(c.getNewY() - myNewPosY, 2)
+                    < Math.pow(DGame.getRadius(), 2)) {
+                double directX = Math.sin(Math.toRadians(myAngle));
+                double directY = -Math.cos(Math.toRadians(myAngle));
+                double creatureX = c.getNewX() - myNewPosX;
+                double creatureY = c.getNewY() - myNewPosY;
+                return (directX * creatureX + directY * creatureY > 0);
+            }
+        }
+        return false;
+    }
+
+    public void infect (Creature c, Game game) {
+        if (isNearbyAhead(c, game)) {
+            c.setStatusInfection(true);
+            c.setType(myType);
+        }
     }
 
 }

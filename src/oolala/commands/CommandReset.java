@@ -1,16 +1,18 @@
 package oolala.commands;
 
 import oolala.creatures.Creature;
+import oolala.games.Game;
 
 public class CommandReset extends Command {
     public CommandReset () {
         setName("home");
-        setNumArgs(1);
+        setNumArgs(2);
     }
 
     @Override
-    public void execute (Creature current, int val) {
-        current.reset();
+    public boolean execute (Creature current, Game game) {
+        current.reset(game);
+        return false;
     }
 
 }

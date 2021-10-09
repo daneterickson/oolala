@@ -77,8 +77,8 @@ public class TurtleViewTest extends DukeApplicationTest {
     double expectedX = originX;
     double expectedY = originY - distance;
 
-    creature.reset(); // reset location and angle to original values
-    creature.move(distance); // moves 10 forward
+    creature.reset(myTurtleGame); // reset location and angle to original values
+    creature.move(distance, null); // moves 10 forward
     turtle.updateCanvas();
     assertEquals(expectedX, turtleImage.getX());
     assertEquals(expectedY, turtleImage.getY());
