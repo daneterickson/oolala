@@ -6,15 +6,14 @@ import oolala.creatures.Creature;
 public class TurtleGame extends Game {
 
 
-    private final int myHomeX, myHomeY;
-
-    public TurtleGame (int originX, int originY) {
+    public TurtleGame (int defaultX, int defaultY) {
         super();
-        myHomeX = originX;
-        myHomeY = originY;
-        getCreaturesMap().put(1, new Creature(myHomeX, myHomeY));
+        updateHome(defaultX, defaultY);
+        getCreaturesMap().put(1, new Creature(getHomeX(), getHomeY()));
         getActiveIndices().add(1);
     }
+
+
 
     @Override
     public void step (String command) {
@@ -25,7 +24,9 @@ public class TurtleGame extends Game {
             for (int i = 1; i < commands.length; i++) {
                 int index = Integer.valueOf(commands[i]);
                 getActiveIndices().add(index);
-                if (!getCreaturesMap().containsKey(index)) getCreaturesMap().put(index, new Creature(myHomeX, myHomeY));
+                if (!getCreaturesMap().containsKey(index)) {
+                    getCreaturesMap().put(index, new Creature(getHomeX(), getHomeY()));
+                }
             }
         }
         else {

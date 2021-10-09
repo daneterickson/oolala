@@ -7,5 +7,4 @@ public class CommandTell extends Command {
         setNumArgs(-1);//variable length
     }
 
-
 }
