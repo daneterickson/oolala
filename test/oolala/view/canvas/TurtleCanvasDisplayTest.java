@@ -28,14 +28,11 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
     private TurtleGame turtleGame;
     private TurtleView turtleView;
     private ScreenDisplay display;
-    private TurtleCanvasDisplay myCanvas;
 
     @Override
     public void start (Stage stage) {
         turtleGame = new TurtleGame(ORIGIN_X, ORIGIN_Y);
         turtleView = new TurtleView(turtleGame, ORIGIN_X, ORIGIN_Y);
-        ScreenDisplayComponents components = new ScreenDisplayComponents("English");
-        myCanvas = new TurtleCanvasDisplay(turtleView, turtleGame, components);
         display = new ScreenDisplay(turtleView, turtleGame, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
@@ -94,7 +91,21 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         clickOn(myRunButton);
         assertEquals("cat.png", turtleView.getTurtleImage());
     }
-    
+
+    @Test
+    void testCurrentCreaturePosition () {
+        String command = "fd 100\nrt 90\nfd 100";
+        clickOn(myTextField);
+        writeInputTo(myTextField, command);
+        clickOn(myRunButton);
+        double x = ORIGIN_X + 100;
+        double y = ORIGIN_Y - 100;
+        TurtleCanvasDisplay turtleCanvas = (TurtleCanvasDisplay)display.getMyCanvasDisplay();
+        assertEquals("TurtleStateX: " + x, turtleCanvas.getTurtleStateXLabel().getText());
+        assertEquals("TurtleStateY: " + y, turtleCanvas.getTurtleStateYLabel().getText());
+    }
+
+
 
 
 

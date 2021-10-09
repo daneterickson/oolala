@@ -128,4 +128,13 @@ public class ScreenDisplay {
         myCanvasDisplay = canvas;
     }
 
+    /**
+     * Getter method to get myCanvasDisplay for testing
+     *
+     * @return myCanvasDisplay is the CanvasDisplay object
+     */
+    public CanvasDisplay getMyCanvasDisplay () {
+        return myCanvasDisplay;
+    }
+
 }

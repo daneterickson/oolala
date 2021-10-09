@@ -123,6 +123,23 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
     turtleStateX.setText("TurtleStateX: " + myTurtleView.getX());
     turtleStateY.setText("TurtleStateY: " + myTurtleView.getY());
   }
+  /**
+   * Getter method to get the string from the current turtle X position
+   *
+   * @return turtleStateX.getText() is the string of current position X
+   */
+  public Label getTurtleStateXLabel () {
+    return turtleStateX;
+  }
+
+  /**
+   * Getter method to get the string from the current turtle Y position
+   *
+   * @return turtleStateX.getText() is the string of current position Y
+   */
+  public Label getTurtleStateYLabel () {
+    return turtleStateY;
+  }
 
 
   private void temporary () {
