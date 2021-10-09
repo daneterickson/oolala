@@ -11,7 +11,7 @@ public class CommandRightTurn extends Command {
     }
 
     @Override
-    public boolean execute (Creature current, int val, Game game) {
+    public boolean execute (Creature current, double val, Game game) {
         current.changeOrientation(val);
         return false;
     }
