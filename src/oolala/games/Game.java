@@ -87,8 +87,8 @@ public abstract class Game {
         Command input = new Command(commands[0]);
         Command result = input.recognize();
         switch (result.getNumArgs()) {
-            case 2 -> result.execute(current, Integer.valueOf(commands[1])); //bk,fk,lt,rt
             case 1 -> result.execute(current); //ht,st,pd,pu,stamp
+            case 2 -> result.execute(current, Integer.valueOf(commands[1])); //bk,fk,lt,rt
             case 3 -> result.execute(current, this); // for reset()
             case 0 -> result.execute(); // go
 //            case -1 -> //tell, indefinite number of arguments

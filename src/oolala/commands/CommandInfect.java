@@ -1,20 +1,22 @@
 package oolala.commands;
 
 import oolala.creatures.Creature;
-
-import java.util.Collection;
+import oolala.games.Game;
 
 public class CommandInfect extends Command {
     public CommandInfect () {
         setName("infect");
-        setNumArgs(4);
+        setNumArgs(3);
     }
 
     @Override
-    public boolean execute (Creature current, Collection<Creature> creaturesList) {
-        for (Creature c: creaturesList) {
+    public boolean execute (Creature current, Game game) {
+        for (Creature c: game.getCreaturesMap().values()) {
             current.infect(c, 10);//need to change this
         }
         return false;
     }
+
+    @Override
+    public boolean isAction () { return true; }
 }

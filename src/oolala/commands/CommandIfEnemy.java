@@ -1,19 +1,16 @@
 package oolala.commands;
 
 import oolala.creatures.Creature;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import oolala.games.Game;
 
 public class CommandIfEnemy extends Command {
     public CommandIfEnemy () {
         setName("ifenemy");
-        setNumArgs(4);
+        setNumArgs(3);
     }
 
-    public boolean execute (Creature current, Collection<Creature> creaturesList) {
-        for (Creature c: creaturesList) {
+    public boolean execute (Creature current, Game game) {
+        for (Creature c: game.getCreaturesMap().values()) {
             if (!current.getType().equals(c.getType())) return true;
         }
         return false;
