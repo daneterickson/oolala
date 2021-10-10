@@ -117,8 +117,12 @@ public class ScreenDisplay {
 
     // currently broken
     private void clearCanvas () {
-        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents);
-        myCanvasDisplay.makeCanvas();
+        StackPane pane = (StackPane)myRoot.lookup("#CanvasComponentPane");
+        pane.getChildren().remove(myGameView.getMyCreaturePane());
+        // I need a method that will create a new creature
+        //pane.getChildren().add(myGameView.getMyCreaturePane());
+        //myCanvasDisplay.makeCanvas();
+
     }
 
     protected void setCanvas (CanvasDisplay canvas) {
