@@ -1,5 +1,7 @@
 package oolala.view.canvas;
 
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextInputControl;
@@ -12,9 +14,11 @@ import oolala.view.ScreenDisplay;
 import oolala.view.ScreenDisplayComponents;
 import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
+import org.testfx.matcher.base.NodeMatchers;
 import util.DukeApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.testfx.api.FxAssert.verifyThat;
 
 public class TurtleCanvasDisplayTest extends DukeApplicationTest {
     private static final String TITLE = "OOLALA";
@@ -104,6 +108,17 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         assertEquals("TurtleStateX: " + x, turtleCanvas.getTurtleStateXLabel().getText());
         assertEquals("TurtleStateY: " + y, turtleCanvas.getTurtleStateYLabel().getText());
     }
+
+    @Test
+    void testInvalidCommand() {
+        String command = "fd 210\nff\nfd 300";
+        clickOn(myTextField);
+        writeInputTo(myTextField, command);
+        clickOn(myRunButton);
+        verifyThat("OK", NodeMatchers.isVisible());
+    }
+
+
 
 
 

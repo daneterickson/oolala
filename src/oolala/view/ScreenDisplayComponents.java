@@ -96,4 +96,12 @@ public class ScreenDisplayComponents {
         return node;
     }
 
+    public Alert createErrorMessage(String id, String content, Alert.AlertType alertType) {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText(myResources.getString(id));
+        error.setContentText(myResources.getString(content));
+        error.showAndWait();
+        return error;
+    }
+
 }

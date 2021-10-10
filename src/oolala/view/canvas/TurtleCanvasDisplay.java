@@ -88,7 +88,6 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
     Node homeLocationLabel = myDisplayComponents.makeLabel("HomeLocationLabel");
     Node homeLocationX = myDisplayComponents.makeTextBoxWithLabel("HomeLocationX", "LocationX");
     Node homeLocationY = myDisplayComponents.makeTextBoxWithLabel("HomeLocationY", "LocationY");
-    // set the button to grab stuff
     Node setHomeLocation = myDisplayComponents.makeButton("SetHomeLocation", e -> updateHomeLocation((TextField)panel.lookup("#LocationX"), (TextField)panel.lookup("#LocationY")));
     panel.getChildren().addAll(homeLocationLabel, homeLocationX, homeLocationY, setHomeLocation);
     return panel;

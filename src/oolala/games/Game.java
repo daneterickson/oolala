@@ -74,6 +74,7 @@ public abstract class Game {
                 }
             }
             catch (Exception e) {
+                ret.append("\nerror");
                 System.out.println("Error: Not a valid command");
                 break;
             }

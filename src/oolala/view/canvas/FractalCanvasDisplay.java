@@ -1,5 +1,5 @@
 package oolala.view.canvas;
-// Can't check styling yet
+
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -14,9 +14,7 @@ import oolala.view.ScreenDisplayComponents;
 
 public class FractalCanvasDisplay extends CanvasDisplay {
 
-  private int myNumLevels = 3;
-  private int myLength = 60;
-  private int myAngle = 30;
+  private static final int MY_LEVEL_SPAN = 100;
 
   private FractalView myFractalView;
   private FractalGame myFractalGame;
@@ -105,7 +103,7 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     int angleNum = Integer.parseInt(angle.getText());
     int xNum = Integer.parseInt(startX.getText());
     int yNum = Integer.parseInt(startY.getText());
-    myFractalGame.initialize(levelNum, lengthNum, angleNum, xNum, yNum, 100);
+    myFractalGame.initialize(levelNum, lengthNum, angleNum, xNum, yNum, MY_LEVEL_SPAN);
 
   }
 
