@@ -80,7 +80,6 @@ public class Creature {
             else {
                 for (Creature c: game.getCreaturesMap().values()) {
                     if ((!c.equals(this)) && newX == c.getNewX() && newY == c.getNewY()) {
-
                         return;
                     }
                 }
