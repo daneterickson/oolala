@@ -130,7 +130,29 @@
     -fx-padding: 10 90px;
 }
 
+#RadiusPanel {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+}
 
+#DarwinImagePanel {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+}
+
+#DarwinImagePanelButtons {
+    -fx-alignment: center;
+    -fx-spacing: 10px;
+}
+
+#AnimationSettingsPanel {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+#DarwinPanel {
+    -fx-spacing: 40px;
+}
 
 #Canvas {
     -fx-box-shadow: lightgray;
