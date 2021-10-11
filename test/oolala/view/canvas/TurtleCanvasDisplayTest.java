@@ -37,7 +37,7 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
     private ScreenDisplay display;
 
     @Override
-    public void start (Stage stage) throws InterruptedException {
+    public void start (Stage stage) {
         display = new ScreenDisplay("English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
