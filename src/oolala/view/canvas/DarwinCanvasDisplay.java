@@ -17,16 +17,15 @@ import oolala.view.ScreenDisplayComponents;
 
 public class DarwinCanvasDisplay extends CanvasDisplay {
 
-  private GameView myDarwinView;
-  private DarwinGame myGame;
+  private DarwinView myDarwinView;
   private Rectangle canvas;
   private Slider animationSpeedSlider;
-  private Game myDarwinGame;
+  private DarwinGame myDarwinGame;
 
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(components);
-    myDarwinGame = game;
-    myDarwinView = gameView;
+    myDarwinGame = (DarwinGame) game;
+    myDarwinView = (DarwinView) gameView;
   }
 
   /**
@@ -67,7 +66,7 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
   }
 
   private void initializeGame (TextField radiusBox){
-    myGame.initialize((int) canvas.getLayoutBounds().getWidth(), (int) canvas.getLayoutBounds().getHeight(), Integer.parseInt(radiusBox.getText()));
+    myDarwinGame.initialize((int) myPane.getLayoutBounds().getWidth(), (int) myPane.getLayoutBounds().getHeight(), Integer.parseInt(radiusBox.getText()));
   }
 
   private Node setupDarwinImagePanel () {
@@ -100,8 +99,8 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
 
   private void makeCreature (String type) {
 //    myDarwinView.setTurtleImage(type);
-    myGame.addCreature(type, myGame.getHomeX(), myGame.getHomeY());
-    myDarwinView.drawCreature(myGame.getHomeX(), myGame.getHomeY(), myDarwinView.getMyCreatureMap().size() + 1, type);
+    myDarwinGame.addCreature(type, myDarwinGame.getHomeX(), myDarwinGame.getHomeY());
+    myDarwinView.drawCreature(myDarwinGame.getHomeX(), myDarwinGame.getHomeY(), myDarwinView.getMyCreatureMap().size() + 1, type);
   }
 
   private void updateHomeLocation (TextField x, TextField y){
