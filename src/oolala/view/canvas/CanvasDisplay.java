@@ -16,6 +16,7 @@ public abstract class CanvasDisplay {
   protected BorderPane myPane;
   protected VBox panel;
   protected ScreenDisplayComponents myDisplayComponents;
+  protected boolean isPlaying = true;
 
   protected CanvasDisplay(ScreenDisplayComponents components) {
     myDisplayComponents = components;
@@ -77,5 +78,9 @@ public abstract class CanvasDisplay {
   protected abstract Node addCreature(StackPane pane);
 
   public abstract void updateTurtleStatePanel();
+
+  public boolean getPlayingStatus() {
+    return isPlaying;
+  }
 
   }

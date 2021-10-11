@@ -11,7 +11,6 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import oolala.games.TurtleGame;
 import oolala.view.ScreenDisplay;
-import oolala.view.ScreenDisplayComponents;
 import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
 import org.testfx.matcher.base.NodeMatchers;
@@ -105,7 +104,7 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         clickOn(myTextField);
         writeInputTo(myTextField, command);
         clickOn(myRunButton);
-        assertEquals("cat.png", turtleView.getTurtleImage());
+        assertEquals("cat.png", turtleView.getCreatureImage());
     }
 
     @Test

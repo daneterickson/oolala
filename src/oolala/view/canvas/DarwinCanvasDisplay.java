@@ -1,31 +1,38 @@
 package oolala.view.canvas;
 
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import oolala.games.DarwinGame;
 import oolala.games.Game;
 import oolala.view.game.DarwinView;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
 
-public class DarwinCanvasDisplay extends CanvasDisplay{
+public class DarwinCanvasDisplay extends CanvasDisplay {
 
-  private DarwinView myDarwinView;
+  private GameView myDarwinView;
+  private DarwinGame myGame;
+  private Rectangle canvas;
+  private Slider animationSpeedSlider;
   private Game myDarwinGame;
 
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(components);
     myDarwinGame = game;
-    myDarwinView = (DarwinView) gameView;
+    myDarwinView = gameView;
   }
 
   /**
    * Creates a border pane where the window that displays the output of the game is on the left and
    * the UI controls for the game are on the left
+   *
    * @return BorderPane panel
    */
 
@@ -36,10 +43,10 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
   }
 
   @Override
-  public Node setupGamePanel () {
+  public Node setupGamePanel() {
     VBox panel = new VBox();
     panel.setId("DarwinPanel");
-    panel.getChildren().addAll(setupRadiusPanel(), setupHomeLocationPanel(), setupDarwinImagePanel());
+    panel.getChildren().addAll(setupRadiusPanel(), setupHomeLocationPanel(), setupDarwinImagePanel(), animationSettingsPanel());
     return panel;
   }
 
@@ -47,7 +54,7 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     VBox panel = new VBox();
     panel.setId("RadiusPanel");
     Node radius = myDisplayComponents.makeTextBoxWithLabel("RadiusLabel", "RadiusBox");
-    Node radiusButton = myDisplayComponents.makeButton("RadiusButton", e-> temporary());
+    Node radiusButton = myDisplayComponents.makeButton("RadiusButton", e -> initializeGame((TextField) panel.lookup("#RadiusBox")));
     panel.getChildren().addAll(radius, radiusButton);
     return panel;
   }
@@ -55,29 +62,49 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
   @Override
   protected Node setupHomeButton() {
     Node renderButton = myDisplayComponents.makeButton("SetHomeLocation", e ->
-            updateHomeLocation((TextField)panel.lookup("#LocationX"), (TextField)panel.lookup("#LocationY")));
+            updateHomeLocation((TextField) panel.lookup("#LocationX"), (TextField) panel.lookup("#LocationY")));
     return renderButton;
   }
 
-  private Node setupDarwinImagePanel() {
-    VBox panel = new VBox();
-    panel.setId("DarwinImagePanel");
-    Node turtleImageLabel = myDisplayComponents.makeLabel("DarwinImageLabel");
-    panel.getChildren().addAll(turtleImageLabel, setupDarwinImagePanelButtons());
-    return panel;
+  private void initializeGame (TextField radiusBox){
+    myGame.initialize((int) canvas.getLayoutBounds().getWidth(), (int) canvas.getLayoutBounds().getHeight(), Integer.parseInt(radiusBox.getText()));
   }
 
-  private Node setupDarwinImagePanelButtons() {
+  private Node setupDarwinImagePanel () {
+      VBox panel = new VBox();
+      panel.setId("DarwinImagePanel");
+      Node turtleImageLabel = myDisplayComponents.makeLabel("DarwinImageLabel");
+      panel.getChildren().addAll(turtleImageLabel, setupDarwinImagePanelButtons());
+      return panel;
+  }
+
+  private Node setupDarwinImagePanelButtons () {
     HBox panel = new HBox();
     panel.setId("DarwinImagePanelButtons");
-    Node catButton = myDisplayComponents.makeButton("CatButton", e -> temporary());
-    Node dogButton = myDisplayComponents.makeButton("DogButton", e -> temporary());
-    Node turtleButton = myDisplayComponents.makeButton("TurtleButton", e -> temporary());
+    Node catButton = myDisplayComponents.makeButton("CatButton", e -> makeCreature("cat"));
+    Node dogButton = myDisplayComponents.makeButton("DogButton", e -> makeCreature("dog"));
+    Node turtleButton = myDisplayComponents.makeButton("TurtleButton", e -> makeCreature("turtle"));
     panel.getChildren().addAll(catButton, dogButton, turtleButton);
     return panel;
   }
 
-  private void updateHomeLocation (TextField x, TextField y) {
+  private Node animationSettingsPanel () {
+    VBox panel = new VBox();
+    panel.setId("AnimationSettingsPanel");
+    Node sliderLabel = myDisplayComponents.makeLabel("AnimationSpeed");
+    animationSpeedSlider = myDisplayComponents.makeSlider("SpeedSlider", 1, 3, 5);
+    Node playPauseButton = myDisplayComponents.makeButton("PlayPauseButton", e -> isPlaying = !isPlaying);
+    panel.getChildren().addAll(sliderLabel, animationSpeedSlider, playPauseButton);
+    return panel;
+  }
+
+  private void makeCreature (String type) {
+//    myDarwinView.setTurtleImage(type);
+    myGame.addCreature(type, myGame.getHomeX(), myGame.getHomeY());
+    myDarwinView.drawCreature(myGame.getHomeX(), myGame.getHomeY(), myDarwinView.getMyCreatureMap().size() + 1, type);
+  }
+
+  private void updateHomeLocation (TextField x, TextField y){
     if (!isInputValid(x) | !isInputValid(y)) {
       showErrorMessage();
     } else {
@@ -85,10 +112,8 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     }
   }
 
-  private void temporary() {}
-  
-  @Override
-  public void updateTurtleStatePanel() {
+    @Override
+    public void updateTurtleStatePanel () {
 
+    }
   }
-}

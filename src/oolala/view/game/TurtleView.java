@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
 
 /**
  * TurtleView class creates the visual turtle and lines that go on the canvas in the IDE
@@ -24,6 +23,7 @@ public class TurtleView extends GameView {
 //  private Map<Integer, ImageView> myTurtleMap;
   private double newX;
   private double newY;
+  private String myCreatureType = "turtle";
 
   /**
    * Constructor to create a TurtleView, which is the turtle and lines that go on the canvas in the
@@ -37,7 +37,8 @@ public class TurtleView extends GameView {
     myModel = game;
     myCreaturePane = new Pane();
     myCreatureMap = new HashMap<>();
-    drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT, 1);
+    creatureImage = "turtle.png";
+    drawCreature(x, y, 1, myCreatureType);
   }
 
   /**
@@ -69,21 +70,11 @@ public class TurtleView extends GameView {
   public void updateCanvas() {
     for (int i : myModel.getActiveIndices()) {
       Creature currentModel = myModel.getCreaturesMap().get(i);
-      ImageView currentTurtle = findCurrentTurtle(currentModel, i);
-      drawLine(currentModel, i);
+      ImageView currentTurtle = findCurrentTurtle(currentModel, i, myCreatureType);
+      drawLine(currentModel, i, myLineWidth, currentModel.getOldX() + CREATURE_WIDTH / 2,
+          currentModel.getOldY() + CREATURE_HEIGHT / 2,
+          currentModel.getNewX() + CREATURE_WIDTH / 2, currentModel.getNewY() + CREATURE_HEIGHT / 2);
       updateCreature(currentModel, currentTurtle);
-    }
-  }
-
-  @Override
-  protected void drawLine(Creature currentModel, int index) {
-    Line path = new Line(currentModel.getOldX() + TURTLE_WIDTH / 2,
-        currentModel.getOldY() + TURTLE_HEIGHT / 2,
-        currentModel.getNewX() + TURTLE_WIDTH / 2, currentModel.getNewY() + TURTLE_HEIGHT / 2);
-    path.setStrokeWidth(myLineWidth);
-    path.setId("line" + index);
-    if (currentModel.getPenActivity()) {
-      myCreaturePane.getChildren().add(path);
     }
   }
 
@@ -97,8 +88,8 @@ public class TurtleView extends GameView {
    */
   public void updateCreature(Creature currentModel, ImageView currentTurtle) {
     if (currentModel.getStatusStamp()) {
-      drawCreature(currentModel.getOldX(), currentModel.getOldY(), TURTLE_WIDTH, TURTLE_HEIGHT,
-          -1).setRotate(currentModel.getAngle());
+      drawCreature(currentModel.getOldX(), currentModel.getOldY(),
+          -1, myCreatureType).setRotate(currentModel.getAngle());
     }
     newX = currentModel.getNewX();
     currentTurtle.setX(newX);
@@ -134,20 +125,11 @@ public class TurtleView extends GameView {
    *
    * @param creature is the creature used in the game
    */
-  @Override
-  public void setTurtleImage(String creature) {
+//  @Override
+//  public void setTurtleImage(String creature) {
+//    turtleImage = creature + ".png";
+//  }
 
-    turtleImage = creature + ".png";
-  }
-
-  /**
-   * Getter method to get the creature on the screen - Used for testing
-   *
-   * @return turtleImage is the URL of the creature Image on the screen
-   */
-  public String getTurtleImage() {
-    return turtleImage;
-  }
 
   @Override
   public double getX() {

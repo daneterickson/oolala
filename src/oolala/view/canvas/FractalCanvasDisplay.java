@@ -4,6 +4,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
@@ -60,10 +61,14 @@ public class FractalCanvasDisplay extends CanvasDisplay {
 
   private Node setupImagePanel() {
     VBox panel = new VBox();
+    HBox images = new HBox();
     panel.setId("ImagePanel");
     Node imageLabel = myDisplayComponents.makeLabel("LeafLabel");
-    Node image = myDisplayComponents.makeButton("LeafImage", e -> temporary());
-    panel.getChildren().addAll(imageLabel, image);
+    Node catButton = myDisplayComponents.makeButton("CatButton", e -> myFractalView.setCreatureImage("cat"));
+    Node dogButton = myDisplayComponents.makeButton("DogButton", e -> myFractalView.setCreatureImage("dog"));
+    Node turtleButton = myDisplayComponents.makeButton("TurtleButton", e -> myFractalView.setCreatureImage("turtle"));
+    images.getChildren().addAll(catButton, dogButton,turtleButton);
+    panel.getChildren().addAll(imageLabel, images);
     return panel;
   }
 

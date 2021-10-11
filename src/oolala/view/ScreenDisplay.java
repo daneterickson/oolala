@@ -85,18 +85,26 @@ public class ScreenDisplay {
 
     public void getCommandBoxInput () {
         String commandText = myCommandBox.getText();
-        String[] splitCommand = myGame.compile(commandText).split("\n");
-        for (String command : splitCommand) {
-            if (command == "") {
-                showErrorMessage();
-                break;
-            } else {
-                myGame.step(command);
-                if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
-                    myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
-                }
+        String compileCommand = myGame.compile(commandText);
+        if (compileCommand == null) { // compileCommand is null --> Darwin Game
+            while (myCanvasDisplay.getPlayingStatus()) {
+                myGame.step("");
                 myGameView.updateCanvas();
-                myCanvasDisplay.updateTurtleStatePanel();
+            }
+        } else {
+            for (String command : compileCommand.split("\n")) {
+                if (command == "") {
+                    showErrorMessage();
+                    break;
+                } else {
+                    myGame.step(command);
+                    if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
+                        myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
+                    }
+                    myGameView.updateCanvas();
+                    myCanvasDisplay.updateTurtleStatePanel();
+                    if (myCanvasDisplay instanceof FractalCanvasDisplay) ((FractalView) myGameView).drawLeaves();
+                }
             }
         }
     }
