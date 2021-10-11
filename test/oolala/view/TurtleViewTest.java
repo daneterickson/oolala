@@ -1,5 +1,6 @@
 package oolala.view;
 
+import javafx.scene.Node;
 import oolala.creatures.Creature;
 import oolala.games.TurtleGame;
 import javafx.scene.control.Button;
@@ -24,23 +25,31 @@ public class TurtleViewTest extends DukeApplicationTest {
   private TurtleGame myTurtleGame;
   private TurtleView myTurtleView;
   private ScreenDisplay myDisplay;
+  private Node myTurtleButton;
 
   @Override
   public void start (Stage stage) {
-    myTurtleGame = new TurtleGame(originX, originY);
-    myTurtleView = new TurtleView(myTurtleGame, originX, originY);
     myDisplay = new ScreenDisplay("English", originX, originY);
     stage.setScene(myDisplay.setupDisplay(Main.BACKGROUND));
     stage.setTitle(Main.TITLE);
     stage.show();
+    stage.setFullScreen(true);
 
+    myTurtleButton = lookup("#Turtle").query();
+    clickOn(myTurtleButton);
+
+  }
+
+  private void getButtons() {
     myTextField = lookup("#CommandBox").query();
-    myTextField.clear();
     myRunButton = lookup("Run").query();
+    myTurtleGame = (TurtleGame) myDisplay.getGame();
+    myTurtleView = (TurtleView) myDisplay.getGameView();
   }
 
   @Test
   void testDrawCreatureLocation () {
+    getButtons();
     TurtleView turtle = new TurtleView(myTurtleGame, originX, originY);
     ImageView turtleImage = turtle.getMyTurtleMap().get(1);
     double expectedX = originX;
@@ -51,6 +60,7 @@ public class TurtleViewTest extends DukeApplicationTest {
 
   @Test
   void testDrawCreatureVisibility () {
+    getButtons();
     TurtleView turtle = new TurtleView(myTurtleGame, originX, originY);
     ImageView turtleImage = turtle.getMyTurtleMap().get(1);
     assertEquals(true, turtleImage.isVisible());
@@ -58,6 +68,7 @@ public class TurtleViewTest extends DukeApplicationTest {
 
   @Test
   void testDrawCreatureSize () {
+    getButtons();
     TurtleView turtle = new TurtleView(myTurtleGame, originX, originY);
     ImageView turtleImage = turtle.getMyTurtleMap().get(1);
     double expectedHeight = turtle.CREATURE_HEIGHT;
@@ -66,8 +77,10 @@ public class TurtleViewTest extends DukeApplicationTest {
     assertEquals(expectedWidth, turtleImage.getFitWidth());
   }
 
+  // This one fails, not sure why
   @Test
   void testUpdateCreatureLocation () { // assume model functions properly
+    getButtons();
     int distance = 10;
     TurtleView turtle = new TurtleView(myTurtleGame, originX, originY);
     ImageView turtleImage = turtle.getMyTurtleMap().get(1);
@@ -104,6 +117,7 @@ public class TurtleViewTest extends DukeApplicationTest {
 
   @Test
   void testAddTurtle () {
+    getButtons();
     String command = "tell 2";
     clickOn(myTextField);
     writeInputTo(myTextField, command);
@@ -113,6 +127,7 @@ public class TurtleViewTest extends DukeApplicationTest {
 
   @Test
   void testAddAndMoveTurtle () {
+    getButtons();
     String command = "fd 100\ntell 2\nrt 90\nfd 100";
     clickOn(myTextField);
     writeInputTo(myTextField, command);
@@ -124,6 +139,7 @@ public class TurtleViewTest extends DukeApplicationTest {
 
   @Test
   void testStampTurtle () {
+    getButtons();
     String command = "fd 100\nstamp\nfd 100";
     clickOn(myTextField);
     writeInputTo(myTextField, command);
@@ -133,6 +149,7 @@ public class TurtleViewTest extends DukeApplicationTest {
   }
 
   private void testMoveTurtle(int distance, int angle, String direction) {
+    getButtons();
     String command = String.format("rt %d\n%s %d", angle, direction, distance);
     clickOn(myTextField);
     writeInputTo(myTextField, command);

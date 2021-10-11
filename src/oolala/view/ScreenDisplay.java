@@ -10,7 +10,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
-import java.util.ResourceBundle;
 import oolala.games.TurtleGame;
 import oolala.view.canvas.CanvasDisplay;
 import oolala.view.canvas.DarwinCanvasDisplay;
