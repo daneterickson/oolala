@@ -37,6 +37,7 @@ public class TurtleView extends GameView {
     myModel = game;
     myCreaturePane = new Pane();
     myCreatureMap = new HashMap<>();
+    creatureImage = "turtle.png";
     drawCreature(x, y, 1, myCreatureType);
   }
 
@@ -143,14 +144,6 @@ public class TurtleView extends GameView {
 //    turtleImage = creature + ".png";
 //  }
 
-  /**
-   * Getter method to get the creature on the screen - Used for testing
-   *
-   * @return turtleImage is the URL of the creature Image on the screen
-   */
-  public String getTurtleImage() {
-    return turtleImage;
-  }
 
   @Override
   public double getX() {

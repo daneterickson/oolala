@@ -15,7 +15,7 @@ public abstract class GameView { // make it an interface if I don't make any met
 
     protected Pane myCreaturePane;
     protected Map<Integer, ImageView> myCreatureMap;
-    protected String turtleImage = "turtle.png";
+    protected String creatureImage;
 
     public ImageView drawCreature(double x, double y, int index, String type) { // final will just be double size for turtle
         myCreatureMap.put(index, new ImageView(new Image(getImage(type))));
@@ -32,11 +32,11 @@ public abstract class GameView { // make it an interface if I don't make any met
 
     private String getImage(String type) {
         switch (type) {
-            case "cat" -> turtleImage = "cat.png";
-            case "dog" -> turtleImage = "dog.png";
-            case "turtle" -> turtleImage = "turtle.png";
+            case "cat" -> creatureImage = "cat.png";
+            case "dog" -> creatureImage = "dog.png";
+            case "turtle" -> creatureImage = "turtle.png";
         }
-        return turtleImage;
+        return creatureImage;
     }
 
     protected ImageView findCurrentTurtle(Creature model, int index, String type) {
@@ -72,6 +72,15 @@ public abstract class GameView { // make it an interface if I don't make any met
     public Node getMyCreaturePane() { return myCreaturePane; }
 
     /**
+     * Getter method to get the creature on the screen - Used for testing
+     *
+     * @return turtleImage is the URL of the creature Image on the screen
+     */
+    public String getCreatureImage() {
+        return creatureImage;
+    }
+
+    /**
      * Getter method to get the Map with the indices and ImageViews of the creatures to be added to
      * the scene in ScreenDisplay
      *
@@ -93,8 +102,8 @@ public abstract class GameView { // make it an interface if I don't make any met
      *
      * @param creature is the creature used in the game
      */
-    public void setTurtleImage(String creature) {
-        turtleImage = creature + ".png";
+    public void setCreatureImage(String creature) {
+        creatureImage = creature + ".png";
     }
 
     public abstract double getX ();

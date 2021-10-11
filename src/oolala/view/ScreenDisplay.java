@@ -40,8 +40,8 @@ public class ScreenDisplay {
         myGame = game;
         myDisplayComponents = new ScreenDisplayComponents(language);
 //        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
-//        myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
-        myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
+        myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
+//        myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myStartX = startX;
         myStartY = startY;
@@ -99,6 +99,7 @@ public class ScreenDisplay {
                 myGameView.updateCanvas();
                 myCanvasDisplay.updateTurtleStatePanel();
             }
+            if (myCanvasDisplay instanceof FractalCanvasDisplay) ((FractalView)myGameView).drawLeaves();
         }
     }
 

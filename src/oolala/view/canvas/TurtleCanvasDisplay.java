@@ -4,7 +4,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -14,7 +13,6 @@ import oolala.games.Game;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
 
-import java.util.function.Consumer;
 import oolala.view.game.TurtleView;
 
 public class TurtleCanvasDisplay extends CanvasDisplay{
@@ -105,9 +103,9 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
   private Node makeTurtleImagePanelButtons() {
     HBox panel = new HBox();
     panel.setId("TurtleImagePanelButtons");
-    Node catButton = myDisplayComponents.makeButton("CatButton", e -> myTurtleView.setTurtleImage("cat"));
-    Node dogButton = myDisplayComponents.makeButton("DogButton", e -> myTurtleView.setTurtleImage("dog"));
-    Node turtleButton = myDisplayComponents.makeButton("TurtleButton", e -> myTurtleView.setTurtleImage("turtle"));
+    Node catButton = myDisplayComponents.makeButton("CatButton", e -> myTurtleView.setCreatureImage("cat"));
+    Node dogButton = myDisplayComponents.makeButton("DogButton", e -> myTurtleView.setCreatureImage("dog"));
+    Node turtleButton = myDisplayComponents.makeButton("TurtleButton", e -> myTurtleView.setCreatureImage("turtle"));
     panel.getChildren().addAll(catButton, dogButton, turtleButton);
     return panel;
   }

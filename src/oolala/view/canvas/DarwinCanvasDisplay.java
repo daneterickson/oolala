@@ -1,6 +1,8 @@
 package oolala.view.canvas;
 
 import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -18,6 +20,8 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
   private DarwinView myDarwinView;
   private ScreenDisplayComponents myDisplayComponents;
   private DarwinGame myGame;
+  private Rectangle canvas;
+  private Slider animationSpeedSlider;
 
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
@@ -44,7 +48,7 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
   protected Node makeCanvasPanel () {
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
-    Rectangle canvas = myDisplayComponents.makeCanvas();
+    canvas = myDisplayComponents.makeCanvas();
     pane.getChildren().addAll(canvas, myDarwinView.getMyCreaturePane());
     return pane;
   }
@@ -52,7 +56,7 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
   private Node makeDarwinPanel () {
     VBox panel = new VBox();
     panel.setId("DarwinPanel");
-    panel.getChildren().addAll(makeRadiusPanel(), makeSpeciesPanel(), makeDarwinImagePanel());
+    panel.getChildren().addAll(makeRadiusPanel(), makeSpeciesPanel(), makeDarwinImagePanel(), animationSettingsPanel());
     return panel;
   }
 
@@ -60,13 +64,13 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     VBox panel = new VBox();
     panel.setId("RadiusPanel");
     Node radius = myDisplayComponents.makeTextBoxWithLabel("RadiusLabel", "RadiusBox");
-    Node radiusButton = myDisplayComponents.makeButton("RadiusButton", e-> changeRadius((TextField)panel.lookup("#RadiusBox")));
+    Node radiusButton = myDisplayComponents.makeButton("RadiusButton", e-> initializeGame((TextField)panel.lookup("#RadiusBox")));
     panel.getChildren().addAll(radius, radiusButton);
     return panel;
   }
 
-  private void changeRadius(TextField radiusBox) {
-    myGame.initialize(600, 600, Integer.parseInt(radiusBox.getText()));
+  private void initializeGame(TextField radiusBox) {
+    myGame.initialize((int)canvas.getLayoutBounds().getWidth(), (int)canvas.getLayoutBounds().getHeight(), Integer.parseInt(radiusBox.getText()));
   }
 
   private Node makeSpeciesPanel() {
@@ -98,8 +102,14 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     return panel;
   }
 
-  private Node makePlayPauseButton () {
-    return myDisplayComponents.makeButton("PlayPauseButton", e -> isPlaying = !isPlaying);
+  private Node animationSettingsPanel() {
+    VBox panel = new VBox();
+    panel.setId("AnimationSettingsPanel");
+    Node sliderLabel = myDisplayComponents.makeLabel("AnimationSpeed");
+    animationSpeedSlider = myDisplayComponents.makeSlider("SpeedSlider", 1, 3, 5);
+    Node playPauseButton = myDisplayComponents.makeButton("PlayPauseButton", e -> isPlaying = !isPlaying);
+    panel.getChildren().addAll(sliderLabel, animationSpeedSlider, playPauseButton);
+    return panel;
   }
 
   private void makeCreature(String type) {

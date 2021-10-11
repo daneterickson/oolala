@@ -29,7 +29,7 @@ public class Main extends Application {
         FractalView fractalView = new FractalView(fractalGame);
         DarwinGame darwinGame = new DarwinGame();
         DarwinView darwinView = new DarwinView(darwinGame, ORIGIN_X, ORIGIN_Y);
-        ScreenDisplay display = new ScreenDisplay(darwinView, darwinGame, "English", ORIGIN_X, ORIGIN_Y);
+        ScreenDisplay display = new ScreenDisplay(fractalView, fractalGame, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
