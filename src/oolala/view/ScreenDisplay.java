@@ -39,8 +39,8 @@ public class ScreenDisplay {
         myGameView = gameView;
         myGame = game;
         myDisplayComponents = new ScreenDisplayComponents(language);
-//        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
-        myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
+        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
+//        myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
 //        myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myStartX = startX;
@@ -85,7 +85,11 @@ public class ScreenDisplay {
         String commandText = myCommandBox.getText();
         String compileCommand = myGame.compile(commandText);
         if (compileCommand == null) { // compileCommand is null --> Darwin Game
-            while (myCanvasDisplay.getPlayingStatus()) {
+//            while (myCanvasDisplay.getPlayingStatus()) {
+//                myGame.step("");
+//                myGameView.updateCanvas();
+//            }
+            for (int i=0; i<5; i++) {
                 myGame.step("");
                 myGameView.updateCanvas();
             }
@@ -125,4 +129,6 @@ public class ScreenDisplay {
         return myCanvasDisplay;
     }
 
+    public void step(double secondDelay) {
+    }
 }

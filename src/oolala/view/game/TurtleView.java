@@ -23,7 +23,6 @@ public class TurtleView extends GameView {
 //  private Map<Integer, ImageView> myTurtleMap;
   private double newX;
   private double newY;
-  private String myCreatureType = "turtle";
 
   /**
    * Constructor to create a TurtleView, which is the turtle and lines that go on the canvas in the
@@ -38,7 +37,7 @@ public class TurtleView extends GameView {
     myCreaturePane = new Pane();
     myCreatureMap = new HashMap<>();
     creatureImage = "turtle.png";
-    drawCreature(x, y, 1, myCreatureType);
+    drawCreature(x, y, 1, creatureImage);
   }
 
   /**
@@ -84,7 +83,7 @@ public class TurtleView extends GameView {
   public void updateCanvas() {
     for (int i : myModel.getActiveIndices()) {
       Creature currentModel = myModel.getCreaturesMap().get(i);
-      ImageView currentTurtle = findCurrentTurtle(currentModel, i, myCreatureType);
+      ImageView currentTurtle = findCurrentTurtle(currentModel, i, creatureImage);
       drawLine(currentModel, i, myLineWidth, currentModel.getOldX() + CREATURE_WIDTH / 2,
           currentModel.getOldY() + CREATURE_HEIGHT / 2,
           currentModel.getNewX() + CREATURE_WIDTH / 2, currentModel.getNewY() + CREATURE_HEIGHT / 2);
@@ -103,7 +102,7 @@ public class TurtleView extends GameView {
   public void updateCreature(Creature currentModel, ImageView currentTurtle) {
     if (currentModel.getStatusStamp()) {
       drawCreature(currentModel.getOldX(), currentModel.getOldY(),
-          -1, myCreatureType).setRotate(currentModel.getAngle());
+          -1, creatureImage).setRotate(currentModel.getAngle());
     }
     newX = currentModel.getNewX();
     currentTurtle.setX(newX);
@@ -137,7 +136,7 @@ public class TurtleView extends GameView {
    * Setter method to change the creature on the screen. ScreenDisplay gets the creature type
    * from the user and uses this method to set the creature image.
    *
-   * @param creature is the creature used in the game
+//   * @param creature is the creature used in the game
    */
 //  @Override
 //  public void setTurtleImage(String creature) {
