@@ -31,7 +31,7 @@ public class TurtleViewTest extends DukeApplicationTest {
   public void start (Stage stage) {
     myTurtleGame = new TurtleGame(originX, originY);
     myTurtleView = new TurtleView(myTurtleGame, originX, originY);
-    myDisplay = new ScreenDisplay(myTurtleView, myTurtleGame, "English", originX, originY);
+    myDisplay = new ScreenDisplay("English", originX, originY);
     stage.setScene(myDisplay.setupDisplay(Main.BACKGROUND));
     stage.setTitle(Main.TITLE);
     stage.show();

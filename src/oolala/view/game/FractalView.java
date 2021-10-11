@@ -1,9 +1,5 @@
 package oolala.view.game;
 
-import java.util.HashMap;
-import java.util.Map;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import oolala.creatures.Creature;

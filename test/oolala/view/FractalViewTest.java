@@ -24,7 +24,7 @@ public class FractalViewTest extends DukeApplicationTest {
   public void start (Stage stage) {
     myFractalGame = new FractalGame();
     myFractalView = new FractalView(myFractalGame);
-    myDisplay = new ScreenDisplay(myFractalView, myFractalGame, "English", originX, originY);
+    myDisplay = new ScreenDisplay("English", originX, originY);
     stage.setScene(myDisplay.setupDisplay(Main.BACKGROUND));
     stage.setTitle(Main.TITLE);
     stage.show();

@@ -15,14 +15,12 @@ import oolala.view.ScreenDisplayComponents;
 public class DarwinCanvasDisplay extends CanvasDisplay{
 
   private DarwinView myDarwinView;
-  private ScreenDisplayComponents myDisplayComponents;
-  private Game myGame;
+  private Game myDarwinGame;
 
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
-    super(gameView, game, components);
-    myGame = game;
+    super(components);
+    myDarwinGame = game;
     myDarwinView = (DarwinView) gameView;
-    myDisplayComponents = components;
   }
 
   /**
@@ -30,32 +28,22 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
    * the UI controls for the game are on the left
    * @return BorderPane panel
    */
-  @Override
-  public Node makeCanvas () {
-    BorderPane panel = new BorderPane();
-    panel.setId("CanvasPanel");
-    panel.setLeft(makeCanvasPanel());
-    panel.setRight(makeDarwinPanel());
-    return panel;
-  }
 
   @Override
-  protected Node makeCanvasPanel () {
-    StackPane pane = new StackPane();
-    pane.setId("CanvasComponentPane");
-    Rectangle canvas = myDisplayComponents.makeCanvas();
-//    pane.getChildren().addAll(canvas, myDarwinView.getMyTurtlePane());
+  protected Node addCreature(StackPane pane) {
+    pane.getChildren().add(myDarwinView.getMyCreaturePane());
     return pane;
   }
 
-  private Node makeDarwinPanel () {
+  @Override
+  public Node setupGamePanel () {
     VBox panel = new VBox();
     panel.setId("DarwinPanel");
-    panel.getChildren().addAll(makeRadiusPanel(), makeSpeciesPanel(), makeDarwinImagePanel());
+    panel.getChildren().addAll(setupRadiusPanel(), setupHomeLocationPanel(), setupDarwinImagePanel());
     return panel;
   }
 
-  private Node makeRadiusPanel() {
+  private Node setupRadiusPanel() {
     VBox panel = new VBox();
     panel.setId("RadiusPanel");
     Node radius = myDisplayComponents.makeTextBoxWithLabel("RadiusLabel", "RadiusBox");
@@ -64,26 +52,22 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     return panel;
   }
 
-  private Node makeSpeciesPanel() {
-    VBox panel = new VBox();
-    panel.setId("SpeciesPanel");
-    Node speciesLabel = myDisplayComponents.makeLabel("SpeciesLabel");
-    Node speciesX = myDisplayComponents.makeTextBoxWithLabel("HomeLocationX", "LocationX");
-    Node speciesY = myDisplayComponents.makeTextBoxWithLabel("HomeLocationY", "LocationY");
-    Node setHomeLocation = myDisplayComponents.makeButton("SetHomeLocation", e -> updateHomeLocation((TextField)panel.lookup("#LocationX"), (TextField)panel.lookup("#LocationY")));
-    panel.getChildren().addAll(speciesLabel, speciesX, speciesY, setHomeLocation);
-    return panel;
+  @Override
+  protected Node setupHomeButton() {
+    Node renderButton = myDisplayComponents.makeButton("SetHomeLocation", e ->
+            updateHomeLocation((TextField)panel.lookup("#LocationX"), (TextField)panel.lookup("#LocationY")));
+    return renderButton;
   }
 
-  private Node makeDarwinImagePanel() {
+  private Node setupDarwinImagePanel() {
     VBox panel = new VBox();
     panel.setId("DarwinImagePanel");
     Node turtleImageLabel = myDisplayComponents.makeLabel("DarwinImageLabel");
-    panel.getChildren().addAll(turtleImageLabel, makeDarwinImagePanelButtons());
+    panel.getChildren().addAll(turtleImageLabel, setupDarwinImagePanelButtons());
     return panel;
   }
 
-  private Node makeDarwinImagePanelButtons() {
+  private Node setupDarwinImagePanelButtons() {
     HBox panel = new HBox();
     panel.setId("DarwinImagePanelButtons");
     Node catButton = myDisplayComponents.makeButton("CatButton", e -> temporary());
@@ -94,7 +78,11 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
   }
 
   private void updateHomeLocation (TextField x, TextField y) {
-    myGame.updateHome(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
+    if (!isInputValid(x) | !isInputValid(y)) {
+      showErrorMessage();
+    } else {
+      myDarwinGame.updateHome(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
+    }
   }
 
   private void temporary() {}

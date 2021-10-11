@@ -1,6 +1,7 @@
 package oolala.view.canvas;
 
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
@@ -18,47 +19,29 @@ public class FractalCanvasDisplay extends CanvasDisplay {
 
   private FractalView myFractalView;
   private FractalGame myFractalGame;
-  private ScreenDisplayComponents myDisplayComponents;
-  private BorderPane myPane;
 
   public FractalCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
-    super(gameView, game, components);
+    super(components);
     myFractalView = (FractalView) gameView;
     myFractalGame = (FractalGame) game;
-    myDisplayComponents = components;
   }
 
-  /**
-   * Creates a border pane where the window that displays the output of the game is on the left and
-   * the UI controls for the game are on the left
-   * @return BorderPane panel
-   */
-  @Override
-  public Node makeCanvas () {
-    myPane = new BorderPane();
-    myPane.setId("CanvasPanel");
-    myPane.setLeft(makeCanvasPanel());
-    myPane.setRight(makeFractalPanel());
-    return myPane;
-  }
 
   @Override
-  protected Node makeCanvasPanel () {
-    StackPane pane = new StackPane();
-    pane.setId("CanvasComponentPane");
-    Rectangle canvas = myDisplayComponents.makeCanvas();
-    pane.getChildren().addAll(canvas, myFractalView.getMyCreaturePane());
+  protected Node addCreature(StackPane pane) {
+    pane.getChildren().add(myFractalView.getMyCreaturePane());
     return pane;
   }
 
-  private Node makeFractalPanel () {
+  @Override
+    protected Node setupGamePanel () {
     VBox panel = new VBox();
     panel.setId("FractalPanel");
-    panel.getChildren().addAll(makeAngleAndLengthPanel(), makeLevelPanel(), makeHomeLocationPanel(), makeImagePanel());
+    panel.getChildren().addAll(setupAngleAndLengthPanel(), setupLevelPanel(), setupHomeLocationPanel(), setupImagePanel());
     return panel;
   }
 
-  private Node makeAngleAndLengthPanel() {
+  private Node setupAngleAndLengthPanel() {
     VBox panel = new VBox();
     panel.setId("AngleAndLevelPanel");
     Node angle = myDisplayComponents.makeTextBoxWithLabel("AngleLabel", "AngleBox");
@@ -67,7 +50,7 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     return panel;
   }
 
-  private Node makeLevelPanel() {
+  private Node setupLevelPanel() {
     VBox panel = new VBox();
     panel.setId("LevelPanel");
     Node level = myDisplayComponents.makeTextBoxWithLabel("LevelLabel", "LevelBox");
@@ -75,7 +58,7 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     return panel;
   }
 
-  private Node makeImagePanel() {
+  private Node setupImagePanel() {
     VBox panel = new VBox();
     panel.setId("ImagePanel");
     Node imageLabel = myDisplayComponents.makeLabel("LeafLabel");
@@ -84,26 +67,25 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     return panel;
   }
 
-  private Node makeHomeLocationPanel() {
-    VBox panel = new VBox();
-    panel.setId("HomeLocationPanel");
-    Node homeLocationLabel = myDisplayComponents.makeLabel("HomeLocationLabel");
-    Node homeLocationX = myDisplayComponents.makeTextBoxWithLabel("HomeLocationX", "LocationX");
-    Node homeLocationY = myDisplayComponents.makeTextBoxWithLabel("HomeLocationY", "LocationY");
+  @Override
+  protected Node setupHomeButton() {
     Node renderButton = myDisplayComponents.makeButton("SetButton", e -> renderFractal((TextField)myPane.lookup("#LevelBox"),
             (TextField)myPane.lookup("#LengthBox"), (TextField)myPane.lookup("#AngleBox"), (TextField)myPane.lookup("#LocationX")
     , (TextField)myPane.lookup("#LocationY")));
-    panel.getChildren().addAll(homeLocationLabel, homeLocationX, homeLocationY, renderButton);
-    return panel;
+    return renderButton;
   }
 
   private void renderFractal(TextField level, TextField length, TextField angle, TextField startX, TextField startY) {
-    int levelNum = Integer.parseInt(level.getText());
-    int lengthNum = Integer.parseInt(length.getText());
-    int angleNum = Integer.parseInt(angle.getText());
-    int xNum = Integer.parseInt(startX.getText());
-    int yNum = Integer.parseInt(startY.getText());
-    myFractalGame.initialize(levelNum, lengthNum, angleNum, xNum, yNum, MY_LEVEL_SPAN);
+    if (!isInputValid(level) || !isInputValid(length) || !isInputValid(angle) || !isInputValid(startX) || !isInputValid(startY)) {
+      showErrorMessage();
+    } else {
+      int levelNum = Integer.parseInt(level.getText());
+      int lengthNum = Integer.parseInt(length.getText());
+      int angleNum = Integer.parseInt(angle.getText());
+      int xNum = Integer.parseInt(startX.getText());
+      int yNum = Integer.parseInt(startY.getText());
+      myFractalGame.initialize(levelNum, lengthNum, angleNum, xNum, yNum, MY_LEVEL_SPAN);
+    }
 
   }
 
