@@ -45,7 +45,7 @@ public class Command {
 
     public Command recognize () {
         for (Command cd: myCommandsList)  {
-            if (cd.getName().equals(myName)) {
+            if (cd.equals(this)) {
                 return cd;
             }
         }

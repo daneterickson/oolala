@@ -69,8 +69,8 @@ public class Creature {
     }
 
     public void move (double distance, Game game) {
-        double newX = myOldPosX + distance * Math.sin(Math.toRadians(myAngle));
-        double newY = myOldPoxY - distance * Math.cos(Math.toRadians(myAngle));
+        double newX = myNewPosX + distance * Math.sin(Math.toRadians(myAngle));
+        double newY = myNewPosY - distance * Math.cos(Math.toRadians(myAngle));
         if (game instanceof DarwinGame) {
             DarwinGame DGame = (DarwinGame) game;
             if (newX < 0 || newX > DGame.getMaxX()
@@ -79,7 +79,7 @@ public class Creature {
             }
             else {
                 for (Creature c: game.getCreaturesMap().values()) {
-                    if (newX == c.getNewX() && newY == c.getNewY()) {
+                    if (!c.equals(this) && newX == c.getNewX() && newY == c.getNewY()) {
                         return;
                     }
                 }
