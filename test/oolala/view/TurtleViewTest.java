@@ -7,6 +7,7 @@ import javafx.scene.control.TextInputControl;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import oolala.Main;
+import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
@@ -20,9 +21,9 @@ public class TurtleViewTest extends DukeApplicationTest {
   private TextInputControl myTextField;
   private Button myRunButton;
 
-  TurtleGame myTurtleGame;
-  TurtleView myTurtleView;
-  ScreenDisplay myDisplay;
+  private TurtleGame myTurtleGame;
+  private TurtleView myTurtleView;
+  private ScreenDisplay myDisplay;
 
   @Override
   public void start (Stage stage) {
@@ -59,8 +60,8 @@ public class TurtleViewTest extends DukeApplicationTest {
   void testDrawCreatureSize () {
     TurtleView turtle = new TurtleView(myTurtleGame, originX, originY);
     ImageView turtleImage = turtle.getMyTurtleMap().get(1);
-    double expectedHeight = turtle.TURTLE_HEIGHT;
-    double expectedWidth = turtle.TURTLE_WIDTH;
+    double expectedHeight = turtle.CREATURE_HEIGHT;
+    double expectedWidth = turtle.CREATURE_WIDTH;
     assertEquals(expectedHeight, turtleImage.getFitHeight());
     assertEquals(expectedWidth, turtleImage.getFitWidth());
   }

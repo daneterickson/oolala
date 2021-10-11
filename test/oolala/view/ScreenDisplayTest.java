@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
@@ -27,8 +28,8 @@ public class ScreenDisplayTest extends DukeApplicationTest {
         stage.setTitle(TITLE);
         stage.show();
 
-        myCommandBox = lookup("#Pane #CommandBoxPanel #CommandBox").query();
-        myRunButton =  (Button)lookup("#Pane #CommandBoxPanel #CommandBoxButtonPanel #Run").query();
+        myCommandBox = lookup("#CommandBox").query();
+        myRunButton =  (Button)lookup("#Run").query();
         myCommandBox.clear();
     }
 

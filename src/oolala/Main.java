@@ -1,10 +1,12 @@
 package oolala;
 
 import oolala.games.DarwinGame;
+import oolala.games.FractalGame;
 import oolala.games.TurtleGame;
-import oolala.view.DarwinView;
 import oolala.view.ScreenDisplay;
-import oolala.view.TurtleView;
+import oolala.view.game.DarwinView;
+import oolala.view.game.FractalView;
+import oolala.view.game.TurtleView;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -21,9 +23,13 @@ public class Main extends Application {
      */
     @Override
     public void start (Stage stage) {
-        TurtleGame turtle = new TurtleGame(ORIGIN_X, ORIGIN_Y);
-        TurtleView game = new TurtleView(turtle, ORIGIN_X, ORIGIN_Y);
-        ScreenDisplay display = new ScreenDisplay(game, turtle, "English", ORIGIN_X, ORIGIN_Y);
+        TurtleGame turtleGame = new TurtleGame(ORIGIN_X, ORIGIN_Y);
+        TurtleView turtleView = new TurtleView(turtleGame, ORIGIN_X, ORIGIN_Y);
+        FractalGame fractalGame = new FractalGame();
+        FractalView fractalView = new FractalView(fractalGame);
+        DarwinGame darwinGame = new DarwinGame();
+        DarwinView darwinView = new DarwinView(darwinGame, ORIGIN_X, ORIGIN_Y);
+        ScreenDisplay display = new ScreenDisplay(darwinView, darwinGame, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
