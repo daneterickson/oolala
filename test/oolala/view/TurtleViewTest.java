@@ -1,7 +1,5 @@
 package oolala.view;
 
-import javafx.scene.control.Slider;
-import javafx.scene.image.Image;
 import oolala.creatures.Creature;
 import oolala.games.TurtleGame;
 import javafx.scene.control.Button;
@@ -62,8 +60,8 @@ public class TurtleViewTest extends DukeApplicationTest {
   void testDrawCreatureSize () {
     TurtleView turtle = new TurtleView(myTurtleGame, originX, originY);
     ImageView turtleImage = turtle.getMyTurtleMap().get(1);
-    double expectedHeight = turtle.TURTLE_HEIGHT;
-    double expectedWidth = turtle.TURTLE_WIDTH;
+    double expectedHeight = turtle.CREATURE_HEIGHT;
+    double expectedWidth = turtle.CREATURE_WIDTH;
     assertEquals(expectedHeight, turtleImage.getFitHeight());
     assertEquals(expectedWidth, turtleImage.getFitWidth());
   }

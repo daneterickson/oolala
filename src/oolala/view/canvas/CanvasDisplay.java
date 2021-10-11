@@ -7,6 +7,7 @@ import oolala.view.ScreenDisplayComponents;
 
 public abstract class CanvasDisplay {
 
+  protected boolean isPlaying = true;
 
   public CanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
   }
@@ -22,5 +23,8 @@ public abstract class CanvasDisplay {
 
   public abstract void updateTurtleStatePanel();
 
+  public boolean getPlayingStatus() {
+    return isPlaying;
+  }
 
   }

@@ -1,6 +1,7 @@
 package oolala.view.game;
 
 import java.util.HashMap;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import oolala.creatures.Creature;
@@ -9,15 +10,15 @@ import oolala.games.DarwinGame;
 
 public class DarwinView extends GameView {
 
-  private Pane myDarwinPane;
   private DarwinGame myModel;
+  private String myCreatureType = "turtle";
 
   public DarwinView (DarwinGame game, double x, double y) { // x and y based on canvas/scene size
     myModel = game;
-    myDarwinPane = new Pane();
+    myCreaturePane = new Pane();
     myCreatureMap = new HashMap<>();
-    drawCreature(x, y, TURTLE_WIDTH, TURTLE_HEIGHT, 1);
   }
+
   /**
    * Iterates through each turtle on the canvas. Calls updateCreature to update the position,
    * orientation, and visibility of the turtle on the screen Calls drawLine to draw the line that
@@ -25,17 +26,14 @@ public class DarwinView extends GameView {
    */
   @Override
   public void updateCanvas() {
-    for (int i : myModel.getActiveIndices()) {
+    for (int i : myModel.getCreaturesMap().keySet()) {
       Creature currentModel = myModel.getCreaturesMap().get(i);
-      ImageView currentTurtle = findCurrentTurtle(currentModel, i);
+      ImageView currentTurtle = myCreatureMap.get(i);
+//      ImageView currentTurtle = findCurrentTurtle(currentModel, i, myCreatureType);
       updateCreature(currentModel, currentTurtle);
     }
   }
 
-  @Override
-  protected void drawLine(Creature currentModel, int index) {
-
-  }
 
   /**
    * Update the position of the creature on the screen.
@@ -46,28 +44,20 @@ public class DarwinView extends GameView {
    * @param currentTurtle is the current ImageView of the creature on the screen being moved
    */
   public void updateCreature(Creature currentModel, ImageView currentTurtle) {
-//    if (currentModel.getStatusStamp()) {
-//      drawCreature(currentModel.getOldX(), currentModel.getOldY(), TURTLE_WIDTH, TURTLE_HEIGHT,
-//          -1).setRotate(currentModel.getAngle());
-//    }
-//    newX = currentModel.getNewX();
-//    currentTurtle.setX(newX);
-//    newY = currentModel.getNewY();
-//    currentTurtle.setY(newY);
-//    currentTurtle.setRotate(currentModel.getAngle());
-//    currentTurtle.setVisible(currentModel.getCreatureVisibility());
+    currentTurtle.setX(currentModel.getNewX());
+    currentTurtle.setY(currentModel.getNewY());
+    currentTurtle.setRotate(currentModel.getAngle());
+    changeImage(currentTurtle, currentModel.getType());
   }
 
-  /**
-   * Getter method to get the Pane with the creature and lines to be added to the scene in
-   * ScreenDisplay
-   *
-   * @return myDarwinPane
-   */
-  @Override
-  public Pane getMyCreaturePane() {
-    return myDarwinPane;
+  private void changeImage(ImageView currentTurtle, String type) {
+    switch (type) {
+      case "cat" -> currentTurtle.setImage(new Image("cat.png"));
+      case "dog" -> currentTurtle.setImage(new Image("dog.png"));
+      case "turtle" -> currentTurtle.setImage(new Image("turtle.png"));
+    }
   }
+
   /**
    * Setter method to change the width of the line drawn on the screen. ScreenDisplay gets the line
    * width from the user and uses this method to set the line width.
@@ -83,12 +73,11 @@ public class DarwinView extends GameView {
    * Setter method to change the creature on the screen. ScreenDisplay gets the creature type
    * from the user and uses this method to set the creature image.
    *
-   * @param creature is the creature used in the game
+   * //@param creature is the creature used in the game
    */
-  @Override
-  public void setTurtleImage(String creature) {
-
-  }
+//  @Override
+//  public void setTurtleImage(String creature) {
+//  }
   @Override
   public double getX() {
     return 1.0;

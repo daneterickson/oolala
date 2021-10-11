@@ -40,7 +40,8 @@ public class ScreenDisplay {
         myGame = game;
         myDisplayComponents = new ScreenDisplayComponents(language);
 //        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
-        myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
+//        myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
+        myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myStartX = startX;
         myStartY = startY;
@@ -82,14 +83,22 @@ public class ScreenDisplay {
     // Trying to figure out the connection from ScreenDisplay to model
     public void getCommandBoxInput () {
         String commandText = myCommandBox.getText();
-        String[] splitCommand = myGame.compile(commandText).split("\n");
-        for (String command : splitCommand) {
-            myGame.step(command);
-            if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
-                myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
+        String compileCommand = myGame.compile(commandText);
+        if (compileCommand == null) { // compileCommand is null --> Darwin Game
+            while (myCanvasDisplay.getPlayingStatus()) {
+                myGame.step("");
+                myGameView.updateCanvas();
             }
-            myGameView.updateCanvas();
-            myCanvasDisplay.updateTurtleStatePanel();
+        }
+        else {
+            for (String command : compileCommand.split("\n")) {
+                myGame.step(command);
+                if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
+                    myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
+                }
+                myGameView.updateCanvas();
+                myCanvasDisplay.updateTurtleStatePanel();
+            }
         }
     }
 

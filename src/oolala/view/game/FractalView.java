@@ -1,22 +1,17 @@
 package oolala.view.game;
 
-import java.util.HashMap;
-import java.util.Map;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.shape.Line;
 import oolala.creatures.Creature;
 import oolala.games.FractalGame;
 
 public class FractalView extends GameView {
 
   private FractalGame myModel;
-  private Pane myFractalPane;
+  private double myLineWidth = 1;
 
   public FractalView(FractalGame game) {
     myModel = game;
-    myFractalPane = new Pane();
+    myCreaturePane = new Pane();
   }
 
   /**
@@ -28,17 +23,8 @@ public class FractalView extends GameView {
   public void updateCanvas() {
     for (int i : myModel.getActiveIndices()) {
       Creature currentModel = myModel.getCreaturesMap().get(i);
-      drawLine(currentModel, i);
-    }
-  }
-
-  @Override
-  protected void drawLine(Creature currentModel, int index) {
-    Line path = new Line(currentModel.getOldX(), currentModel.getOldY(), currentModel.getNewX(),
-        currentModel.getNewY());
-    path.setId("line" + index);
-    if (currentModel.getPenActivity()) {
-      myFractalPane.getChildren().add(path);
+      drawLine(currentModel, i, myLineWidth, currentModel.getOldX(), currentModel.getOldY(), currentModel.getNewX(),
+          currentModel.getNewY());
     }
   }
 
@@ -50,7 +36,7 @@ public class FractalView extends GameView {
    */
   @Override
   public Pane getMyCreaturePane() {
-    return myFractalPane;
+    return myCreaturePane;
   }
 
   /**
@@ -68,12 +54,12 @@ public class FractalView extends GameView {
    * Setter method to change the creature on the screen. ScreenDisplay gets the creature type
    * from the user and uses this method to set the creature image.
    *
-   * @param creature is the creature used in the game
+//   * @param creature is the creature used in the game
    */
-  @Override
-  public void setTurtleImage(String creature) {
-
-  }
+//  @Override
+//  public void setTurtleImage(String creature) {
+//
+//  }
   @Override
   public double getX() {
     return 1.0;

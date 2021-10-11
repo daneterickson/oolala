@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
+import oolala.games.DarwinGame;
 import oolala.games.Game;
 import oolala.view.game.DarwinView;
 import oolala.view.game.GameView;
@@ -16,11 +17,11 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
 
   private DarwinView myDarwinView;
   private ScreenDisplayComponents myDisplayComponents;
-  private Game myGame;
+  private DarwinGame myGame;
 
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(gameView, game, components);
-    myGame = game;
+    myGame = (DarwinGame) game;
     myDarwinView = (DarwinView) gameView;
     myDisplayComponents = components;
   }
@@ -44,7 +45,7 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
     Rectangle canvas = myDisplayComponents.makeCanvas();
-//    pane.getChildren().addAll(canvas, myDarwinView.getMyTurtlePane());
+    pane.getChildren().addAll(canvas, myDarwinView.getMyCreaturePane());
     return pane;
   }
 
@@ -59,9 +60,13 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     VBox panel = new VBox();
     panel.setId("RadiusPanel");
     Node radius = myDisplayComponents.makeTextBoxWithLabel("RadiusLabel", "RadiusBox");
-    Node radiusButton = myDisplayComponents.makeButton("RadiusButton", e-> temporary());
+    Node radiusButton = myDisplayComponents.makeButton("RadiusButton", e-> changeRadius((TextField)panel.lookup("#RadiusBox")));
     panel.getChildren().addAll(radius, radiusButton);
     return panel;
+  }
+
+  private void changeRadius(TextField radiusBox) {
+    myGame.initialize(600, 600, Integer.parseInt(radiusBox.getText()));
   }
 
   private Node makeSpeciesPanel() {
@@ -86,19 +91,27 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
   private Node makeDarwinImagePanelButtons() {
     HBox panel = new HBox();
     panel.setId("DarwinImagePanelButtons");
-    Node catButton = myDisplayComponents.makeButton("CatButton", e -> temporary());
-    Node dogButton = myDisplayComponents.makeButton("DogButton", e -> temporary());
-    Node turtleButton = myDisplayComponents.makeButton("TurtleButton", e -> temporary());
+    Node catButton = myDisplayComponents.makeButton("CatButton", e -> makeCreature("cat"));
+    Node dogButton = myDisplayComponents.makeButton("DogButton", e -> makeCreature("dog"));
+    Node turtleButton = myDisplayComponents.makeButton("TurtleButton", e -> makeCreature("turtle"));
     panel.getChildren().addAll(catButton, dogButton, turtleButton);
     return panel;
+  }
+
+  private Node makePlayPauseButton () {
+    return myDisplayComponents.makeButton("PlayPauseButton", e -> isPlaying = !isPlaying);
+  }
+
+  private void makeCreature(String type) {
+//    myDarwinView.setTurtleImage(type);
+    myGame.addCreature(type, myGame.getHomeX(), myGame.getHomeY());
+    myDarwinView.drawCreature(myGame.getHomeX(), myGame.getHomeY(), myDarwinView.getMyCreatureMap().size() + 1, type);
   }
 
   private void updateHomeLocation (TextField x, TextField y) {
     myGame.updateHome(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
   }
 
-  private void temporary() {}
-  
   @Override
   public void updateTurtleStatePanel() {
 
