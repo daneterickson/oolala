@@ -37,6 +37,7 @@ public class TurtleView extends GameView {
     myModel = game;
     myCreaturePane = new Pane();
     myCreatureMap = new HashMap<>();
+    creatureImage = "turtle.png";
     drawCreature(x, y, 1, myCreatureType);
   }
 
@@ -50,20 +51,6 @@ public class TurtleView extends GameView {
   public Pane getMyCreaturePane() {
     return myCreaturePane;
   }
-
-//  private ImageView drawCreature(double x, double y, double width,
-//      double height, int index) { // final will just be double size for turtle
-//    myTurtleMap.put(index, new ImageView(new Image(turtleImage)));
-//    ImageView turtle = myTurtleMap.get(index);
-//    turtle.setFitHeight(height);
-//    turtle.setFitWidth(width);
-//    turtle.setX(x);
-//    turtle.setY(y);
-//    turtle.setVisible(true);
-//    turtle.setId("turtle-image");
-//    myTurtlePane.getChildren().add(turtle);
-//    return turtle;
-//  }
 
   /**
    * Getter method to get the myTurtleImage, which is the actual turtle on the screen
@@ -143,14 +130,6 @@ public class TurtleView extends GameView {
 //    turtleImage = creature + ".png";
 //  }
 
-  /**
-   * Getter method to get the creature on the screen - Used for testing
-   *
-   * @return turtleImage is the URL of the creature Image on the screen
-   */
-  public String getTurtleImage() {
-    return turtleImage;
-  }
 
   @Override
   public double getX() {

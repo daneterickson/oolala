@@ -1,5 +1,7 @@
 package oolala.view.game;
 
+import java.util.HashMap;
+import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import oolala.creatures.Creature;
 import oolala.games.FractalGame;
@@ -12,6 +14,8 @@ public class FractalView extends GameView {
   public FractalView(FractalGame game) {
     myModel = game;
     myCreaturePane = new Pane();
+    myCreatureMap = new HashMap<>();
+    creatureImage = "turtle.png";
   }
 
   /**
@@ -26,6 +30,15 @@ public class FractalView extends GameView {
       drawLine(currentModel, i, myLineWidth, currentModel.getOldX(), currentModel.getOldY(), currentModel.getNewX(),
           currentModel.getNewY());
     }
+  }
+  public void drawLeaves () {
+    Pane leafPane = new Pane();
+    for (int index : myModel.getCreaturesMap().keySet()) {
+      Creature creature = myModel.getCreaturesMap().get(index);
+      Node leaf = drawCreature(creature.getNewX(), creature.getNewY(), index, creatureImage);
+      leafPane.getChildren().add(leaf);
+    }
+    myCreaturePane.getChildren().add(leafPane);
   }
 
   /**
