@@ -166,7 +166,7 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
   }
 
   /**
-   * Method that is overriden but not implemented by Darwin since it is a Turtle method.
+   * Method that is overrides but not implemented by Darwin since it is a Turtle method.
    */
   @Override
     public void updateTurtleStatePanel () {
