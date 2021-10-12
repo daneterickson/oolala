@@ -15,6 +15,11 @@ import oolala.view.ScreenDisplayComponents;
 
 import oolala.view.game.TurtleView;
 
+/**
+ * Class for Turtle Display on the Canvas, displays specific UI components for Turtle
+ *
+ * @author: Evelyn Cupi-Garcia, Dane Erickson
+ */
 public class TurtleCanvasDisplay extends CanvasDisplay{
 
   private TurtleView myTurtleView;
@@ -23,17 +28,18 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
   private Slider lineWidthSlider;
   private Game myTurtleGame;
 
+  /**
+   * Constructor for TurtleDisplayCanvas to initialize the ScreenDisplayComponent object, TurtleView, TurtleGame
+   *
+   * @param gameView instance of TurtleView to create/display Turtle
+   * @param game is the oolala.Creature object that is used as the model for this TurtleCanvasDisplay class
+   * @param components instance from superclass to create UI components for the ScreenDisplay
+   */
   public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(components);
     myTurtleView = (TurtleView) gameView;
     myTurtleGame = game;
   }
-
-  /**
-   * Creates a border pane where the window that displays the output of the game is on the left and
-   * the UI controls for the game are on the left
-   * @return BorderPane panel
-   */
 
   @Override
   protected Node addCreature(StackPane panel) {

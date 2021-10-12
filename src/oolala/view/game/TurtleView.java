@@ -15,12 +15,8 @@ import javafx.scene.layout.Pane;
  */
 public class TurtleView extends GameView {
 
-//  private String turtleImage = "turtle.png";
   private double myLineWidth = 1;
-
   private TurtleGame myModel;
-//  private Pane myTurtlePane;
-//  private Map<Integer, ImageView> myTurtleMap;
   private double newX;
   private double newY;
   private String myCreatureType = "turtle";
@@ -120,22 +116,20 @@ public class TurtleView extends GameView {
   }
 
   /**
-   * Setter method to change the creature on the screen. ScreenDisplay gets the creature type
-   * from the user and uses this method to set the creature image.
+   * Getter method to get the x-value of the Turtle
    *
-   * @param creature is the creature used in the game
+   * @return newX that is the double value of the x-position
    */
-//  @Override
-//  public void setTurtleImage(String creature) {
-//    turtleImage = creature + ".png";
-//  }
-
-
   @Override
   public double getX() {
     return newX;
   }
 
+  /**
+   * Getter method to get the y-value of the Turtle
+   *
+   * @return newY that is the double value of the y-position
+   */
   @Override
   public double getY() {
     return newY;
