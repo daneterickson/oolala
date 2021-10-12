@@ -20,8 +20,7 @@ public class Main extends Application {
     public static final Paint BACKGROUND = Color.THISTLE;
     public static final int ORIGIN_X = 650;
     public static final int ORIGIN_Y = 300;
-    public static final int FRAMES_PER_SECOND = 60;
-    public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
+
 
     /**
      * Organize display of game in a scene and start the game.
@@ -34,14 +33,10 @@ public class Main extends Application {
         FractalView fractalView = new FractalView(fractalGame);
         DarwinGame darwinGame = new DarwinGame();
         DarwinView darwinView = new DarwinView(darwinGame, ORIGIN_X, ORIGIN_Y);
-        ScreenDisplay display = new ScreenDisplay(darwinView, darwinGame, "English", ORIGIN_X, ORIGIN_Y);
+        ScreenDisplay display = new ScreenDisplay(turtleView, turtleGame, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
 
-        Timeline animation = new Timeline();
-        animation.setCycleCount(Timeline.INDEFINITE);
-        animation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> display.step(SECOND_DELAY)));
-        animation.play();
     }
 }

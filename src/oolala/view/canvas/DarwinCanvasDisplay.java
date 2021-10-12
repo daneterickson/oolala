@@ -1,5 +1,6 @@
 package oolala.view.canvas;
 
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
@@ -23,8 +24,8 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
   private Rectangle canvas;
   private Slider animationSpeedSlider;
 
-  public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
-    super(gameView, game, components);
+  public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
+    super(gameView, game, components, animation);
     myGame = (DarwinGame) game;
     myDarwinView = (DarwinView) gameView;
     myDisplayComponents = components;
@@ -107,9 +108,15 @@ public class DarwinCanvasDisplay extends CanvasDisplay{
     panel.setId("AnimationSettingsPanel");
     Node sliderLabel = myDisplayComponents.makeLabel("AnimationSpeed");
     animationSpeedSlider = myDisplayComponents.makeSlider("SpeedSlider", 1, 3, 5);
-    Node playPauseButton = myDisplayComponents.makeButton("PlayPauseButton", e -> isPlaying = !isPlaying);
+    Node playPauseButton = myDisplayComponents.makeButton("PlayPauseButton", e -> togglePlay());
     panel.getChildren().addAll(sliderLabel, animationSpeedSlider, playPauseButton);
     return panel;
+  }
+
+  private void togglePlay() {
+    if (isPlaying) myAnimation.stop();
+    else myAnimation.play();
+    isPlaying = !isPlaying;
   }
 
   private void makeCreature(String type) {

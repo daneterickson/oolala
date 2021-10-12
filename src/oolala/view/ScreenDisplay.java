@@ -1,7 +1,8 @@
 package oolala.view;
 
-import oolala.games.DarwinGame;
-import oolala.games.FractalGame;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import oolala.games.Game;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -11,15 +12,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 
 import java.util.ResourceBundle;
-import oolala.games.TurtleGame;
 import oolala.view.canvas.CanvasDisplay;
 import oolala.view.canvas.DarwinCanvasDisplay;
 import oolala.view.canvas.FractalCanvasDisplay;
 import oolala.view.canvas.TurtleCanvasDisplay;
-import oolala.view.game.DarwinView;
-import oolala.view.game.FractalView;
 import oolala.view.game.GameView;
-import oolala.view.game.TurtleView;
 
 public class ScreenDisplay {
     private static final int MY_PADDING = 20;
@@ -32,17 +29,20 @@ public class ScreenDisplay {
     private ScreenDisplayComponents myDisplayComponents;
     private CanvasDisplay myCanvasDisplay;
     private String compileCommand;
+    private Timeline myAnimation;
 
     public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.view.resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
+    public static final int FRAMES_PER_SECOND = 60;
+    public static final double SECOND_DELAY = 1.0 / FRAMES_PER_SECOND;
 
     public ScreenDisplay (GameView gameView, Game game, String language, int startX, int startY) {
         myGameView = gameView;
         myGame = game;
         myDisplayComponents = new ScreenDisplayComponents(language);
-//        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
-//        myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
-        myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
+        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents, myAnimation); // Default is turtle Logo Game
+//        myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents, myAnimation); // Default is turtle Logo Game
+//        myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents, myAnimation); // Default is turtle Logo Game
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myStartX = startX;
         myStartY = startY;
@@ -62,9 +62,9 @@ public class ScreenDisplay {
         HBox panel = new HBox();
         panel.setId("GameModePanel");
 
-        Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents)));
-        Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents)));
-        Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents)));
+        Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents, myAnimation)));
+        Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents, myAnimation)));
+        Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents, myAnimation)));
 
         panel.getChildren().addAll(turtleMode, fractalMode, darwinMode);
 
@@ -108,10 +108,11 @@ public class ScreenDisplay {
 //            if (myCanvasDisplay instanceof FractalCanvasDisplay) ((FractalView)myGameView).drawLeaves();
 //        }
 //    }
-    public void step(double secondDelay) {
-        myGame.step(compileCommand);
+    public void step(String command) {
+        myGame.step(command);
         myGameView.updateCanvas();
     }
+
 
     private Node makeCommandBoxButtons () {
         VBox panel = new VBox();
@@ -124,6 +125,21 @@ public class ScreenDisplay {
 
     protected void setCanvas (CanvasDisplay canvas) {
         myCanvasDisplay = canvas;
+        int commandNum = 0;
+        myAnimation = new Timeline();
+        myAnimation.setCycleCount(Timeline.INDEFINITE);
+        myAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> callCommand(commandNum)));
+        myAnimation.play();
+    }
+
+    private void callCommand(int index) {
+        String command;
+        if (compileCommand != null) {
+            command = compileCommand.split("\n")[index];
+        }
+        else command = "";
+        index++;
+        step(command);
     }
 
     /**

@@ -1,5 +1,6 @@
 package oolala.view.canvas;
 // Can't check styling yet
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -24,8 +25,8 @@ public class FractalCanvasDisplay extends CanvasDisplay {
   private ScreenDisplayComponents myDisplayComponents;
   private BorderPane myPane;
 
-  public FractalCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
-    super(gameView, game, components);
+  public FractalCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
+    super(gameView, game, components, animation);
     myFractalView = (FractalView) gameView;
     myFractalGame = (FractalGame) game;
     myDisplayComponents = components;

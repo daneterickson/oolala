@@ -1,5 +1,7 @@
 package oolala.view.canvas;
 
+import java.sql.Time;
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import oolala.games.Game;
 import oolala.view.game.GameView;
@@ -8,8 +10,10 @@ import oolala.view.ScreenDisplayComponents;
 public abstract class CanvasDisplay {
 
   protected boolean isPlaying = true;
+  protected Timeline myAnimation;
 
-  public CanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
+  public CanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
+    myAnimation = animation;
   }
 
   /**

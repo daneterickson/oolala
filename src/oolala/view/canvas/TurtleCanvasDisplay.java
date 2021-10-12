@@ -1,5 +1,6 @@
 package oolala.view.canvas;
 
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -24,8 +25,8 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
   private Slider lineWidthSlider;
   private Game myGame;
 
-  public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
-    super(gameView, game, components);
+  public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
+    super(gameView, game, components, animation);
     myTurtleView = (TurtleView) gameView;
     myGame = game;
     myDisplayComponents = components;
