@@ -95,17 +95,14 @@ public class DarwinGame extends Game {
 
             Command input = new Command(commands[0]);
             Command result = input.recognize();
-            try {
-                myInstructionsMap.put(myInstructionsMap.size() + 1, result);
-                if (commands.length == 1)
-                    myCommandArgs.put(myCommandArgs.size() + 1, -1);
-                else
-                    myCommandArgs.put(myCommandArgs.size() + 1, Integer.valueOf(commands[1]));
-            }
-            catch (Exception e) {
-                System.out.println("Not a valid command");
-                break;
-            }
+
+            if (result == null) throw new NullPointerException();
+
+            myInstructionsMap.put(myInstructionsMap.size() + 1, result);
+            if (commands.length == 1)
+                myCommandArgs.put(myCommandArgs.size() + 1, -1);
+            else
+                myCommandArgs.put(myCommandArgs.size() + 1, Integer.valueOf(commands[1]));
 
         }
         return null;
