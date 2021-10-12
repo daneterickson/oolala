@@ -1,6 +1,9 @@
 package oolala.view;
 
 import javafx.scene.control.Alert;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import oolala.games.DarwinGame;
 import oolala.games.FractalGame;
 import oolala.games.Game;
@@ -8,7 +11,6 @@ import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.*;
 import javafx.scene.paint.Paint;
 import oolala.games.TurtleGame;
 import oolala.view.canvas.CanvasDisplay;
@@ -19,6 +21,7 @@ import oolala.view.game.DarwinView;
 import oolala.view.game.FractalView;
 import oolala.view.game.GameView;
 import oolala.view.game.TurtleView;
+
 
 public class ScreenDisplay {
     private static final int MY_PADDING = 20;

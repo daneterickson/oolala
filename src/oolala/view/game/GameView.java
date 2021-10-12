@@ -8,6 +8,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import oolala.creatures.Creature;
 
+/**
+ * Superclass for drawing the creatures on the canvas
+ *
+ * @author: Dane Erickson
+ */
 public abstract class GameView {
 
     public static final double CREATURE_WIDTH = 60;
@@ -17,6 +22,15 @@ public abstract class GameView {
     protected Map<Integer, ImageView> myCreatureMap;
     protected String creatureImage;
 
+    /**
+     * Constructor to draw a creature for GameView
+     *
+     * @param x the x-value for initialization of the creature
+     * @param y the y-value for initialization of the creature
+     * @param index index of where the creature will be stored in the Creature Map from GameModel
+     * @param type the type of image that will be displayed for the creature
+     * @return turtle which is the creature being drawn
+     */
     public ImageView drawCreature(double x, double y, int index, String type) {
         myCreatureMap.put(index, new ImageView(new Image(getImage(type))));
         ImageView turtle = myCreatureMap.get(index);
@@ -39,6 +53,14 @@ public abstract class GameView {
         return creatureImage;
     }
 
+    /**
+     * Method that finds and returns the current creature from the Creature Map
+     *
+     * @param model the Creature type to be searched for in the Creature Map
+     * @param index the index at where the Creature is stored
+     * @param type the type of Creature
+     * @return currentTurtle which is the current Creature
+     */
     protected ImageView findCurrentTurtle(Creature model, int index, String type) {
         if (!myCreatureMap.containsKey(index)) {
             myCreatureMap.put(index, drawCreature(model.getNewX(),
@@ -51,9 +73,24 @@ public abstract class GameView {
         return currentTurtle;
     }
 
+    /**
+     * Method that updates the canvas with the creature specific to each Game
+     *
+     */
     public abstract void updateCanvas ();
 
-
+    /**
+     * This method draws the line for a creature
+     *
+     * @param currentModel the current model that is drawing a line
+     * @param index the index of the creature
+     * @param lineWidth the width of the line to be drawn
+     * @param startX the start x-value for drawing the line
+     * @param startY the start y-value for drawing the line
+     * @param endX the end x-value for drawing the line
+     * @param endY the end y-value for drawing the line
+     *
+     */
     protected void drawLine(Creature currentModel, int index, double lineWidth, double startX, double startY, double endX, double endY) {
         Line path = new Line(startX, startY, endX, endY);
         path.setStrokeWidth(lineWidth);
@@ -106,8 +143,18 @@ public abstract class GameView {
         creatureImage = creature + ".png";
     }
 
+    /**
+     * Method that returns the x-value of the Creature
+     *
+     * @return
+     */
     public abstract double getX ();
 
+    /**
+     * Method that returns the y-value of the Creature.
+     *
+     * @return
+     */
     public abstract double getY ();
 
 }
