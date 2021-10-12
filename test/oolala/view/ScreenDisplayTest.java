@@ -11,6 +11,11 @@ import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
 
+/**
+ * ScreenDisplayTest: Has Unit Testing for components that are across game such as CommandBox, Run, and Clear
+ *
+ * @author: Evelyn Cupil-Garcia
+ */
 public class ScreenDisplayTest extends DukeApplicationTest {
     private static final String TITLE = "OOLALA";
     private static final Paint BACKGROUND = Color.THISTLE;
@@ -32,10 +37,15 @@ public class ScreenDisplayTest extends DukeApplicationTest {
         clickOn(myTurtleButton);
     }
 
+
     private void lookupButtons() {
         myCommandBox = lookup("#CommandBox").query();
         myRunButton =  (Button)lookup("#Run").query();
     }
+
+    /**
+     * Test to check that commandBox values are the same as input
+     */
     @Test
     void commandBoxAction () {
         lookupButtons();
@@ -46,6 +56,9 @@ public class ScreenDisplayTest extends DukeApplicationTest {
         assertEquals(expected, myCommandBox.getText());
     }
 
+    /**
+     * Test that checks that when you hit clear, a new default game is initialized
+     */
     @Test
     void clearAction() {
         lookupButtons();

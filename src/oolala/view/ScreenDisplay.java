@@ -27,7 +27,11 @@ import oolala.view.game.FractalView;
 import oolala.view.game.GameView;
 import oolala.view.game.TurtleView;
 
-
+/**
+ * Class that setups the display for all the games such as setting up canvas, command box, and the game itself.
+ *
+ * @author: Evelyn Cupil-Garcia, Dane Erickson
+ */
 public class ScreenDisplay {
     private static final int MY_PADDING = 20;
     private TextArea myCommandBox;
@@ -49,6 +53,12 @@ public class ScreenDisplay {
     public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.view.resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
 
+    /**
+     * Constructor for ScreenDisplay that initializes its resources, ScreenDisplayComponents
+     * @param language what language property will be used (English or Spanish)
+     * @param startX start x-value for Turtle/Darwin
+     * @param startY start y-value for Turtle/Darwin
+     */
     public ScreenDisplay (String language, int startX, int startY) {
         myDisplayComponents = new ScreenDisplayComponents(language);
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
@@ -58,14 +68,28 @@ public class ScreenDisplay {
         commandIndex = 0;
     }
 
+    /**
+     * Getter that gets the current Game
+     * @return myGame
+     */
     public Game getGame() {
         return myGame;
     }
 
+    /**
+     * Getter that gets the current GameView
+     * @return myGameView
+     */
     public GameView getGameView() {
         return myGameView;
     }
 
+    /**
+     * Method that sets up the initial display that asks the user to choose a game.
+     *
+     * @param background Set's the scene's background color
+     * @return scene that shows the 3 options of games to choose from and its associated label.
+     */
     public Scene setupDisplay (Paint background) {
         myRoot = new VBox();
         myRoot.setId("Pane");
@@ -77,6 +101,11 @@ public class ScreenDisplay {
         return scene;
     }
 
+    /**
+     * Method that sets up the buttons to switch between games
+     *
+     * @return panel of game button options
+     */
     private Node setupGameModesPanel () {
         HBox panel = new HBox();
         panel.setId("GameModePanel");
@@ -87,6 +116,7 @@ public class ScreenDisplay {
 
         return panel;
     }
+
 
     private Node setupCommandBox () {
         BorderPane panel = new BorderPane();
@@ -107,27 +137,6 @@ public class ScreenDisplay {
         catch (Exception e) {
             showErrorMessage();
         }
-//        if (compileCommand == null) { // compileCommand is null --> Darwin Game
-//            while (myCanvasDisplay.getPlayingStatus()) {
-//                myGame.step("");
-//                myGameView.updateCanvas();
-//            }
-//        } else {
-//            for (String command : compileCommand.split("\n")) {
-//                if (command == "") {
-//                    showErrorMessage();
-//                    break;
-//                } else {
-//                    myGame.step(command);
-//                    if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
-//                        myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
-//                    }
-//                    myGameView.updateCanvas();
-//                    myCanvasDisplay.updateTurtleStatePanel();
-//                    if (myCanvasDisplay instanceof FractalCanvasDisplay) ((FractalView) myGameView).drawLeaves();
-//                }
-//            }
-//        }
     }
 
     private void step(String command, Boolean isFinal) {
@@ -142,6 +151,10 @@ public class ScreenDisplay {
         }
     }
 
+    /**
+     * Method that creates an Error Message that is Command Invalid
+     *
+     */
     public void showErrorMessage() {
         Alert myError = myDisplayComponents.createErrorMessage("CommandInvalid", "CommandInvalidContent", Alert.AlertType.ERROR);
         myError.showAndWait();
@@ -170,6 +183,7 @@ public class ScreenDisplay {
             command = "";
         step(command, isFinal);
     }
+
     private void setCanvas (Class canvas) {
         setGame(canvas);
         myRoot.getChildren().remove(myRoot.lookup("#ChooseGame"));
@@ -180,16 +194,6 @@ public class ScreenDisplay {
         }
         myRoot.getChildren().addAll(myCanvasDisplay.setupCanvas(), setupCommandBox());
         startAnimation();
-    }
-
-    /**
-     * Setter method to set the frames per second for the animation speed.
-     * This is used in the Darwin application to adjust the animation speed with the slider.
-     *
-     * @param fps is the new frames per second to be used
-     */
-    public void setMyFramesPerSecond (int fps) {
-        framesPerSecond = fps;
     }
 
     private void setGame (Class canvas) {
