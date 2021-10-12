@@ -12,7 +12,7 @@ public class Main extends Application {
     public static final Paint BACKGROUND = Color.THISTLE;
     public static final int ORIGIN_X = 650;
     public static final int ORIGIN_Y = 300;
-    public static final String LANGUAGE = "English";
+    public static final String LANGUAGE = "Spanish";
 
     /**
      * Organize display of game in a scene and start the game.
