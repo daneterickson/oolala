@@ -7,12 +7,23 @@ import javafx.scene.layout.Pane;
 import oolala.creatures.Creature;
 import oolala.games.DarwinGame;
 
-
+/**
+ * DarwinView class creates the visual for creatures that go on the canvas in the IDE
+ *
+ * @author Dane Erickson
+ */
 public class DarwinView extends GameView {
 
   private DarwinGame myModel;
   private String myCreatureType = "turtle";
 
+  /**
+   * Constructor to create a DarwinView, which is the creatures that go on the canvas in the
+   * ScreenDisplay class
+   * @param game is the oolala.Creature object that is used as the model for this view class
+   * @param x is the starting x position of the turtle
+   * @param y is the starting y position of the turtle
+   */
   public DarwinView (DarwinGame game, double x, double y) { // x and y based on canvas/scene size
     myModel = game;
     myCreaturePane = new Pane();
@@ -29,7 +40,6 @@ public class DarwinView extends GameView {
     for (int i : myModel.getCreaturesMap().keySet()) {
       Creature currentModel = myModel.getCreaturesMap().get(i);
       ImageView currentTurtle = myCreatureMap.get(i);
-//      ImageView currentTurtle = findCurrentTurtle(currentModel, i, myCreatureType);
       updateCreature(currentModel, currentTurtle);
     }
   }
@@ -69,15 +79,6 @@ public class DarwinView extends GameView {
 
   }
 
-  /**
-   * Setter method to change the creature on the screen. ScreenDisplay gets the creature type
-   * from the user and uses this method to set the creature image.
-   *
-   * //@param creature is the creature used in the game
-   */
-//  @Override
-//  public void setTurtleImage(String creature) {
-//  }
   @Override
   public double getX() {
     return 1.0;

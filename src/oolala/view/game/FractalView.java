@@ -6,11 +6,22 @@ import javafx.scene.layout.Pane;
 import oolala.creatures.Creature;
 import oolala.games.FractalGame;
 
+/**
+ * FractalView class creates the visual for fractals that go on the canvas in the IDE
+ *
+ * @author Dane Erickson
+ */
 public class FractalView extends GameView {
 
   private FractalGame myModel;
   private double myLineWidth = 1;
 
+  /**
+   * Constructor to create a DarwinView, which is the creatures that go on the canvas in the
+   * ScreenDisplay class
+   *
+   * @param game is the oolala.Creature object that is used as the model for this view class
+   */
   public FractalView(FractalGame game) {
     myModel = game;
     myCreaturePane = new Pane();
@@ -31,6 +42,10 @@ public class FractalView extends GameView {
           currentModel.getNewY());
     }
   }
+
+  /**
+   * Draws a leaf at the end of each Fractal and displays it.
+   */
   public void drawLeaves () {
     Pane leafPane = new Pane();
     for (int index : myModel.getCreaturesMap().keySet()) {
@@ -63,16 +78,6 @@ public class FractalView extends GameView {
 
   }
 
-  /**
-   * Setter method to change the creature on the screen. ScreenDisplay gets the creature type
-   * from the user and uses this method to set the creature image.
-   *
-//   * @param creature is the creature used in the game
-   */
-//  @Override
-//  public void setTurtleImage(String creature) {
-//
-//  }
   @Override
   public double getX() {
     return 1.0;

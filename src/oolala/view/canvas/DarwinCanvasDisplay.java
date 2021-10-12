@@ -2,43 +2,46 @@ package oolala.view.canvas;
 
 import javafx.animation.Timeline;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import oolala.games.DarwinGame;
 import oolala.games.Game;
 import oolala.view.game.DarwinView;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
 
+/**
+ * Class that displays the Canvas for Darwin.
+ *
+ * @author: Evelyn Cupil-Garcia, Dane Erickson
+ */
 public class DarwinCanvasDisplay extends CanvasDisplay {
 
   private DarwinView myDarwinView;
   private DarwinGame myDarwinGame;
 
+  /**
+   * Constructor for DarwinCanvasDisplay to initialize a ScreenDisplayComponents object to create UI components
+   * @param gameView instance of DarwinView to create/display Darwin creatures
+   * @param game is the oolala.Creature object that is used as the model for this DarwinCanvasDisplay class
+   * @param components instance from superclass to create UI components for the ScreenDisplay
+   * @param animation is the application's animation
+   */
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
     super(components, animation);
     myDarwinGame = (DarwinGame) game;
     myDarwinView = (DarwinView) gameView;
   }
 
-  /**
-   * Creates a border pane where the window that displays the output of the game is on the left and
-   * the UI controls for the game are on the left
-   *
-   * @return BorderPane panel
-   */
 
   @Override
   protected Node addCreature(StackPane pane) {
     pane.getChildren().add(myDarwinView.getMyCreaturePane());
     return pane;
   }
+
 
   @Override
   public Node setupGamePanel() {
@@ -47,6 +50,7 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     panel.getChildren().addAll(setupRadiusPanel(), setupHomeLocationPanel(), setupDarwinImagePanel(), animationSettingsPanel());
     return panel;
   }
+
 
   private Node setupRadiusPanel() {
     VBox panel = new VBox();
@@ -57,6 +61,7 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     return panel;
   }
 
+
   @Override
   protected Node setupHomeButton() {
     Node renderButton = myDisplayComponents.makeButton("SetHomeLocation", e ->
@@ -64,10 +69,16 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     return renderButton;
   }
 
+
   private void initializeGame (TextField radiusBox){
     myDarwinGame.initialize((int) myPane.getLayoutBounds().getWidth(), (int) myPane.getLayoutBounds().getHeight(), Integer.parseInt(radiusBox.getText()));
   }
 
+  /**
+   * Creates the Darwin Image Panel to set a specific image to a Darwin Creature
+   *
+   * @return VBox panel containing the buttons to toggle between specific images to set and its label
+   */
   private Node setupDarwinImagePanel () {
       VBox panel = new VBox();
       panel.setId("DarwinImagePanel");
@@ -76,6 +87,11 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
       return panel;
   }
 
+  /**
+   * Creates Image Panel Buttons for the Darwin Image Panel
+   *
+   * @return HBox panel containing the buttons to toggle between images to set the Darwin Creature
+   */
   private Node setupDarwinImagePanelButtons () {
     HBox panel = new HBox();
     panel.setId("DarwinImagePanelButtons");
@@ -85,6 +101,7 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     panel.getChildren().addAll(catButton, dogButton, turtleButton);
     return panel;
   }
+
 
   private Node animationSettingsPanel () {
     VBox panel = new VBox();
@@ -103,10 +120,10 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
   }
 
   private void makeCreature (String type) {
-//    myDarwinView.setTurtleImage(type);
     myDarwinGame.addCreature(type, myDarwinGame.getHomeX(), myDarwinGame.getHomeY());
     myDarwinView.drawCreature(myDarwinGame.getHomeX(), myDarwinGame.getHomeY(), myDarwinView.getMyCreatureMap().size() + 1, type);
   }
+
 
   private void updateHomeLocation (TextField x, TextField y){
     if (!isInputValid(x) | !isInputValid(y)) {
@@ -116,7 +133,10 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     }
   }
 
-    @Override
+  /**
+   * Method that is overrides but not implemented by Darwin since it is a Turtle method.
+   */
+  @Override
     public void updateTurtleStatePanel () {
 
     }

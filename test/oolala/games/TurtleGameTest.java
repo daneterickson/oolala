@@ -15,7 +15,7 @@ public class TurtleGameTest {
     }
 
     @Test
-    void stepCommandParsing () {
+    void stepCommandParsing() {
         myGame.step("fd 50");
         assertEquals(-50, myGame.getCreaturesMap().get(1).getNewY());
         myGame.step("pd");
@@ -58,6 +58,27 @@ public class TurtleGameTest {
     @Test
     void compileLogoCommand () {
         String paragraph = "pd fd 10 pu";
+        String expected = "pd \nfd 10 \npu \n";
+        assertTrue(myGame.compile(paragraph).equals(expected));
+    }
+
+    @Test
+    void compileWithEmptyLines () {
+        String paragraph = "pd fd 10 \n \n \n pu \n";
+        String expected = "pd \nfd 10 \npu \n";
+        assertTrue(myGame.compile(paragraph).equals(expected));
+    }
+
+    @Test
+    void compileWithComments () {
+        String paragraph = "pd fd 10 # bla \n # blah blahblah \n \n pu \n";
+        String expected = "pd \nfd 10 \npu \n";
+        assertTrue(myGame.compile(paragraph).equals(expected));
+    }
+
+    @Test
+    void compileWithExtraWhiteSpaces () {
+        String paragraph = "    pd   fd    10 # bla \n # blah blahblah \n \n pu \n";
         String expected = "pd \nfd 10 \npu \n";
         assertTrue(myGame.compile(paragraph).equals(expected));
     }

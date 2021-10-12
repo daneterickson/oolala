@@ -3,8 +3,16 @@ package oolala.commands;
 import oolala.creatures.Creature;
 import oolala.games.Game;
 
+/**
+ * CommandRightTurn class that creates executable commands for "rt" and "right"
+ *
+ * @author Norah Tan
+ */
 public class CommandRightTurn extends Command {
 
+    /**
+     * Constructor that sets the name and sets the number of arguments it takes in for execution
+     */
     public CommandRightTurn () {
         setName("rt");
         setNumArgs(3);
