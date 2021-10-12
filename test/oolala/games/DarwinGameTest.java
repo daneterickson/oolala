@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Class that tests DarwinGame
+ *
+ * @author: Norah Tan
+ */
 public class DarwinGameTest {
     private DarwinGame myGame;
 
@@ -17,6 +22,9 @@ public class DarwinGameTest {
         myGame.addCreature("C", 12, 10);
     }
 
+    /**
+     * Tests that basic Darwin commands compile
+     */
     @Test
     void compileBasic () {
         String paragraph = "# Flytrap species\n" +
@@ -29,6 +37,9 @@ public class DarwinGameTest {
         assertEquals(5, myGame.getInstructionsMap().size());
     }
 
+    /**
+     * Tests that Darwin Commands with extra lines compile
+     */
     @Test
     void compileWithExtraLines () {
         String paragraph = "# Flytrap species\n" +
@@ -41,6 +52,9 @@ public class DarwinGameTest {
         assertEquals(5, myGame.getInstructionsMap().size());
     }
 
+    /**
+     * Tests that Darwin Command with extra white spaces compile
+     */
     @Test
     void compileWithExtraWhitespaces () {
         String paragraph = "# Flytrap species\n" +
@@ -52,6 +66,4 @@ public class DarwinGameTest {
         assertEquals(null, myGame.compile(paragraph));
         assertEquals(5, myGame.getInstructionsMap().size());
     }
-
-
 }

@@ -6,6 +6,11 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Class that tests FractalGame
+ *
+ * @author: Norah Tan
+ */
 public class FractalGameTest {
 
     private FractalGame myGameOne, myGameTwo, myGameThree;
@@ -20,6 +25,9 @@ public class FractalGameTest {
         myGameThree.initialize(3, 30, 30, 0, 0, 20);
     }
 
+    /**
+     * Tests that a Fractal rule compiles
+     */
     @Test
     void testCompileRule () {
         String paragraph = "start F\n" +
@@ -28,6 +36,9 @@ public class FractalGameTest {
         assertTrue(myGameOne.compile(paragraph).equals(expectedOne));
     }
 
+    /**
+     * Tests that a command expands to expected functionality from Logo
+     */
     @Test
     void testCompileExpand () {
         String paragraph = "start F\n" +
@@ -36,6 +47,9 @@ public class FractalGameTest {
         assertTrue(myGameTwo.compile(paragraph).equals(expectedTwo));
     }
 
+    /**
+     * Tests that a command expands to 3 levels of expected functionality from Logo
+     */
     @Test
     void testCompileThreeLevels () {
         String paragraph = "start F\n" +

@@ -6,6 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Class that tests TurtleGame
+ *
+ * @author: Nora Tan
+ */
 public class TurtleGameTest {
     private TurtleGame myGame;
 
@@ -14,6 +19,9 @@ public class TurtleGameTest {
         myGame = new TurtleGame(0, 0);
     }
 
+    /**
+     * Tests that step commands parse
+     */
     @Test
     void stepCommandParsing() {
         myGame.step("fd 50");
@@ -22,6 +30,9 @@ public class TurtleGameTest {
         assertTrue(myGame.getCreaturesMap().get(1).getPenActivity());
     }
 
+    /**
+     * Tests that tell command creates 1 new creature
+     */
     @Test
     void tellCreateOneNewCreature () {
         myGame.step("tell 2");
@@ -29,6 +40,9 @@ public class TurtleGameTest {
         assertEquals(2, myGame.getCreaturesMap().size());
     }
 
+    /**
+     * Tests that tell command creates 2 new creatures
+     */
     @Test
     void tellCreateTwoNewCreatures () {
         myGame.step("tell 3 2");
@@ -38,6 +52,9 @@ public class TurtleGameTest {
         assertEquals(3, myGame.getCreaturesMap().size());
     }
 
+    /**
+     * Tests that tell command creates 3 new creatures
+     */
     @Test
     void tellThreeCreatures () {
         myGame.step("tell 1 2 3");
@@ -48,6 +65,9 @@ public class TurtleGameTest {
         assertEquals(3, myGame.getCreaturesMap().size());
     }
 
+    /**
+     * Tests that the tell command from the Command Box simulated input compiles
+     */
     @Test
     void compileTellCommand () {
         String paragraph = "tell 1 2 rt 20";
@@ -55,6 +75,9 @@ public class TurtleGameTest {
         assertTrue(myGame.compile(paragraph).equals(expected));
     }
 
+    /**
+     * Tests that a logo command compiles from Command Box simulated input
+     */
     @Test
     void compileLogoCommand () {
         String paragraph = "pd fd 10 pu";
@@ -62,6 +85,9 @@ public class TurtleGameTest {
         assertTrue(myGame.compile(paragraph).equals(expected));
     }
 
+    /**
+     * Tests that logo command compiles with random whitespace in the middle from Command Box simulated input
+     */
     @Test
     void compileWithEmptyLines () {
         String paragraph = "pd fd 10 \n \n \n pu \n";
@@ -69,6 +95,9 @@ public class TurtleGameTest {
         assertTrue(myGame.compile(paragraph).equals(expected));
     }
 
+    /**
+     * Tests that logo command compiles with comments from Command Box simulated input
+     */
     @Test
     void compileWithComments () {
         String paragraph = "pd fd 10 # bla \n # blah blahblah \n \n pu \n";
@@ -76,6 +105,9 @@ public class TurtleGameTest {
         assertTrue(myGame.compile(paragraph).equals(expected));
     }
 
+    /**
+     * Tests that logo command compiles with extra white spaces from Command Box simulated input
+     */
     @Test
     void compileWithExtraWhiteSpaces () {
         String paragraph = "    pd   fd    10 # bla \n # blah blahblah \n \n pu \n";
