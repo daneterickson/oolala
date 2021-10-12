@@ -35,10 +35,11 @@ public class DarwinGame extends Game {
         Creature c = new Creature(x, y);
         c.setType(type);
         getCreaturesMap().put(getCreaturesMap().size() + 1, c);
-        myIndexMap.put(getCreaturesMap().size() + 1, 1);
+        myIndexMap.put(myIndexMap.size() + 1, 1);
     }
 
     public double getRadius () { return myRadius; }
+    public void setRadius (int radius) { myRadius = radius; }
     public double getMaxX () { return myMaxX; }
     public double getMaxY () { return myMaxY; }
 
@@ -61,6 +62,7 @@ public class DarwinGame extends Game {
     private void stepForEachCreature (Creature currentCreature, int currentInstruction, int index) {
         while (true) {
             Command result = myInstructionsMap.get(currentInstruction);
+            System.out.println(currentInstruction + " " + index);
             int arg = myCommandArgs.get(currentInstruction);
             if (result.isAction()) {
                 switch (result.getNumArgs()) {
@@ -79,6 +81,7 @@ public class DarwinGame extends Game {
                 }
                 if (ifContinue) currentInstruction = arg;
                 else currentInstruction++;
+                myIndexMap.put(index, currentInstruction);
             }
         }
     }
@@ -92,17 +95,14 @@ public class DarwinGame extends Game {
 
             Command input = new Command(commands[0]);
             Command result = input.recognize();
-            try {
-                myInstructionsMap.put(myInstructionsMap.size() + 1, result);
-                if (commands.length == 1)
-                    myCommandArgs.put(myInstructionsMap.size() + 1, -1);
-                else
-                    myCommandArgs.put(myInstructionsMap.size() + 1, Integer.valueOf(commands[1]));
-            }
-            catch (Exception e) {
-                System.out.println("Not a valid command");
-                break;
-            }
+
+            if (result == null) throw new NullPointerException();
+
+            myInstructionsMap.put(myInstructionsMap.size() + 1, result);
+            if (commands.length == 1)
+                myCommandArgs.put(myCommandArgs.size() + 1, -1);
+            else
+                myCommandArgs.put(myCommandArgs.size() + 1, Integer.valueOf(commands[1]));
 
         }
         return null;

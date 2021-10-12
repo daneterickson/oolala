@@ -52,30 +52,26 @@ public abstract class Game {
             Command input = new Command(temp);
             Command result = input.recognize();
 
-            try {
-                switch (result.getNumArgs()) {
-                    case 3 -> ret.append(String.format("%s %s \n", temp, commandIterator.next()));
-                    case 1, 2 -> ret.append(String.format("%s \n", temp));//
-                    case -1 -> {
-                        ret.append(String.format("%s ", temp));
-                        while (commandIterator.hasNext()) {
-                            temp = commandIterator.next();
-                            if (isNumeric(temp)) {
-                                ret.append(String.format("%s ", temp));
-                            }
-                            else {
-                                commandIterator.previous();
-                                break;
-                            }
+            if (result == null) throw new NullPointerException();
+
+            switch (result.getNumArgs()) {
+                case 3 -> ret.append(String.format("%s %s \n", temp, commandIterator.next()));
+                case 1, 2 -> ret.append(String.format("%s \n", temp));//
+                case -1 -> {
+                    ret.append(String.format("%s ", temp));
+                    while (commandIterator.hasNext()) {
+                        temp = commandIterator.next();
+                        if (isNumeric(temp)) {
+                            ret.append(String.format("%s ", temp));
                         }
-                        ret.append("\n");
-                        break;
+                        else {
+                            commandIterator.previous();
+                            break;
+                        }
                     }
+                    ret.append("\n");
+                    break;
                 }
-            }
-            catch (Exception e) {
-                System.out.println("Error: Not a valid command");
-                break;
             }
         }
         return ret;
