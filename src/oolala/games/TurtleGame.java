@@ -2,17 +2,24 @@ package oolala.games;
 
 import oolala.creatures.Creature;
 
-
+/**
+ * TurtleGame class creates a game equipped with components unique to Logo Programming IDE application, aka. TurtleGame.
+ *
+ * @author Norah Tan
+ */
 public class TurtleGame extends Game {
 
-
+    /**
+     * Constructor that initializes the default home x and default home y
+     * @param defaultX is the default home x for the Turtles/Creatures
+     * @param defaultY is the default home y for the Turtles/Creatures
+     */
     public TurtleGame (int defaultX, int defaultY) {
         super();
         updateHome(defaultX, defaultY);
         getCreaturesMap().put(1, new Creature(getHomeX(), getHomeY()));
         getActiveIndices().add(1);
     }
-
 
 
     @Override
