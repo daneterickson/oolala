@@ -51,20 +51,6 @@ public class TurtleView extends GameView {
     return myCreaturePane;
   }
 
-//  private ImageView drawCreature(double x, double y, double width,
-//      double height, int index) { // final will just be double size for turtle
-//    myTurtleMap.put(index, new ImageView(new Image(turtleImage)));
-//    ImageView turtle = myTurtleMap.get(index);
-//    turtle.setFitHeight(height);
-//    turtle.setFitWidth(width);
-//    turtle.setX(x);
-//    turtle.setY(y);
-//    turtle.setVisible(true);
-//    turtle.setId("turtle-image");
-//    myTurtlePane.getChildren().add(turtle);
-//    return turtle;
-//  }
-
   /**
    * Getter method to get the myTurtleImage, which is the actual turtle on the screen
    *

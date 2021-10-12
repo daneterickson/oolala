@@ -1,5 +1,6 @@
 package oolala.view.canvas;
 
+import java.sql.Time;
 import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -19,17 +20,15 @@ import oolala.view.game.TurtleView;
 public class TurtleCanvasDisplay extends CanvasDisplay{
 
   private TurtleView myTurtleView;
-  private ScreenDisplayComponents myDisplayComponents;
   private Label turtleStateX;
   private Label turtleStateY;
   private Slider lineWidthSlider;
-  private Game myGame;
+  private Game myTurtleGame;
 
   public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
-    super(gameView, game, components, animation);
+    super(components, animation);
     myTurtleView = (TurtleView) gameView;
-    myGame = game;
-    myDisplayComponents = components;
+    myTurtleGame = game;
   }
 
   /**
@@ -37,32 +36,22 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
    * the UI controls for the game are on the left
    * @return BorderPane panel
    */
+
   @Override
-  public Node makeCanvas () {
-    BorderPane panel = new BorderPane();
-    panel.setId("CanvasPanel");
-    panel.setLeft(makeCanvasPanel());
-    panel.setRight(makeLogoPanel());
+  protected Node addCreature(StackPane panel) {
+    panel.getChildren().addAll(myTurtleView.getMyCreaturePane());
     return panel;
   }
 
   @Override
-  protected Node makeCanvasPanel () {
-    StackPane pane = new StackPane();
-    pane.setId("CanvasComponentPane");
-    Rectangle canvas = myDisplayComponents.makeCanvas();
-    pane.getChildren().addAll(canvas, myTurtleView.getMyCreaturePane());
-    return pane;
-  }
-
-  private Node makeLogoPanel () {
+  public Node setupGamePanel () {
     VBox panel = new VBox();
     panel.setId("LogoPanel");
-    panel.getChildren().addAll(makePenThicknessPanel(), makeHomeLocationPanel(), makeTurtleImagePanel(), makeTurtleStatePanel());
+    panel.getChildren().addAll(setupPenThicknessPanel(), setupHomeLocationPanel(), setupTurtleImagePanel(), setupTurtleStatePanel());
     return panel;
   }
 
-  private Node makePenThicknessPanel () {
+  private Node setupPenThicknessPanel () {
     VBox panel = new VBox();
     panel.setId("PenThicknessPanel");
     Node sliderLabel = myDisplayComponents.makeLabel("PenThickness");
@@ -81,27 +70,22 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
     return lineWidthSlider;
   }
 
-  private Node makeHomeLocationPanel() {
-    VBox panel = new VBox();
-    panel.setId("HomeLocationPanel");
-    Node homeLocationLabel = myDisplayComponents.makeLabel("HomeLocationLabel");
-    Node homeLocationX = myDisplayComponents.makeTextBoxWithLabel("HomeLocationX", "LocationX");
-    Node homeLocationY = myDisplayComponents.makeTextBoxWithLabel("HomeLocationY", "LocationY");
-    // set the button to grab stuff
-    Node setHomeLocation = myDisplayComponents.makeButton("SetHomeLocation", e -> updateHomeLocation((TextField)panel.lookup("#LocationX"), (TextField)panel.lookup("#LocationY")));
-    panel.getChildren().addAll(homeLocationLabel, homeLocationX, homeLocationY, setHomeLocation);
-    return panel;
+  @Override
+  protected Node setupHomeButton() {
+    Node renderButton = myDisplayComponents.makeButton("SetHomeLocation", e -> updateHomeLocation((TextField)
+            panel.lookup("#LocationX"), (TextField)panel.lookup("#LocationY")));
+    return renderButton;
   }
 
-  private Node makeTurtleImagePanel() {
+  private Node setupTurtleImagePanel() {
     VBox panel = new VBox();
     panel.setId("TurtleImagePanel");
     Node turtleImageLabel = myDisplayComponents.makeLabel("TurtleImageLabel");
-    panel.getChildren().addAll(turtleImageLabel, makeTurtleImagePanelButtons());
+    panel.getChildren().addAll(turtleImageLabel, setupTurtleImagePanelButtons());
     return panel;
   }
 
-  private Node makeTurtleImagePanelButtons() {
+  private Node setupTurtleImagePanelButtons() {
     HBox panel = new HBox();
     panel.setId("TurtleImagePanelButtons");
     Node catButton = myDisplayComponents.makeButton("CatButton", e -> myTurtleView.setCreatureImage("cat"));
@@ -111,7 +95,7 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
     return panel;
   }
 
-  private Node makeTurtleStatePanel() {
+  private Node setupTurtleStatePanel() {
     VBox panel = new VBox();
     panel.setId("TurtleStatePanel");
     Node turtleStateTitle = myDisplayComponents.makeLabel("TurtleStateTitle");
@@ -146,6 +130,10 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
 
 
   private void updateHomeLocation (TextField x, TextField y) {
-    myGame.updateHome(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
+    if (!isInputValid(x) | !isInputValid(y)) {
+      showErrorMessage();
+    } else {
+      myTurtleGame.updateHome(Integer.parseInt(x.getText()), Integer.parseInt(y.getText()));
+    }
   }
 }

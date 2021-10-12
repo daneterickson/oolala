@@ -14,7 +14,6 @@ import java.util.function.Consumer;
 
 import static oolala.view.ScreenDisplay.DEFAULT_RESOURCE_PACKAGE;
 
-// Class that creates components for the ScreenDisplay class
 public class ScreenDisplayComponents {
     private static final int MY_WIDTH = 1300;
     private static final int CANVAS_X = 350;
@@ -46,7 +45,6 @@ public class ScreenDisplayComponents {
     public Rectangle makeCanvas () {
         Rectangle result = new Rectangle(CANVAS_X, CANVAS_Y, MY_WIDTH, CANVAS_HEIGHT);
         result.setFill(Color.WHITE);
-
         return (Rectangle)setId("Canvas", result);
     }
 
@@ -94,6 +92,14 @@ public class ScreenDisplayComponents {
     private Node setId (String id, Node node) {
         node.setId(id);
         return node;
+    }
+
+    public Alert createErrorMessage(String id, String content, Alert.AlertType alertType) {
+        Alert error = new Alert(Alert.AlertType.ERROR);
+        error.setHeaderText(myResources.getString(id));
+        error.setContentText(myResources.getString(content));
+        error.showAndWait();
+        return error;
     }
 
 }

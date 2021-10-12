@@ -1,12 +1,12 @@
 package oolala.view;
 
-import oolala.games.TurtleGame;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputControl;
 import static org.junit.jupiter.api.Assertions.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
+import oolala.games.TurtleGame;
 import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
 import util.DukeApplicationTest;
@@ -18,30 +18,43 @@ public class ScreenDisplayTest extends DukeApplicationTest {
     private static int ORIGIN_Y = 300;
     private TextInputControl myCommandBox;
     private Button myRunButton;
+    private Button myTurtleButton;
+    private ScreenDisplay display;
 
     @Override
     public void start (Stage stage) {
-        TurtleGame turtle = new TurtleGame(ORIGIN_X, ORIGIN_Y);
-        TurtleView game = new TurtleView(turtle, ORIGIN_X, ORIGIN_Y);
-        ScreenDisplay display = new ScreenDisplay(game, turtle, "English", ORIGIN_X, ORIGIN_Y);
+        display = new ScreenDisplay("English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
+        stage.setFullScreen(true);
         stage.show();
+        myTurtleButton = lookup("#Turtle").query();
+        clickOn(myTurtleButton);
+    }
 
+    private void lookupButtons() {
         myCommandBox = lookup("#CommandBox").query();
         myRunButton =  (Button)lookup("#Run").query();
-        myCommandBox.clear();
     }
-
     @Test
     void commandBoxAction () {
+        lookupButtons();
         String expected = "fd 100";
-        clickOn(myCommandBox).write(expected).clickOn(myRunButton);
-        assertLabelText(expected);
-    }
-
-    private void assertLabelText (String expected) {
+        clickOn(myCommandBox);
+        writeInputTo(myCommandBox, expected);
+        clickOn(myRunButton);
         assertEquals(expected, myCommandBox.getText());
     }
 
+    @Test
+    void clearAction() {
+        lookupButtons();
+        String command = "fd 100\nbk 201";
+        clickOn(myCommandBox);
+        writeInputTo(myCommandBox, command);
+        clickOn(myRunButton);
+        TurtleView newTurtle = new TurtleView((TurtleGame) display.getGame(), ORIGIN_X, ORIGIN_Y);
+        TurtleView oldTurtle = (TurtleView) display.getGameView();
+        assertNotEquals(oldTurtle.getY(), newTurtle.getY());
+    }
 }

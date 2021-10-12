@@ -1,5 +1,7 @@
 package oolala.view.canvas;
 
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextInputControl;
@@ -11,9 +13,13 @@ import oolala.games.TurtleGame;
 import oolala.view.ScreenDisplay;
 import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
+import org.testfx.matcher.base.NodeMatchers;
+import org.testfx.util.WaitForAsyncUtils;
 import util.DukeApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.testfx.api.FxAssert.verifyThat;
 
 public class TurtleCanvasDisplayTest extends DukeApplicationTest {
     private static final String TITLE = "OOLALA";
@@ -24,30 +30,36 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
     private TextInputControl myHomeLocationY;
     private TextInputControl myTextField;
     private Button myRunButton;
+    private Button myClearButton;
     private TurtleGame turtleGame;
     private TurtleView turtleView;
     private ScreenDisplay display;
 
     @Override
     public void start (Stage stage) {
-        turtleGame = new TurtleGame(ORIGIN_X, ORIGIN_Y);
-        turtleView = new TurtleView(turtleGame, ORIGIN_X, ORIGIN_Y);
-        display = new ScreenDisplay(turtleView, turtleGame, "English", ORIGIN_X, ORIGIN_Y);
+        display = new ScreenDisplay("English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
+        stage.setFullScreen(true);
+        Button myTurtleButton = lookup("#Turtle").query();
+        clickOn(myTurtleButton);
+    }
 
+    private void lookupButtons() {
         myHomeLocationX = lookup("#LocationX").query();
         myHomeLocationY =  lookup("#LocationY").query();
-        myHomeLocationX.clear();
-        myHomeLocationY.clear();
         myTextField = lookup("#CommandBox").query();
-        myTextField.clear();
-        myRunButton = lookup("Run").query();
+        myRunButton = lookup("#Run").query();
+        myClearButton = lookup("#Clear").query();
+        turtleGame = (TurtleGame) display.getGame();
+        turtleView = (TurtleView) display.getGameView();
     }
+
 
     @Test
     void homeLocationXAction () {
+        lookupButtons();
         String expected = "200";
         clickOn(myHomeLocationX).write(expected).write(KeyCode.ENTER.getChar());
         assertEquals(expected, myHomeLocationX.getText());
@@ -55,11 +67,13 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
 
     @Test
     void homeLocationYAction () {
+        lookupButtons();
         String expected = "200";
         clickOn(myHomeLocationY).write(expected).write(KeyCode.ENTER.getChar());
         assertEquals(expected, myHomeLocationY.getText());
 
     }
+
 
     @Test
     void testSliderAction () {
@@ -71,6 +85,7 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
 
     @Test
     void testLineWidthSlider () {
+        lookupButtons();
         String command = "fd 100";
         double lineWidth = 4;
         clickOn(myTextField);
@@ -83,6 +98,7 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
 
     @Test
     void testChangeCreature () {
+        lookupButtons();
         String command = "fd 100\ntell 2\nbk 100";
         clickOn(lookup("#CatButton").query());
         clickOn(myTextField);
@@ -93,6 +109,7 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
 
     @Test
     void testCurrentCreaturePosition () {
+        lookupButtons();
         String command = "fd 100\nrt 90\nfd 100";
         clickOn(myTextField);
         writeInputTo(myTextField, command);
@@ -103,6 +120,30 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         assertEquals("TurtleStateX: " + x, turtleCanvas.getTurtleStateXLabel().getText());
         assertEquals("TurtleStateY: " + y, turtleCanvas.getTurtleStateYLabel().getText());
     }
+
+    @Test
+    void testInvalidCommand() {
+        lookupButtons();
+        String command = "fd 210\nff\nfd 300";
+        clickOn(myTextField);
+        writeInputTo(myTextField, command);
+        clickOn(myRunButton);
+        verifyThat("OK", NodeMatchers.isVisible());
+    }
+
+    @Test
+    void testClearing() {
+        lookupButtons();
+        String command = "fd 100\n bk 300";
+        clickOn(myTextField);
+        writeInputTo(myTextField, command);
+        clickOn(myRunButton);
+        clickOn(myClearButton);
+        TurtleView newTurtleView = (TurtleView) display.getGameView();
+        assertNotEquals(newTurtleView.getX(), turtleView.getX());
+    }
+
+
 
 
 

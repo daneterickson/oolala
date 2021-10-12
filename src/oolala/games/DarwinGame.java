@@ -46,7 +46,7 @@ public class DarwinGame extends Game {
     @Override
     public void step (String command) {
         myShuffledIndices = new ArrayList<>(getCreaturesMap().keySet());
-        getActiveIndices().clear();
+//        getActiveIndices().clear();
         Collections.shuffle(myShuffledIndices);
         for (Integer index: myShuffledIndices) {
             Creature currentCreature = getCreaturesMap().get(index);
@@ -69,7 +69,7 @@ public class DarwinGame extends Game {
                     case 3 -> result.execute(currentCreature, arg, this); //fd,rt,lt
                     case 2 -> result.execute(currentCreature, this); //infect,other non-action commands except go, ifrandom
                 }
-                getActiveIndices().add(index);
+//                getActiveIndices().add(index);
                 myIndexMap.put(index, myIndexMap.get(index)+1);
                 return;
             }
@@ -95,17 +95,14 @@ public class DarwinGame extends Game {
 
             Command input = new Command(commands[0]);
             Command result = input.recognize();
-            try {
-                myInstructionsMap.put(myInstructionsMap.size() + 1, result);
-                if (commands.length == 1)
-                    myCommandArgs.put(myCommandArgs.size() + 1, -1);
-                else
-                    myCommandArgs.put(myCommandArgs.size() + 1, Integer.valueOf(commands[1]));
-            }
-            catch (Exception e) {
-                System.out.println("Not a valid command");
-                break;
-            }
+
+            if (result == null) throw new NullPointerException();
+
+            myInstructionsMap.put(myInstructionsMap.size() + 1, result);
+            if (commands.length == 1)
+                myCommandArgs.put(myCommandArgs.size() + 1, -1);
+            else
+                myCommandArgs.put(myCommandArgs.size() + 1, Integer.valueOf(commands[1]));
 
         }
         return null;

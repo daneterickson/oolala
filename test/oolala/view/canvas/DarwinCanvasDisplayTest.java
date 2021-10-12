@@ -32,19 +32,22 @@ public class DarwinCanvasDisplayTest extends DukeApplicationTest {
   public void start (Stage stage) {
     darwinGame = new DarwinGame();
     darwinView = new DarwinView(darwinGame, ORIGIN_X, ORIGIN_Y);
-    display = new ScreenDisplay(darwinView, darwinGame, "English", ORIGIN_X, ORIGIN_Y);
+    display = new ScreenDisplay("English", ORIGIN_X, ORIGIN_Y);
     darwinCanvas = (DarwinCanvasDisplay) display.getMyCanvasDisplay();
     stage.setScene(display.setupDisplay(BACKGROUND));
     stage.setTitle(TITLE);
     stage.show();
 
+  }
+
+  private void getButtons() {
     myTextField = lookup("#CommandBox").query();
-    myTextField.clear();
     myRunButton = lookup("Run").query();
   }
 
   @Test
   void testPlayPauseButton () {
+    getButtons();
     Button playPause = lookup("#PlayPauseButton").query();
     clickOn(playPause);
     assertEquals(false, darwinCanvas.isPlaying);
@@ -54,6 +57,7 @@ public class DarwinCanvasDisplayTest extends DukeApplicationTest {
 
   @Test
   void testSliderAction () {
+    getButtons();
     Slider slider = lookup("#SpeedSlider").query();
     Double expected = 2.0;
     setValue(slider, 2);
