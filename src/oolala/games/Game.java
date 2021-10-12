@@ -84,8 +84,7 @@ public abstract class Game {
         for (String command: lines) {
             if (command.equals("")) continue;
             String[] commands = command.split(" ");
-            List<String> cleanedCommands = new ArrayList<>(Arrays.asList(commands));
-            cleanedCommands.removeAll(Collections.singleton(""));
+            List<String> cleanedCommands = cleanCommands(commands);
             compiledText.append(breakCommands(cleanedCommands));
         }
         return compiledText.toString();
@@ -158,6 +157,22 @@ public abstract class Game {
         if (result == null) throw new NullPointerException();
 
         return result;
+    }
+
+    /**
+     * A helper method that removes all the extra whitespaces in an array of commands
+     * @param commands is an array of commands split by newline or whitespace
+     * @return the List of cleaned commands
+     */
+    public List<String> cleanCommands (String[] commands) {
+        List<String> cleanedCommands = new ArrayList<>(Arrays.asList(commands));
+        ListIterator<String> itr = cleanedCommands.listIterator();
+        while(itr.hasNext()) {
+            if (itr.next().trim().equals("")) {
+                itr.remove();
+            }
+        }
+        return cleanedCommands;
     }
 
     /**
