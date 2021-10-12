@@ -1,8 +1,7 @@
 package oolala.view.canvas;
 
-
+import javafx.animation.Timeline;
 import javafx.scene.Node;
-import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
@@ -21,7 +20,6 @@ import oolala.view.ScreenDisplayComponents;
 public class DarwinCanvasDisplay extends CanvasDisplay {
 
   private DarwinView myDarwinView;
-  private Slider animationSpeedSlider;
   private DarwinGame myDarwinGame;
 
   /**
@@ -29,9 +27,10 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
    * @param gameView instance of DarwinView to create/display Darwin creatures
    * @param game is the oolala.Creature object that is used as the model for this DarwinCanvasDisplay class
    * @param components instance from superclass to create UI components for the ScreenDisplay
+   * @param animation is the application's animation
    */
-  public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
-    super(components);
+  public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
+    super(components, animation);
     myDarwinGame = (DarwinGame) game;
     myDarwinView = (DarwinView) gameView;
   }
@@ -109,11 +108,16 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     panel.setId("AnimationSettingsPanel");
     Node sliderLabel = myDisplayComponents.makeLabel("AnimationSpeed");
     animationSpeedSlider = myDisplayComponents.makeSlider("SpeedSlider", 1, 3, 5);
-    Node playPauseButton = myDisplayComponents.makeButton("PlayPauseButton", e -> isPlaying = !isPlaying);
+    Node playPauseButton = myDisplayComponents.makeButton("PlayPauseButton", e -> togglePlay());
     panel.getChildren().addAll(sliderLabel, animationSpeedSlider, playPauseButton);
     return panel;
   }
 
+  private void togglePlay() {
+    if (isPlaying) myAnimation.stop();
+    else myAnimation.play();
+    isPlaying = !isPlaying;
+  }
 
   private void makeCreature (String type) {
     myDarwinGame.addCreature(type, myDarwinGame.getHomeX(), myDarwinGame.getHomeY());

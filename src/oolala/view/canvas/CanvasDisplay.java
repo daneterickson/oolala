@@ -1,15 +1,14 @@
 package oolala.view.canvas;
 
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
-import oolala.games.Game;
-import oolala.view.ScreenDisplay;
-import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
 
 /**
@@ -22,14 +21,18 @@ public abstract class CanvasDisplay {
   protected VBox panel;
   protected ScreenDisplayComponents myDisplayComponents;
   protected boolean isPlaying = true;
+  protected Timeline myAnimation;
+  protected Slider animationSpeedSlider;
+
 
   /**
    * Constructor for CanvasDisplay to initialize a ScreenDisplayComponents object to create UI components
    *
    * @param components is the ScreenDisplayComponents that is used to create UI components
    */
-  protected CanvasDisplay(ScreenDisplayComponents components) {
+  protected CanvasDisplay(ScreenDisplayComponents components, Timeline animation) {
     myDisplayComponents = components;
+    myAnimation = animation;
   }
 
   /**
@@ -128,6 +131,16 @@ public abstract class CanvasDisplay {
    */
   public boolean getPlayingStatus() {
     return isPlaying;
+  }
+
+  /**
+   * Getter method to get the slider that adjusts the animation speed for Darwin.
+   * Used in ScreenDisplay to apply the adjusted speed to the animation.
+   *
+   * @return animationSpeedSlider is the slider that adjusts the animation speed
+   */
+  public Slider getAnimationSpeedSlider () {
+    return animationSpeedSlider;
   }
 
   }

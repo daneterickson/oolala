@@ -1,6 +1,5 @@
 package oolala;
 
-
 import oolala.view.ScreenDisplay;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
@@ -14,6 +13,7 @@ public class Main extends Application {
     public static final int ORIGIN_Y = 300;
     public static final String LANGUAGE = "Spanish";
 
+
     /**
      * Organize display of game in a scene and start the game.
      */
@@ -23,5 +23,6 @@ public class Main extends Application {
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
+
     }
 }

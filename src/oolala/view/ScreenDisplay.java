@@ -1,5 +1,8 @@
 package oolala.view;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -12,6 +15,8 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
 import javafx.scene.paint.Paint;
+
+import java.util.ResourceBundle;
 import oolala.games.TurtleGame;
 import oolala.view.canvas.CanvasDisplay;
 import oolala.view.canvas.DarwinCanvasDisplay;
@@ -32,15 +37,25 @@ public class ScreenDisplay {
     private GameView myGameView;
     private ScreenDisplayComponents myDisplayComponents;
     private CanvasDisplay myCanvasDisplay;
+    private String compileCommand;
+    private Timeline myAnimation;
     private VBox myRoot;
+    private ResourceBundle myResources;
+    private boolean hasCommand;
+    private int commandIndex;
+    private int framesPerSecond = 8;
+    private double secondDelay = 1.0 / framesPerSecond;
 
     public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.view.resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
 
     public ScreenDisplay (String language, int startX, int startY) {
         myDisplayComponents = new ScreenDisplayComponents(language);
+        myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myStartX = startX;
         myStartY = startY;
+        hasCommand = false;
+        commandIndex = 0;
     }
 
     public Game getGame() {
@@ -65,11 +80,9 @@ public class ScreenDisplay {
     private Node setupGameModesPanel () {
         HBox panel = new HBox();
         panel.setId("GameModePanel");
-
         Node turtleMode = myDisplayComponents.makeButton("Turtle", value -> setCanvas(TurtleCanvasDisplay.class));
         Node fractalMode = myDisplayComponents.makeButton("Fractal", value -> setCanvas(FractalCanvasDisplay.class));
         Node darwinMode = myDisplayComponents.makeButton("Darwin", value -> setCanvas(DarwinCanvasDisplay.class));
-
         panel.getChildren().addAll(turtleMode, fractalMode, darwinMode);
 
         return panel;
@@ -85,29 +98,47 @@ public class ScreenDisplay {
         return panel;
     }
 
-    public void getCommandBoxInput () {
+    private void getCommandBoxInput () {
         String commandText = myCommandBox.getText();
-        String compileCommand = myGame.compile(commandText);
-        if (compileCommand == null) { // compileCommand is null --> Darwin Game
-            while (myCanvasDisplay.getPlayingStatus()) {
-                myGame.step("");
-                myGameView.updateCanvas();
+        try {
+            compileCommand = myGame.compile(commandText);
+            hasCommand = true;
+        }
+        catch (Exception e) {
+            showErrorMessage();
+        }
+//        if (compileCommand == null) { // compileCommand is null --> Darwin Game
+//            while (myCanvasDisplay.getPlayingStatus()) {
+//                myGame.step("");
+//                myGameView.updateCanvas();
+//            }
+//        } else {
+//            for (String command : compileCommand.split("\n")) {
+//                if (command == "") {
+//                    showErrorMessage();
+//                    break;
+//                } else {
+//                    myGame.step(command);
+//                    if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
+//                        myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
+//                    }
+//                    myGameView.updateCanvas();
+//                    myCanvasDisplay.updateTurtleStatePanel();
+//                    if (myCanvasDisplay instanceof FractalCanvasDisplay) ((FractalView) myGameView).drawLeaves();
+//                }
+//            }
+//        }
+    }
+
+    private void step(String command, Boolean isFinal) {
+        if (hasCommand) {
+            myGame.step(command);
+            if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
+                myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
             }
-        } else {
-            for (String command : compileCommand.split("\n")) {
-                if (command == "") {
-                    showErrorMessage();
-                    break;
-                } else {
-                    myGame.step(command);
-                    if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
-                        myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
-                    }
-                    myGameView.updateCanvas();
-                    myCanvasDisplay.updateTurtleStatePanel();
-                    if (myCanvasDisplay instanceof FractalCanvasDisplay) ((FractalView) myGameView).drawLeaves();
-                }
-            }
+            myGameView.updateCanvas();
+            myCanvasDisplay.updateTurtleStatePanel();
+            if (myCanvasDisplay instanceof FractalCanvasDisplay && isFinal) ((FractalView) myGameView).drawLeaves();
         }
     }
 
@@ -125,6 +156,20 @@ public class ScreenDisplay {
         return panel;
     }
 
+    private void callCommand() {
+        String command;
+        boolean isFinal = false;
+        if (compileCommand != null) {
+            if (compileCommand.split("\n").length > commandIndex) {
+                command = compileCommand.split("\n")[commandIndex];
+                commandIndex++;
+                if (commandIndex == compileCommand.split("\n").length - 1) isFinal = true;
+            }
+            else return;
+        } else
+            command = "";
+        step(command, isFinal);
+    }
     private void setCanvas (Class canvas) {
         setGame(canvas);
         myRoot.getChildren().remove(myRoot.lookup("#ChooseGame"));
@@ -134,27 +179,48 @@ public class ScreenDisplay {
             myRoot.getChildren().remove(myRoot.lookup("#CommandBoxPanel"));
         }
         myRoot.getChildren().addAll(myCanvasDisplay.setupCanvas(), setupCommandBox());
+        startAnimation();
+    }
+
+    /**
+     * Setter method to set the frames per second for the animation speed.
+     * This is used in the Darwin application to adjust the animation speed with the slider.
+     *
+     * @param fps is the new frames per second to be used
+     */
+    public void setMyFramesPerSecond (int fps) {
+        framesPerSecond = fps;
     }
 
     private void setGame (Class canvas) {
         if (canvas == TurtleCanvasDisplay.class) {
             myGame = new TurtleGame(myStartX, myStartY);
             myGameView = new TurtleView((TurtleGame) myGame, myStartX, myStartY);
-            myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents);
+            myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents, myAnimation);
         }
 
         if (canvas == FractalCanvasDisplay.class) {
             myGame = new FractalGame();
             myGameView = new FractalView((FractalGame)myGame);
-            myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents);
+            myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents, myAnimation);
         }
 
         if (canvas == DarwinCanvasDisplay.class) {
             myGame = new DarwinGame();
             myGameView = new DarwinView((DarwinGame) myGame, myStartX, myStartY);
-            myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents);
+            myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents, myAnimation);
         }
-
+    }
+    private void startAnimation() {
+        myAnimation = new Timeline();
+        myAnimation.setCycleCount(Timeline.INDEFINITE);
+        if (myCanvasDisplay instanceof DarwinCanvasDisplay) {
+            myAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(1 / myCanvasDisplay.getAnimationSpeedSlider().getValue() * 3), e -> callCommand()));
+        }
+        else {
+            myAnimation.getKeyFrames().add(new KeyFrame(Duration.seconds(secondDelay), e -> callCommand()));
+        }
+        myAnimation.play();
     }
 
     /**
@@ -165,5 +231,4 @@ public class ScreenDisplay {
     public CanvasDisplay getMyCanvasDisplay () {
         return myCanvasDisplay;
     }
-
 }

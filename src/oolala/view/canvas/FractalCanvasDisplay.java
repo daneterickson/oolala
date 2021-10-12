@@ -1,5 +1,6 @@
 package oolala.view.canvas;
 
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
@@ -32,9 +33,10 @@ public class FractalCanvasDisplay extends CanvasDisplay {
    * @param gameView instance of FractalView to create/display Fractals
    * @param game is the oolala.Creature object that is used as the model for this FractalCanvasDisplay class
    * @param components instance from superclass to create UI components for the ScreenDisplay
+   * @param animation is the application's animation
    */
-  public FractalCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
-    super(components);
+  public FractalCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
+    super(components, animation);
     myFractalView = (FractalView) gameView;
     myFractalGame = (FractalGame) game;
   }

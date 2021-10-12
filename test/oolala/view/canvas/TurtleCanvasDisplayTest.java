@@ -117,8 +117,9 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         double x = ORIGIN_X + 100;
         double y = ORIGIN_Y - 100;
         TurtleCanvasDisplay turtleCanvas = (TurtleCanvasDisplay)display.getMyCanvasDisplay();
-        assertEquals("TurtleStateX: " + x, turtleCanvas.getTurtleStateXLabel().getText());
-        assertEquals("TurtleStateY: " + y, turtleCanvas.getTurtleStateYLabel().getText());
+        clickOn(myTextField);
+        assertEquals(String.valueOf(x), turtleCanvas.getTurtleStateXLabel().getText().split(" ")[1]);
+        assertEquals(String.valueOf(y), turtleCanvas.getTurtleStateYLabel().getText().split(" ")[1]);
     }
 
     @Test

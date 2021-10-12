@@ -1,14 +1,13 @@
 package oolala.view.canvas;
 
+import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import oolala.games.Game;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
@@ -34,9 +33,10 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
    * @param gameView instance of TurtleView to create/display Turtle
    * @param game is the oolala.Creature object that is used as the model for this TurtleCanvasDisplay class
    * @param components instance from superclass to create UI components for the ScreenDisplay
+   * @param animation is the application's animation
    */
-  public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
-    super(components);
+  public TurtleCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
+    super(components, animation);
     myTurtleView = (TurtleView) gameView;
     myTurtleGame = game;
   }
@@ -111,8 +111,8 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
 
   @Override
   public void updateTurtleStatePanel() {
-    turtleStateX.setText("TurtleStateX: " + myTurtleView.getX());
-    turtleStateY.setText("TurtleStateY: " + myTurtleView.getY());
+    turtleStateX.setText("x: " + myTurtleView.getX());
+    turtleStateY.setText("y: " + myTurtleView.getY());
   }
   /**
    * Getter method to get the string from the current turtle X position

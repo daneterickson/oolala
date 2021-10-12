@@ -19,7 +19,6 @@ public class TurtleView extends GameView {
   private TurtleGame myModel;
   private double newX;
   private double newY;
-  private String myCreatureType = "turtle";
 
   /**
    * Constructor to create a TurtleView, which is the turtle and lines that go on the canvas in the
@@ -34,7 +33,7 @@ public class TurtleView extends GameView {
     myCreaturePane = new Pane();
     myCreatureMap = new HashMap<>();
     creatureImage = "turtle.png";
-    drawCreature(x, y, 1, myCreatureType);
+    drawCreature(x, y, 1, creatureImage);
   }
 
   /**
@@ -66,7 +65,7 @@ public class TurtleView extends GameView {
   public void updateCanvas() {
     for (int i : myModel.getActiveIndices()) {
       Creature currentModel = myModel.getCreaturesMap().get(i);
-      ImageView currentTurtle = findCurrentTurtle(currentModel, i, myCreatureType);
+      ImageView currentTurtle = findCurrentTurtle(currentModel, i, creatureImage);
       drawLine(currentModel, i, myLineWidth, currentModel.getOldX() + CREATURE_WIDTH / 2,
           currentModel.getOldY() + CREATURE_HEIGHT / 2,
           currentModel.getNewX() + CREATURE_WIDTH / 2, currentModel.getNewY() + CREATURE_HEIGHT / 2);
@@ -85,13 +84,13 @@ public class TurtleView extends GameView {
   public void updateCreature(Creature currentModel, ImageView currentTurtle) {
     if (currentModel.getStatusStamp()) {
       drawCreature(currentModel.getOldX(), currentModel.getOldY(),
-          -1, myCreatureType).setRotate(currentModel.getAngle());
+          -1, creatureImage).setRotate(currentModel.getAngle());
     }
+    currentTurtle.setRotate(currentModel.getAngle());
     newX = currentModel.getNewX();
     currentTurtle.setX(newX);
     newY = currentModel.getNewY();
     currentTurtle.setY(newY);
-    currentTurtle.setRotate(currentModel.getAngle());
     currentTurtle.setVisible(currentModel.getCreatureVisibility());
   }
 
@@ -118,7 +117,11 @@ public class TurtleView extends GameView {
   /**
    * Getter method to get the x-value of the Turtle
    *
+<<<<<<< HEAD
+//   * @param creature is the creature used in the game
+=======
    * @return newX that is the double value of the x-position
+>>>>>>> c67ebfb6333fa7ae0271028eb22b57ff725851e0
    */
   @Override
   public double getX() {
