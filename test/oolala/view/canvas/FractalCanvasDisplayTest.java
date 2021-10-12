@@ -18,6 +18,11 @@ import util.DukeApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Class that tests FractalCanvasDisplay
+ *
+ * @author: Dane Erickson
+ */
 public class FractalCanvasDisplayTest extends DukeApplicationTest {
   private static final String TITLE = "OOLALA";
   private static final Paint BACKGROUND = Color.THISTLE;
@@ -62,6 +67,9 @@ public class FractalCanvasDisplayTest extends DukeApplicationTest {
     myRenderButton = lookup("#SetButton").query();
   }
 
+  /**
+   * Test that checks that a leaf is drawn after the end of each line
+   */
   @Test
   void testMakeLeaves () {
     setUp(30, 100, 3, 650, 100);
@@ -71,6 +79,9 @@ public class FractalCanvasDisplayTest extends DukeApplicationTest {
     assertEquals(3, fractalView.getMyCreatureMap().size());
   }
 
+  /**
+   * Test that checks that we changed the image of leaf
+   */
   @Test
   void testChangeLeaf () {
     setUp(30, 100, 3, 650, 100);

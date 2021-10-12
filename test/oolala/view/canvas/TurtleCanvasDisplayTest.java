@@ -19,6 +19,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.testfx.api.FxAssert.verifyThat;
 
+/**
+ * Class that tests TurtleCanvasDisplay by testing functionality of Turtle
+ *
+ * @author: Evelyn Cupil-Garcia, Dane Erickson
+ */
 public class TurtleCanvasDisplayTest extends DukeApplicationTest {
     private static final String TITLE = "OOLALA";
     private static final Paint BACKGROUND = Color.THISTLE;
@@ -54,7 +59,9 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         turtleView = (TurtleView) display.getGameView();
     }
 
-
+    /**
+     * Test that checks that writing to home x-value textbox is correct
+     */
     @Test
     void homeLocationXAction () {
         lookupButtons();
@@ -63,6 +70,9 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         assertEquals(expected, myHomeLocationX.getText());
     }
 
+    /**
+     * Test that checks that writing to home y-value textbox is correct
+     */
     @Test
     void homeLocationYAction () {
         lookupButtons();
@@ -72,7 +82,9 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
 
     }
 
-
+    /**
+     * Test that checks that the value that the user slided to is what we are grabbing from the slider
+     */
     @Test
     void testSliderAction () {
         Slider slider = lookup("#PenSlider").query();
@@ -81,6 +93,9 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         assertEquals(expected, slider.getValue());
     }
 
+    /**
+     * Test that checks that the line width assigned to the turtle is the same as the one the user chose with slider
+     */
     @Test
     void testLineWidthSlider () {
         lookupButtons();
@@ -94,6 +109,9 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         assertEquals(lineWidth, turtleView.getMyLineWidth());
     }
 
+    /**
+     * Test that checks when we change the Image of the creature, it does change.
+     */
     @Test
     void testChangeCreature () {
         lookupButtons();
@@ -105,6 +123,9 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         assertEquals("cat.png", turtleView.getCreatureImage());
     }
 
+    /**
+     * Test that checks the turtle's position after running commands is what is expected
+     */
     @Test
     void testCurrentCreaturePosition () {
         lookupButtons();
@@ -120,6 +141,9 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         assertEquals(String.valueOf(y), turtleCanvas.getTurtleStateYLabel().getText().split(" ")[1]);
     }
 
+    /**
+     * Test that checks if invalid input is entered into commandBox, an alert shows
+     */
     @Test
     void testInvalidCommand() {
         lookupButtons();
@@ -130,6 +154,9 @@ public class TurtleCanvasDisplayTest extends DukeApplicationTest {
         verifyThat("OK", NodeMatchers.isVisible());
     }
 
+    /**
+     * Test that checks that when we run clear, we initialize a new Turtle session
+     */
     @Test
     void testClearing() {
         lookupButtons();

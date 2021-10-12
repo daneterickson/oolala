@@ -16,6 +16,11 @@ import util.DukeApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+/**
+ * Class that tests DarwinCanvasDisplay
+ *
+ * @author: Dane Erickson
+ */
 public class DarwinCanvasDisplayTest extends DukeApplicationTest {
   private static final String TITLE = "OOLALA";
   private static final Paint BACKGROUND = Color.THISTLE;
@@ -45,6 +50,9 @@ public class DarwinCanvasDisplayTest extends DukeApplicationTest {
     myRunButton = lookup("Run").query();
   }
 
+  /**
+   * Test that checks that Play/Pause button work as intended
+   */
   @Test
   void testPlayPauseButton () {
     getButtons();
@@ -55,6 +63,9 @@ public class DarwinCanvasDisplayTest extends DukeApplicationTest {
     assertEquals(true, darwinCanvas.isPlaying);
   }
 
+  /**
+   * Test that checks that slider value the user chooses is the one we get
+   */
   @Test
   void testSliderAction () {
     getButtons();
