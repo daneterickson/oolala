@@ -1,7 +1,6 @@
 package oolala.view.canvas;
 
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
+
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextInputControl;
@@ -14,7 +13,6 @@ import oolala.view.ScreenDisplay;
 import oolala.view.game.TurtleView;
 import org.junit.jupiter.api.Test;
 import org.testfx.matcher.base.NodeMatchers;
-import org.testfx.util.WaitForAsyncUtils;
 import util.DukeApplicationTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
