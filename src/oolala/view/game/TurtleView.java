@@ -90,11 +90,11 @@ public class TurtleView extends GameView {
       drawCreature(currentModel.getOldX(), currentModel.getOldY(),
           -1, creatureImage).setRotate(currentModel.getAngle());
     }
+    currentTurtle.setRotate(currentModel.getAngle());
     newX = currentModel.getNewX();
     currentTurtle.setX(newX);
     newY = currentModel.getNewY();
     currentTurtle.setY(newY);
-    currentTurtle.setRotate(currentModel.getAngle());
     currentTurtle.setVisible(currentModel.getCreatureVisibility());
   }
 

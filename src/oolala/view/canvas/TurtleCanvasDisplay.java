@@ -104,8 +104,8 @@ public class TurtleCanvasDisplay extends CanvasDisplay{
 
   @Override
   public void updateTurtleStatePanel() {
-    turtleStateX.setText("TurtleStateX: " + myTurtleView.getX());
-    turtleStateY.setText("TurtleStateY: " + myTurtleView.getY());
+    turtleStateX.setText("x: " + myTurtleView.getX());
+    turtleStateY.setText("y: " + myTurtleView.getY());
   }
   /**
    * Getter method to get the string from the current turtle X position

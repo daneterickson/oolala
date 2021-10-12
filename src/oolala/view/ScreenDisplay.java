@@ -132,9 +132,9 @@ public class ScreenDisplay {
             myGame.step(command);
             if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
                 myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
-                myCanvasDisplay.updateTurtleStatePanel();
             }
             myGameView.updateCanvas();
+            myCanvasDisplay.updateTurtleStatePanel();
             if (myCanvasDisplay instanceof FractalCanvasDisplay && isFinal) ((FractalView) myGameView).drawLeaves();
         }
     }
