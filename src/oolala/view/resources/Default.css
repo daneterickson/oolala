@@ -1,161 +1,163 @@
 /*@author: Evelyn Cupil-Garcia*/
 /*CSS styling for all components of the games*/
 .root {
-    -fx-font-family: "Segoe UI Semibold";
-    -fx-background: #d3e8e5;
-    text_color: black;
+  -fx-font-family: "Segoe UI Semibold";
+  -fx-background: #d3e8e5;
+  text_color: black;
 }
+
 #Pane {
-    -fx-spacing: 10px;
+  -fx-spacing: 10px;
 }
 
 #GameModePanel {
-    -fx-spacing: 10px;
+  -fx-spacing: 10px;
 }
 
 #CommandBoxButtonPanel {
-    -fx-spacing: 20px;
+  -fx-spacing: 20px;
 }
 
 #PenThicknessPanel {
-    -fx-alignment: center;
+  -fx-alignment: center;
 }
 
 #HomeLocationPanel {
-    -fx-alignment: center;
+  -fx-alignment: center;
 }
 
 #HomeLocationX {
-    -fx-spacing: 10px;
-    -fx-alignment: center;
+  -fx-spacing: 10px;
+  -fx-alignment: center;
 }
 
 #HomeLocationY {
-    -fx-spacing: 10px;
-    -fx-alignment: center;
+  -fx-spacing: 10px;
+  -fx-alignment: center;
 }
 
 #TurtleImagePanelButtons {
-    -fx-spacing: 10px;
+  -fx-spacing: 10px;
 }
 
 #TurtleImagePanel {
-    -fx-alignment: center;
-    -fx-spacing: 5px;
+  -fx-alignment: center;
+  -fx-spacing: 5px;
 }
 
 #TurtleStatePanel {
-    -fx-alignment: center;
+  -fx-alignment: center;
 }
 
 #LogoPanel {
-    -fx-spacing: 50px;
+  -fx-spacing: 50px;
 }
 
 #AngleAndLevelPanel {
-    -fx-spacing: 10px;
+  -fx-spacing: 10px;
 }
 
 #FractalPanel {
-    -fx-spacing: 50px;
-    -fx-alignment: center;
+  -fx-spacing: 50px;
+  -fx-alignment: center;
 }
 
 #ImagePanel {
-    -fx-alignment: center;
+  -fx-alignment: center;
 }
 
 #AngleBox {
-    -fx-pref-width: 100px;
+  -fx-pref-width: 100px;
 }
 
 #AngleLabel {
-    -fx-spacing: 8px;
+  -fx-spacing: 8px;
 }
 
 #LengthLabel {
-    -fx-spacing: 5px;
+  -fx-spacing: 5px;
 }
 
 #LevelLabel {
-    -fx-spacing: 12px;
+  -fx-spacing: 12px;
 }
+
 #SetButton {
-    -fx-padding: 10px 7px;
+  -fx-padding: 10px 7px;
 }
 
 #LevelPanel {
-    -fx-alignment: center;
-    -fx-spacing: 10px;
+  -fx-alignment: center;
+  -fx-spacing: 10px;
 }
 
 #LevelButton {
-    -fx-padding: 3px 5px;
+  -fx-padding: 3px 5px;
 }
 
 #LengthBox {
-    -fx-pref-width: 100px;
+  -fx-pref-width: 100px;
 }
 
 #LevelBox {
-    -fx-pref-width: 100px;
+  -fx-pref-width: 100px;
 }
 
 .text-area {
-    -fx-pref-width: 1300;
-    -fx-pref-height: 80;
+  -fx-pref-width: 1300;
+  -fx-pref-height: 80;
 }
 
 .button {
-    -fx-text-fill: text_color;
-    -fx-border-color: darkgray;
-    -fx-border-width: 2px;
-    -fx-background-color: lightgray;
-    -fx-padding: 10px;
+  -fx-text-fill: text_color;
+  -fx-border-color: darkgray;
+  -fx-border-width: 2px;
+  -fx-background-color: lightgray;
+  -fx-padding: 10px;
 }
 
 #Run {
-    -fx-border-color: darkgray;
-    -fx-border-width: 2px;
-    -fx-text-fill: text_color;
-    -fx-background-color: lightgray;
-    -fx-padding: 10 90px;
+  -fx-border-color: darkgray;
+  -fx-border-width: 2px;
+  -fx-text-fill: text_color;
+  -fx-background-color: lightgray;
+  -fx-padding: 10 90px;
 }
 
 #Clear {
-    -fx-border-color: darkgray;
-    -fx-border-width: 2px;
-    -fx-text-fill: text_color;
-    -fx-background-color: lightgray;
-    -fx-padding: 10 90px;
+  -fx-border-color: darkgray;
+  -fx-border-width: 2px;
+  -fx-text-fill: text_color;
+  -fx-background-color: lightgray;
+  -fx-padding: 10 90px;
 }
 
 #RadiusPanel {
-    -fx-alignment: center;
-    -fx-spacing: 10px;
+  -fx-alignment: center;
+  -fx-spacing: 10px;
 }
 
 #DarwinImagePanel {
-    -fx-alignment: center;
-    -fx-spacing: 10px;
+  -fx-alignment: center;
+  -fx-spacing: 10px;
 }
 
 #DarwinImagePanelButtons {
-    -fx-alignment: center;
-    -fx-spacing: 10px;
+  -fx-alignment: center;
+  -fx-spacing: 10px;
 }
 
 #AnimationSettingsPanel {
-    -fx-spacing: 10px;
-    -fx-alignment: center;
+  -fx-spacing: 10px;
+  -fx-alignment: center;
 }
 
 #DarwinPanel {
-    -fx-spacing: 40px;
+  -fx-spacing: 40px;
 }
 
 #Canvas {
-    -fx-box-shadow: lightgray;
+  -fx-box-shadow: lightgray;
 }
 
 

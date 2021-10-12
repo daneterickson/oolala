@@ -9,17 +9,18 @@ import oolala.creatures.Creature;
  * @author Norah Tan
  */
 public class CommandStamp extends Command {
-    /**
-     * Constructor that sets the name and sets the number of arguments it takes in for execution
-     */
-    public CommandStamp () {
-        setName("stamp");
-        setNumArgs(1);
-    }
 
-    @Override
-    public boolean execute (Creature current) {
-        current.setStatusStamp(true);
-        return false;
-    }
+  /**
+   * Constructor that sets the name and sets the number of arguments it takes in for execution
+   */
+  public CommandStamp() {
+    setName("stamp");
+    setNumArgs(1);
+  }
+
+  @Override
+  public boolean execute(Creature current) {
+    current.setStatusStamp(true);
+    return false;
+  }
 }

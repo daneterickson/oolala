@@ -68,17 +68,18 @@ public class TurtleView extends GameView {
       ImageView currentTurtle = findCurrentTurtle(currentModel, i, creatureImage);
       drawLine(currentModel, i, myLineWidth, currentModel.getOldX() + CREATURE_WIDTH / 2,
           currentModel.getOldY() + CREATURE_HEIGHT / 2,
-          currentModel.getNewX() + CREATURE_WIDTH / 2, currentModel.getNewY() + CREATURE_HEIGHT / 2);
+          currentModel.getNewX() + CREATURE_WIDTH / 2,
+          currentModel.getNewY() + CREATURE_HEIGHT / 2);
       updateCreature(currentModel, currentTurtle);
     }
   }
 
   /**
-   * Update the position of the creature on the screen.
-   * This is called directly to update the creature's start position if the user changes it from default,
-   * and it is called in updateCanvas to move the creature for each command.
+   * Update the position of the creature on the screen. This is called directly to update the
+   * creature's start position if the user changes it from default, and it is called in updateCanvas
+   * to move the creature for each command.
    *
-   * @param currentModel is the current Creature object being moved
+   * @param currentModel  is the current Creature object being moved
    * @param currentTurtle is the current ImageView of the creature on the screen being moved
    */
   public void updateCreature(Creature currentModel, ImageView currentTurtle) {
@@ -116,12 +117,10 @@ public class TurtleView extends GameView {
 
   /**
    * Getter method to get the x-value of the Turtle
+   * <p>
+   * <<<<<<< HEAD //   * @param creature is the creature used in the game =======
    *
-<<<<<<< HEAD
-//   * @param creature is the creature used in the game
-=======
-   * @return newX that is the double value of the x-position
->>>>>>> c67ebfb6333fa7ae0271028eb22b57ff725851e0
+   * @return newX that is the double value of the x-position >>>>>>> c67ebfb6333fa7ae0271028eb22b57ff725851e0
    */
   @Override
   public double getX() {

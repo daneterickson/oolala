@@ -7,12 +7,13 @@ package oolala.commands;
  * @author Norah Tan
  */
 public class CommandTell extends Command {
-    /**
-     * Constructor that sets the name and sets the number of arguments it takes in for execution
-     */
-    public CommandTell () {
-        setName("tell");
-        setNumArgs(-1);//variable length
-    }
+
+  /**
+   * Constructor that sets the name and sets the number of arguments it takes in for execution
+   */
+  public CommandTell() {
+    setName("tell");
+    setNumArgs(-1);//variable length
+  }
 
 }

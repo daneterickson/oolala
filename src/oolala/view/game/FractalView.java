@@ -38,7 +38,8 @@ public class FractalView extends GameView {
   public void updateCanvas() {
     for (int i : myModel.getActiveIndices()) {
       Creature currentModel = myModel.getCreaturesMap().get(i);
-      drawLine(currentModel, i, myLineWidth, currentModel.getOldX(), currentModel.getOldY(), currentModel.getNewX(),
+      drawLine(currentModel, i, myLineWidth, currentModel.getOldX(), currentModel.getOldY(),
+          currentModel.getNewX(),
           currentModel.getNewY());
     }
   }
@@ -46,7 +47,7 @@ public class FractalView extends GameView {
   /**
    * Draws a leaf at the end of each Fractal and displays it.
    */
-  public void drawLeaves () {
+  public void drawLeaves() {
     Pane leafPane = new Pane();
     for (int index : myModel.getCreaturesMap().keySet()) {
       Creature creature = myModel.getCreaturesMap().get(index);

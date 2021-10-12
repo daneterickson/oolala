@@ -20,11 +20,12 @@ public class DarwinView extends GameView {
   /**
    * Constructor to create a DarwinView, which is the creatures that go on the canvas in the
    * ScreenDisplay class
+   *
    * @param game is the oolala.Creature object that is used as the model for this view class
-   * @param x is the starting x position of the turtle
-   * @param y is the starting y position of the turtle
+   * @param x    is the starting x position of the turtle
+   * @param y    is the starting y position of the turtle
    */
-  public DarwinView (DarwinGame game, double x, double y) { // x and y based on canvas/scene size
+  public DarwinView(DarwinGame game, double x, double y) { // x and y based on canvas/scene size
     myModel = game;
     myCreaturePane = new Pane();
     myCreatureMap = new HashMap<>();
@@ -46,11 +47,11 @@ public class DarwinView extends GameView {
 
 
   /**
-   * Update the position of the creature on the screen.
-   * This is called directly to update the creature's start position if the user changes it from default,
-   * and it is called in updateCanvas to move the creature for each command.
+   * Update the position of the creature on the screen. This is called directly to update the
+   * creature's start position if the user changes it from default, and it is called in updateCanvas
+   * to move the creature for each command.
    *
-   * @param currentModel is the current Creature object being moved
+   * @param currentModel  is the current Creature object being moved
    * @param currentTurtle is the current ImageView of the creature on the screen being moved
    */
   public void updateCreature(Creature currentModel, ImageView currentTurtle) {
