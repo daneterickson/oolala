@@ -8,7 +8,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import oolala.creatures.Creature;
 
-public abstract class GameView { // make it an interface if I don't make any methods in this class
+public abstract class GameView {
 
     public static final double CREATURE_WIDTH = 60;
     public static final double CREATURE_HEIGHT = 80;
@@ -17,7 +17,7 @@ public abstract class GameView { // make it an interface if I don't make any met
     protected Map<Integer, ImageView> myCreatureMap;
     protected String creatureImage;
 
-    public ImageView drawCreature(double x, double y, int index, String type) { // final will just be double size for turtle
+    public ImageView drawCreature(double x, double y, int index, String type) {
         myCreatureMap.put(index, new ImageView(new Image(getImage(type))));
         ImageView turtle = myCreatureMap.get(index);
         turtle.setFitHeight(CREATURE_HEIGHT);

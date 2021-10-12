@@ -14,6 +14,11 @@ import oolala.view.game.FractalView;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
 
+/**
+ * Class for Fractal Display on the Canvas, displays specific UI components for Fractal
+ *
+ * @author: Evelyn Cupi-Garcia, Dane Erickson
+ */
 public class FractalCanvasDisplay extends CanvasDisplay {
 
   private static final int MY_LEVEL_SPAN = 100;
@@ -93,8 +98,6 @@ public class FractalCanvasDisplay extends CanvasDisplay {
     }
 
   }
-
-  private void temporary() {}
 
   @Override
   public void updateTurtleStatePanel() {

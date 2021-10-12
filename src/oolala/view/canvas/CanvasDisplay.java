@@ -12,12 +12,22 @@ import oolala.view.ScreenDisplay;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
 
+/**
+ * Superclass for the display of the Canvas for all the Game types
+ *
+ * @author: Evelyn Cupil-Garcia, Dane Erickson
+ */
 public abstract class CanvasDisplay {
   protected BorderPane myPane;
   protected VBox panel;
   protected ScreenDisplayComponents myDisplayComponents;
   protected boolean isPlaying = true;
 
+  /**
+   * Constructor for CanvasDisplay to initialize a ScreenDisplayComponents object to create UI components
+   *
+   * @param components is the ScreenDisplayComponents that is used to create UI components
+   */
   protected CanvasDisplay(ScreenDisplayComponents components) {
     myDisplayComponents = components;
   }
@@ -35,6 +45,10 @@ public abstract class CanvasDisplay {
     return myPane;
   }
 
+  /**
+   * Creates a StackPane where the window displays the drawing area
+   * @return StackPane panel
+   */
   protected StackPane setupCanvasStackPane() {
     StackPane pane = new StackPane();
     pane.setId("CanvasComponentPane");
@@ -43,6 +57,10 @@ public abstract class CanvasDisplay {
     return pane;
   }
 
+  /**
+   * Creates the Game Panel that is populated on the right side for each game and called in setupCanvas.
+   * @return Node that contains the Game Panel.
+   */
   protected abstract Node setupGamePanel();
 
   protected Node setupCanvasPanel () {
@@ -50,6 +68,10 @@ public abstract class CanvasDisplay {
     return addCreature(myPane);
   }
 
+  /**
+   * Creates the Home Location panel where the user can input an x and y and set as Home Location.
+   * @return Returns a Node that contains the Home Location panel.
+   */
   protected Node setupHomeLocationPanel() {
     panel = new VBox();
     panel.setId("HomeLocationPanel");
@@ -60,6 +82,12 @@ public abstract class CanvasDisplay {
     return panel;
   }
 
+  /**
+   * Method that checks if an input is only an integer by checking the edge cases of null, empty, or if it contains any
+   * letters.
+   * @param text
+   * @return true if input is numeric, false if not numeric/null/empty
+   */
   protected boolean isInputValid(TextField text) {
     String regex = "^[a-zA-Z]*$";
     if (text.getText().equals("") || text.getText().matches(regex) || text.getText() == null) {
@@ -68,17 +96,36 @@ public abstract class CanvasDisplay {
     return true;
   }
 
+  /**
+   * Method that creates an Alert error message when input is not valid and displays the error.
+   */
   protected void showErrorMessage() {
     Alert myError = myDisplayComponents.createErrorMessage("ValuesNull", "ValuesNullContent", Alert.AlertType.ERROR);
     myError.showAndWait();
   }
 
+  /**
+   * Method that set's up the home button used in the Home Location panel because it's functionality differs across game types.
+   * @return Node containing the button.
+   */
   protected abstract Node setupHomeButton();
 
+  /**
+   * Method that grabs the pane associated with each creature for each Game (ex. creatures for Darwin, turtle for Logo, etc.)
+   * @param pane
+   * @return Node containing the pane with it's creature
+   */
   protected abstract Node addCreature(StackPane pane);
 
+  /**
+   * Method that updates the Turtle's State by displaying it's x and y
+   */
   public abstract void updateTurtleStatePanel();
 
+  /**
+   * Method that returns playing status for Darwin.
+   * @return
+   */
   public boolean getPlayingStatus() {
     return isPlaying;
   }
