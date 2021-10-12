@@ -18,7 +18,40 @@ public class DarwinGameTest {
     }
 
     @Test
-    void test () {
-        
+    void compileBasic () {
+        String paragraph = "# Flytrap species\n" +
+                "ifenemy 4\n" +
+                "left 90\n" +
+                "go 1\n" +
+                "infect\n" +
+                "go 1";
+        assertEquals(null, myGame.compile(paragraph));
+        assertEquals(5, myGame.getInstructionsMap().size());
     }
+
+    @Test
+    void compileWithExtraLines () {
+        String paragraph = "# Flytrap species\n" +
+                "ifenemy 4\n" +
+                "left 90\n" +
+                "go 1\n\n\n" +
+                "infect\n" +
+                "go 1";
+        assertEquals(null, myGame.compile(paragraph));
+        assertEquals(5, myGame.getInstructionsMap().size());
+    }
+
+    @Test
+    void compileWithExtraWhitespaces () {
+        String paragraph = "# Flytrap species\n" +
+                "ifenemy   4\n" +
+                "  left 90\n" +
+                "go 1\n\n  \n" +
+                "infect\n" +
+                "go 1";
+        assertEquals(null, myGame.compile(paragraph));
+        assertEquals(5, myGame.getInstructionsMap().size());
+    }
+
+
 }
