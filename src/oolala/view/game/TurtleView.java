@@ -16,7 +16,6 @@ import javafx.scene.layout.Pane;
 public class TurtleView extends GameView {
 
   private double myLineWidth = 1;
-
   private TurtleGame myModel;
   private double newX;
   private double newY;
@@ -116,12 +115,21 @@ public class TurtleView extends GameView {
     return myLineWidth;
   }
 
-
+  /**
+   * Getter method to get the x-value of the Turtle
+   *
+   * @return newX that is the double value of the x-position
+   */
   @Override
   public double getX() {
     return newX;
   }
 
+  /**
+   * Getter method to get the y-value of the Turtle
+   *
+   * @return newY that is the double value of the y-position
+   */
   @Override
   public double getY() {
     return newY;
