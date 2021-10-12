@@ -31,6 +31,7 @@ public class ScreenDisplay {
     private GameView myGameView;
     private ScreenDisplayComponents myDisplayComponents;
     private CanvasDisplay myCanvasDisplay;
+    private String compileCommand;
 
     public static final String DEFAULT_RESOURCE_PACKAGE = "oolala.view.resources.";
     public static final String DEFAULT_STYLESHEET = "/"+DEFAULT_RESOURCE_PACKAGE.replace(".", "/")+"Default.css";
@@ -39,9 +40,9 @@ public class ScreenDisplay {
         myGameView = gameView;
         myGame = game;
         myDisplayComponents = new ScreenDisplayComponents(language);
-        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
+//        myCanvasDisplay = new TurtleCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
 //        myCanvasDisplay = new FractalCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
-//        myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
+        myCanvasDisplay = new DarwinCanvasDisplay(myGameView, myGame, myDisplayComponents); // Default is turtle Logo Game
         myResources = ResourceBundle.getBundle(DEFAULT_RESOURCE_PACKAGE + language);
         myStartX = startX;
         myStartY = startY;
@@ -83,28 +84,33 @@ public class ScreenDisplay {
     // Trying to figure out the connection from ScreenDisplay to model
     public void getCommandBoxInput () {
         String commandText = myCommandBox.getText();
-        String compileCommand = myGame.compile(commandText);
-        if (compileCommand == null) { // compileCommand is null --> Darwin Game
+        compileCommand = myGame.compile(commandText);
+    }
+//        if (compileCommand == null) { // compileCommand is null --> Darwin Game
 //            while (myCanvasDisplay.getPlayingStatus()) {
 //                myGame.step("");
 //                myGameView.updateCanvas();
 //            }
-            for (int i=0; i<5; i++) {
-                myGame.step("");
-                myGameView.updateCanvas();
-            }
-        }
-        else {
-            for (String command : compileCommand.split("\n")) {
-                myGame.step(command);
-                if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
-                    myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
-                }
-                myGameView.updateCanvas();
-                myCanvasDisplay.updateTurtleStatePanel();
-            }
-            if (myCanvasDisplay instanceof FractalCanvasDisplay) ((FractalView)myGameView).drawLeaves();
-        }
+//            for (int i=0; i<5; i++) {
+//                myGame.step("");
+//                myGameView.updateCanvas();
+//            }
+//        }
+//        else {
+//            for (String command : compileCommand.split("\n")) {
+//                myGame.step(command);
+//                if (myCanvasDisplay instanceof TurtleCanvasDisplay) {
+//                    myGameView.setMyLineWidth(((TurtleCanvasDisplay) myCanvasDisplay).getLineWidthSlider().getValue());
+//                }
+//                myGameView.updateCanvas();
+//                myCanvasDisplay.updateTurtleStatePanel();
+//            }
+//            if (myCanvasDisplay instanceof FractalCanvasDisplay) ((FractalView)myGameView).drawLeaves();
+//        }
+//    }
+    public void step(double secondDelay) {
+        myGame.step(compileCommand);
+        myGameView.updateCanvas();
     }
 
     private Node makeCommandBoxButtons () {
@@ -127,8 +133,5 @@ public class ScreenDisplay {
      */
     public CanvasDisplay getMyCanvasDisplay () {
         return myCanvasDisplay;
-    }
-
-    public void step(double secondDelay) {
     }
 }

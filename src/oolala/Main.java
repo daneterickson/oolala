@@ -34,14 +34,14 @@ public class Main extends Application {
         FractalView fractalView = new FractalView(fractalGame);
         DarwinGame darwinGame = new DarwinGame();
         DarwinView darwinView = new DarwinView(darwinGame, ORIGIN_X, ORIGIN_Y);
-        ScreenDisplay display = new ScreenDisplay(turtleView, turtleGame, "English", ORIGIN_X, ORIGIN_Y);
+        ScreenDisplay display = new ScreenDisplay(darwinView, darwinGame, "English", ORIGIN_X, ORIGIN_Y);
         stage.setScene(display.setupDisplay(BACKGROUND));
         stage.setTitle(TITLE);
         stage.show();
 
-//        Timeline animation = new Timeline();
-//        animation.setCycleCount(Timeline.INDEFINITE);
-//        animation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> display.step(SECOND_DELAY)));
-//        animation.play();
+        Timeline animation = new Timeline();
+        animation.setCycleCount(Timeline.INDEFINITE);
+        animation.getKeyFrames().add(new KeyFrame(Duration.seconds(SECOND_DELAY), e -> display.step(SECOND_DELAY)));
+        animation.play();
     }
 }
