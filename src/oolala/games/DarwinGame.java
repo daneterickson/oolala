@@ -87,19 +87,26 @@ public class DarwinGame extends Game {
      */
     public double getMaxY () { return myMaxY; }
 
+    /**
+     * Getter method that returns the instruction map
+     * @return myInstructionsMap
+     */
+    public Map<Integer, Command> getInstructionsMap () { return myInstructionsMap; };
+
     @Override
     public String compile (String paragraph) {
-        for (String command : paragraph.toLowerCase().split("\n")) {
+        for (String command : cleanCommands(paragraph.toLowerCase().split("\n"))) {
             String temp = command.split("#")[0];
             if (temp.equals("")) continue;
-            String[] commands = temp.split(" ");
 
-            Command result = convertStringToCommand(commands[0]);
+            List<String> cleanedCommands = cleanCommands(temp.split(" "));
+
+            Command result = convertStringToCommand(cleanedCommands.get(0));
             myInstructionsMap.put(myInstructionsMap.size() + 1, result);
-            if (commands.length == 1)
+            if (cleanedCommands.size() == 1)
                 myCommandArgs.put(myCommandArgs.size() + 1, -1);
             else
-                myCommandArgs.put(myCommandArgs.size() + 1, Integer.valueOf(commands[1]));
+                myCommandArgs.put(myCommandArgs.size() + 1, Integer.valueOf(cleanedCommands.get(1)));
         }
         return null;
     }
