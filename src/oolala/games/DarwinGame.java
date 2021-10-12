@@ -20,6 +20,7 @@ public class DarwinGame extends Game {
     private int myMaxX, myMaxY, myRadius;
 
     public DarwinGame() {
+        super();
         myInstructionsMap = new HashMap<>();
         myIndexMap = new HashMap<>();
         myCommandArgs = new HashMap<>();
@@ -62,7 +63,6 @@ public class DarwinGame extends Game {
     private void stepForEachCreature (Creature currentCreature, int currentInstruction, int index) {
         while (true) {
             Command result = myInstructionsMap.get(currentInstruction);
-            System.out.println(currentInstruction + " " + index);
             int arg = myCommandArgs.get(currentInstruction);
             if (result.isAction()) {
                 switch (result.getNumArgs()) {

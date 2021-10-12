@@ -1,16 +1,13 @@
 package oolala.view.canvas;
 
-import java.sql.Time;
 import javafx.animation.Timeline;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import oolala.games.Game;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;

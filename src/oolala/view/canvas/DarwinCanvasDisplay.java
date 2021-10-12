@@ -19,7 +19,6 @@ import oolala.view.ScreenDisplayComponents;
 public class DarwinCanvasDisplay extends CanvasDisplay {
 
   private DarwinView myDarwinView;
-  private Slider animationSpeedSlider;
   private DarwinGame myDarwinGame;
 
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components, Timeline animation) {
