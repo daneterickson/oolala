@@ -17,6 +17,7 @@ import oolala.view.ScreenDisplayComponents;
  * @author: Evelyn Cupil-Garcia, Dane Erickson
  */
 public abstract class CanvasDisplay {
+
   protected BorderPane myPane;
   protected VBox panel;
   protected ScreenDisplayComponents myDisplayComponents;
@@ -26,7 +27,8 @@ public abstract class CanvasDisplay {
 
 
   /**
-   * Constructor for CanvasDisplay to initialize a ScreenDisplayComponents object to create UI components
+   * Constructor for CanvasDisplay to initialize a ScreenDisplayComponents object to create UI
+   * components
    *
    * @param components is the ScreenDisplayComponents that is used to create UI components
    */
@@ -38,9 +40,10 @@ public abstract class CanvasDisplay {
   /**
    * Creates a border pane where the window that displays the output of the game is on the left and
    * the UI controls for the game are on the left
+   *
    * @return BorderPane panel
    */
-  public Node setupCanvas () {
+  public Node setupCanvas() {
     myPane = new BorderPane();
     myPane.setId("CanvasPanel");
     myPane.setLeft(setupCanvasPanel());
@@ -50,6 +53,7 @@ public abstract class CanvasDisplay {
 
   /**
    * Creates a StackPane where the window displays the drawing area
+   *
    * @return StackPane panel
    */
   protected StackPane setupCanvasStackPane() {
@@ -61,18 +65,21 @@ public abstract class CanvasDisplay {
   }
 
   /**
-   * Creates the Game Panel that is populated on the right side for each game and called in setupCanvas.
+   * Creates the Game Panel that is populated on the right side for each game and called in
+   * setupCanvas.
+   *
    * @return Node that contains the Game Panel.
    */
   protected abstract Node setupGamePanel();
 
-  protected Node setupCanvasPanel () {
+  protected Node setupCanvasPanel() {
     StackPane myPane = setupCanvasStackPane();
     return addCreature(myPane);
   }
 
   /**
    * Creates the Home Location panel where the user can input an x and y and set as Home Location.
+   *
    * @return Returns a Node that contains the Home Location panel.
    */
   protected Node setupHomeLocationPanel() {
@@ -86,8 +93,9 @@ public abstract class CanvasDisplay {
   }
 
   /**
-   * Method that checks if an input is only an integer by checking the edge cases of null, empty, or if it contains any
-   * letters.
+   * Method that checks if an input is only an integer by checking the edge cases of null, empty, or
+   * if it contains any letters.
+   *
    * @param text
    * @return true if input is numeric, false if not numeric/null/empty
    */
@@ -103,18 +111,23 @@ public abstract class CanvasDisplay {
    * Method that creates an Alert error message when input is not valid and displays the error.
    */
   protected void showErrorMessage() {
-    Alert myError = myDisplayComponents.createErrorMessage("ValuesNull", "ValuesNullContent", Alert.AlertType.ERROR);
+    Alert myError = myDisplayComponents.createErrorMessage("ValuesNull", "ValuesNullContent",
+        Alert.AlertType.ERROR);
     myError.showAndWait();
   }
 
   /**
-   * Method that set's up the home button used in the Home Location panel because it's functionality differs across game types.
+   * Method that set's up the home button used in the Home Location panel because it's functionality
+   * differs across game types.
+   *
    * @return Node containing the button.
    */
   protected abstract Node setupHomeButton();
 
   /**
-   * Method that grabs the pane associated with each creature for each Game (ex. creatures for Darwin, turtle for Logo, etc.)
+   * Method that grabs the pane associated with each creature for each Game (ex. creatures for
+   * Darwin, turtle for Logo, etc.)
+   *
    * @param pane
    * @return Node containing the pane with it's creature
    */
@@ -127,6 +140,7 @@ public abstract class CanvasDisplay {
 
   /**
    * Method that returns playing status for Darwin.
+   *
    * @return
    */
   public boolean getPlayingStatus() {
@@ -134,13 +148,13 @@ public abstract class CanvasDisplay {
   }
 
   /**
-   * Getter method to get the slider that adjusts the animation speed for Darwin.
-   * Used in ScreenDisplay to apply the adjusted speed to the animation.
+   * Getter method to get the slider that adjusts the animation speed for Darwin. Used in
+   * ScreenDisplay to apply the adjusted speed to the animation.
    *
    * @return animationSpeedSlider is the slider that adjusts the animation speed
    */
-  public Slider getAnimationSpeedSlider () {
+  public Slider getAnimationSpeedSlider() {
     return animationSpeedSlider;
   }
 
-  }
+}

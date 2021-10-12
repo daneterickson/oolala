@@ -6,16 +6,17 @@ package oolala.commands;
  * @author Norah Tan
  */
 public class CommandIfRandom extends Command {
-    /**
-     * Constructor that sets the name and sets the number of arguments it takes in for execution
-     */
-    public CommandIfRandom () {
-        setName("ifrandom");
-        setNumArgs(0);
-    }
 
-    @Override
-    public boolean execute () {
-        return (Math.random() > 0.5);
-    }
+  /**
+   * Constructor that sets the name and sets the number of arguments it takes in for execution
+   */
+  public CommandIfRandom() {
+    setName("ifrandom");
+    setNumArgs(0);
+  }
+
+  @Override
+  public boolean execute() {
+    return (Math.random() > 0.5);
+  }
 }
