@@ -1,26 +1,35 @@
 package oolala.view.canvas;
 
+
 import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 import oolala.games.DarwinGame;
 import oolala.games.Game;
 import oolala.view.game.DarwinView;
 import oolala.view.game.GameView;
 import oolala.view.ScreenDisplayComponents;
 
+/**
+ * Class that displays the Canvas for Darwin.
+ *
+ * @author: Evelyn Cupil-Garcia, Dane Erickson
+ */
 public class DarwinCanvasDisplay extends CanvasDisplay {
 
   private DarwinView myDarwinView;
   private Slider animationSpeedSlider;
   private DarwinGame myDarwinGame;
 
+  /**
+   * Constructor for DarwinCanvasDisplay to initialize a ScreenDisplayComponents object to create UI components
+   * @param gameView instance of DarwinView to create/display Darwin creatures
+   * @param game is the oolala.Creature object that is used as the model for this DarwinCanvasDisplay class
+   * @param components instance from superclass to create UI components for the ScreenDisplay
+   */
   public DarwinCanvasDisplay(GameView gameView, Game game, ScreenDisplayComponents components) {
     super(components);
     myDarwinGame = (DarwinGame) game;
@@ -40,6 +49,12 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     return pane;
   }
 
+  /**
+   * Creates the game panel for the Darwin game that is on the right side of the ScreenDisplay with the components of
+   * Radius panel, Home Location panel, Darwin Image Panel, and Animation Settings Panel.
+   *
+   * @return VBox panel
+   */
   @Override
   public Node setupGamePanel() {
     VBox panel = new VBox();
@@ -48,6 +63,11 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     return panel;
   }
 
+  /**
+   * Creates the Radius Panel that is within the Game Panel to set the Radius of Darwin Creatures.
+   *
+   * @return VBox panel
+   */
   private Node setupRadiusPanel() {
     VBox panel = new VBox();
     panel.setId("RadiusPanel");
@@ -57,6 +77,11 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     return panel;
   }
 
+  /**
+   * Creates the Home Button for Darwin Game where we update the Home Location
+   *
+   * @return Node of the Button renderButton
+   */
   @Override
   protected Node setupHomeButton() {
     Node renderButton = myDisplayComponents.makeButton("SetHomeLocation", e ->
@@ -64,10 +89,20 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     return renderButton;
   }
 
+  /**
+   * Method that initializes the DarwinGame with a TextField that holds the radius
+   *
+   * @param radiusBox TextField that holds the value of the radius
+   */
   private void initializeGame (TextField radiusBox){
     myDarwinGame.initialize((int) myPane.getLayoutBounds().getWidth(), (int) myPane.getLayoutBounds().getHeight(), Integer.parseInt(radiusBox.getText()));
   }
 
+  /**
+   * Creates the Darwin Image Panel to set a specific image to a Darwin Creature
+   *
+   * @return VBox panel containing the buttons to toggle between specific images to set and its label
+   */
   private Node setupDarwinImagePanel () {
       VBox panel = new VBox();
       panel.setId("DarwinImagePanel");
@@ -76,6 +111,11 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
       return panel;
   }
 
+  /**
+   * Creates Image Panel Buttons for the Darwin Image Panel
+   *
+   * @return HBox panel containing the buttons to toggle between images to set the Darwin Creature
+   */
   private Node setupDarwinImagePanelButtons () {
     HBox panel = new HBox();
     panel.setId("DarwinImagePanelButtons");
@@ -86,6 +126,11 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     return panel;
   }
 
+  /**
+   * Creates the Animation Settings Panel containing speed slider and the play/pause button.
+   *
+   * @return VBox panel containing speed slider, play/pause button, and its corresponding label.
+   */
   private Node animationSettingsPanel () {
     VBox panel = new VBox();
     panel.setId("AnimationSettingsPanel");
@@ -96,12 +141,22 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     return panel;
   }
 
+  /**
+   * Method that makes a Darwin Creature
+   *
+   * @param type the type of creature being created either cat, dog, or turtle.
+   */
   private void makeCreature (String type) {
-//    myDarwinView.setTurtleImage(type);
     myDarwinGame.addCreature(type, myDarwinGame.getHomeX(), myDarwinGame.getHomeY());
     myDarwinView.drawCreature(myDarwinGame.getHomeX(), myDarwinGame.getHomeY(), myDarwinView.getMyCreatureMap().size() + 1, type);
   }
 
+  /**
+   * Set's the home location of Darwin Creature from x and y TextFields
+   *
+   * @param x TextField that holds the x-value
+   * @param y TextField that holds the y-value
+   */
   private void updateHomeLocation (TextField x, TextField y){
     if (!isInputValid(x) | !isInputValid(y)) {
       showErrorMessage();
@@ -110,7 +165,10 @@ public class DarwinCanvasDisplay extends CanvasDisplay {
     }
   }
 
-    @Override
+  /**
+   * Method that is overriden but not implemented by Darwin since it is a Turtle method.
+   */
+  @Override
     public void updateTurtleStatePanel () {
 
     }

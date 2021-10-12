@@ -15,12 +15,9 @@ import javafx.scene.layout.Pane;
  */
 public class TurtleView extends GameView {
 
-//  private String turtleImage = "turtle.png";
   private double myLineWidth = 1;
 
   private TurtleGame myModel;
-//  private Pane myTurtlePane;
-//  private Map<Integer, ImageView> myTurtleMap;
   private double newX;
   private double newY;
   private String myCreatureType = "turtle";
@@ -118,17 +115,6 @@ public class TurtleView extends GameView {
   public double getMyLineWidth() {
     return myLineWidth;
   }
-
-  /**
-   * Setter method to change the creature on the screen. ScreenDisplay gets the creature type
-   * from the user and uses this method to set the creature image.
-   *
-   * @param creature is the creature used in the game
-   */
-//  @Override
-//  public void setTurtleImage(String creature) {
-//    turtleImage = creature + ".png";
-//  }
 
 
   @Override
